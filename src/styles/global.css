@@ -80,33 +80,6 @@
   --color-gradient-base: var(--swatch-purple-600);
 }
 
-/* RESET */
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-::before,
-::after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-p,
-blockquote,
-dl,
-dd {
-  margin-block-end: 0;
-}
-
 /* COMMON  */
 body {
   font-family: var(--font-main);
@@ -128,12 +101,12 @@ h4 {
   text-wrap: balance;
 }
 
-button {
-  text-transform: uppercase;
-  letter-spacing: var(--typo-spacing-extra);
-}
-
 h1 {
   font-size: var(--text-h1);
   line-height: var(--line-height-extra);
+}
+
+button {
+  text-transform: uppercase;
+  letter-spacing: var(--typo-spacing-extra);
 }
