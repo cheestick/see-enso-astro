@@ -1,0 +1,14 @@
+---
+interface Props {
+  imageUrl: string
+  imageDescription?: string
+  caption: string
+}
+
+const {imageUrl, imageDescription="", caption=""} = Astro.props
+---
+
+<figure>
+  <img src={imageUrl} alt={imageDescription}>
+  {caption.trim() && <figcaption>{caption.trim()}</figcaption>}
+</figure>
