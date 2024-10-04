@@ -1,0 +1,80 @@
+---
+
+---
+
+<div class="nav__wrapper ">
+  <nav class="nav__body" data-navigation>
+    <ul class="nav__list">
+      <li class="nav__item"><a class="nav__link" href="#about">Про агенцію</a></li>
+      <li class="nav__item"><a class="nav__link" href="#services">Послуги</a></li>
+      <li class="nav__item"><a class="nav__link" href="#cases">Кейси</a></li>
+      <li class="nav__item"><a class="nav__link" href="#team">Команда</a></li>
+    </ul>
+  </nav>
+    
+  <button class="nav__burger" data-burger type="button" aria-label="бургер меню"><span>==</span></button>
+</div>  
+
+<script>
+  const navigation = document.querySelector('[data-navigation]')
+  const btnBurger = document.querySelector('[data-burger]')
+  console.log(navigation, btnBurger)
+
+  btnBurger?.addEventListener('click', (e) => {
+    navigation?.classList.toggle('show-navigation')
+  })
+</script>
+
+<style>
+  .nav__wrapper {
+    --gap: 1.25em;
+
+    order: 1;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+  }
+
+  .nav__body {
+    display: grid;
+    place-content: center;
+    position: absolute;
+    inset: 0 0 0 0;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(7px);
+    transform: translateX(-100%);
+    transition: all 250ms ease-in-out;
+    z-index: 10;
+  }
+
+  .nav__list {
+    --text-nav: var(--typo-size-700);
+    text-transform: uppercase;
+    font-size: var(--text-nav);
+    gap: var(--gap);
+
+    :not(:last-child) {
+      margin-block-end: .5em;
+    }
+  }
+
+  .nav__link {
+    display: inline-flex;
+    padding: 10px 20px;
+    color: var(--text-color);
+  }
+
+  .nav__body.show-navigation {
+    transform: translateX(0);
+  }
+
+  .nav__burger {
+    z-index: 21;
+  }
+  @media screen and (width <= 29.75em) {
+    .nav__wrapper {
+      --gap: 2em;
+    }
+  }
+</style>

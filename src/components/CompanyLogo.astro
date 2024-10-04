@@ -1,14 +1,26 @@
 ---
 interface Props {
+  
   imageUrl: string
   imageDescription?: string
   caption: string
+  visibleCaption?: boolean
+  width: number
+  height: number
 }
 
-const {imageUrl, imageDescription="", caption=""} = Astro.props
+const {imageUrl, imageDescription="", caption="", visibleCaption=false, width, height} = Astro.props
 ---
 
-<figure>
-  <img src={imageUrl} alt={imageDescription}>
-  {caption.trim() && <figcaption>{caption.trim()}</figcaption>}
+<figure class="logo">
+  <img class="logo__image" src={imageUrl} alt={imageDescription} width={width} height={height}>
+  {visibleCaption && <figcaption class="logo__caption">{caption.trim()}</figcaption>}
 </figure>
+
+<style>
+  .logo {
+    display: flex;
+    flex-wrap: wrap;
+    margin-inline-end: auto;
+  }
+</style>

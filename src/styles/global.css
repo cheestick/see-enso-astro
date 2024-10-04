@@ -23,6 +23,10 @@ h1 {
   line-height: var(--line-height-extra);
 }
 
+a {
+  color: var(--text-color);
+}
+
 button {
   text-transform: uppercase;
   letter-spacing: var(--typo-spacing-extra);

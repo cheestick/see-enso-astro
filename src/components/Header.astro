@@ -1,13 +1,34 @@
 ---
 import CompanyLogo from './CompanyLogo.astro';
+import Navigation from './Navigation.astro';
+import SiteOptions from './SiteOptions.astro';
 
 
 ---
 
-<header>
-  <div class="wrapper">
-    <CompanyLogo imageUrl="" caption='SeeEnso'/>
-    <!-- navigation with button -->
-    <!-- options -->
+<header class="header">
+  <div class="header__container spacing">
+    <CompanyLogo imageUrl="/images/seeenso-logo.svg" caption='SeeEnso' width={42} height={42}/>
+    <Navigation/>
+    <SiteOptions />
   </div>
 </header>
+
+<style>
+  .header__container {
+    --side: 15px;
+    --gap: 1.875em;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap);
+    width: min(90em, calc(100% - 2 * var(--side)));
+    margin-inline: auto;
+
+    &.spacing {
+      margin-block-start: clamp(17px, 4vw, 33px);
+    }
+  }
+
+</style>

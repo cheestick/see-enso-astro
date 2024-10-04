@@ -1,0 +1,27 @@
+---
+
+---
+
+<div class="options">
+  <button class="options__lang" type="button" aria-label="зміна мови">EN</button>
+  <a class="cta" href="tel:+380999677776" data-telephone="+380999677776"><span>Зв'язатись</span></a>
+</div>
+
+<style>
+  .options {
+    --gap: .875em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+  }
+
+  .cta {
+    text-transform: uppercase;
+  }
+
+  @media screen and (width <= 29.75em) {
+    .options {
+      --gap: 1.25em;
+    }
+  }
+</style>
