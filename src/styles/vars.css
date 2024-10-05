@@ -7,6 +7,7 @@
   --typo-size-500: 1.25rem;
   --typo-size-400: 1.125rem;
   --typo-size-300: 1rem;
+  --typo-size-200: 0.75rem;
 
   --typo-line-400: 1.3;
   --typo-line-300: 1.2;
@@ -44,4 +45,5 @@
   --color-lightest: var(--swatch-purple-300);
   --color-dark: var(--swatch-purple-700);
   --color-gradient-base: var(--swatch-purple-600);
+  --color-border: var(--swatch-neutral-200);
 }
