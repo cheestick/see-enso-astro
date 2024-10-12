@@ -3,25 +3,37 @@
 ---
 
 <div class="options">
-  <button class="options__lang" type="button" aria-label="зміна мови">EN</button>
-  <a class="cta" href="tel:+380999677776" data-telephone="+380999677776"><span>Зв'язатись</span></a>
+  <a class="options__lang btn" href="#" aria-label="зміна мови" lang="en">EN</a>
+  <a class="cta btn" href="tel:+380999677776" data-telephone="+380999677776"><span class="btn__icon"></span><span class="cta__text">Зв'язатись</span></a>
 </div>
 
 <style>
   .options {
-    --gap: .875em;
+    --gap: clamp(.875rem, 1.8vw, 1.25rem);
+    /* --gap: clamp(14px, 1.8vw, 20px); */
+
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--gap);
   }
 
-  .cta {
-    text-transform: uppercase;
+  .options .btn {
+    --size: 36px;
+    --text-size: var(--text-button-mobile);
   }
 
-  @media screen and (width <= 29.75em) {
-    .options {
-      --gap: 1.25em;
+  .cta .btn__icon {
+    background-image: url("/images/icons/phone.svg");
+  }
+  .cta__text {
+    display: none;
+  }
+
+  @media screen and (width > 64em) {
+    .options .btn {
+      --size: 52px;
+      --text-size: var(--text-button-main)
     }
   }
 </style>

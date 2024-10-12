@@ -38,6 +38,8 @@
   --text-size-main: var(--typo-size-400);
   --text-h1: var(--typo-size-900);
   --text-nav-mobile: var(--typo-size-600);
+  --text-button-main: var(--typo-size-500);
+  --text-button-mobile: var(--typo-size-200);
   --text-color: var(--swatch-neutral-200);
 
   --bg-color: var(--swatch-neutral-900);
