@@ -1,5 +1,7 @@
 body {
   position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
   font-family: var(--font-main);
   font-weight: var(--font-weight);
   font-size: var(--text-size-main);
@@ -34,6 +36,8 @@ button {
 }
 
 .btn {
+  --stroke: 2px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +46,7 @@ button {
   text-transform: uppercase;
   font-size: var(--text-size, 1em);
   border-radius: 50%;
-  border: 1px solid var(--color-border);
+  border: var(--stroke) solid var(--color-border);
   overflow: hidden;
 }
 
