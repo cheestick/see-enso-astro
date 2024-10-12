@@ -2,11 +2,12 @@
   --typo-base-font: "Open Sans", Helvetica, Arial, sans-serif;
 
   --typo-size-900: 3.375rem;
-  --typo-size-700: 1.875rem;
+  --typo-size-700: 1.675rem;
   --typo-size-600: 1.5rem;
   --typo-size-500: 1.25rem;
   --typo-size-400: 1.125rem;
   --typo-size-300: 1rem;
+  --typo-size-200: 0.75rem;
 
   --typo-line-400: 1.3;
   --typo-line-300: 1.2;
@@ -26,6 +27,8 @@
   --swatch-purple-400: #8d57d4;
   --swatch-purple-300: #c395ff;
 
+  --swatch-backdrop: rgba(6, 5, 11, 0.165);
+
   --font-main: var(--typo-base-font);
   --font-weight: 400;
 
@@ -34,6 +37,9 @@
 
   --text-size-main: var(--typo-size-400);
   --text-h1: var(--typo-size-900);
+  --text-nav-mobile: var(--typo-size-600);
+  --text-button-main: var(--typo-size-500);
+  --text-button-mobile: var(--typo-size-200);
   --text-color: var(--swatch-neutral-200);
 
   --bg-color: var(--swatch-neutral-900);
@@ -43,4 +49,12 @@
   --color-lightest: var(--swatch-purple-300);
   --color-dark: var(--swatch-purple-700);
   --color-gradient-base: var(--swatch-purple-600);
+  --color-border: var(--swatch-neutral-200);
+  --color-backdrop: var(--swatch-backdrop);
+  --color-burger: var(--swatch-neutral-700);
+
+  --backdrop-blur: blur(7px);
+  --color-bg-hover: var(--swatch-purple-700);
+  --color-bg-pressed: var(--swatch-purple-500);
+  --color-shadow-focused: 0 0 16px 2px #9747ff;
 }

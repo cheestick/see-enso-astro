@@ -1,4 +1,7 @@
 body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
   font-family: var(--font-main);
   font-weight: var(--font-weight);
   font-size: var(--text-size-main);
@@ -23,7 +26,36 @@ h1 {
   line-height: var(--line-height-extra);
 }
 
+a {
+  color: var(--text-color);
+}
+
 button {
   text-transform: uppercase;
   letter-spacing: var(--typo-spacing-extra);
+}
+
+.btn {
+  --stroke: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  height: var(--size, 60px);
+  text-transform: uppercase;
+  font-size: var(--text-size, 1em);
+  border-radius: 50%;
+  border: var(--stroke) solid var(--color-border);
+  overflow: hidden;
+}
+
+.btn__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  background-position: center;
+  background-color: transparent;
 }

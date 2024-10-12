@@ -1,17 +1,22 @@
 ---
 import MainLayout from '@layouts/MainLayout.astro';
+import Header from '@components/Header.astro';
+import HelperSection from '@components/HelperSection.astro';
+import ButtonToTop from '@components/ButtonToTop.astro';
 
 
 ---
 
 <MainLayout title="See Enso - Digital Agency">
-	<h1>See Enso - Digital Agency</h1>
-	<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni quidem esse quia earum, numquam sint eveniet dolorem ipsum laboriosam eaque!</p>
-	<ul>
-		<li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, consectetur placeat nobis odio vitae tempora obcaecati cupiditate fugiat voluptas ad, quae rerum debitis possimus iusto distinctio illum eveniet magnam eum.</li>
-		<li>Id praesentium debitis pariatur, dolores sunt recusandae ducimus aperiam cum harum, optio quidem, aliquid delectus minima nihil amet ratione vitae minus officia aliquam! Odit nesciunt eos cum ad neque est?</li>
-		<li>Rem ea illo accusantium distinctio ut mollitia dolor error, odio recusandae consectetur doloribus aliquid eaque modi labore dolores. Ab quae consequuntur vitae quo reiciendis qui, laboriosam iure temporibus veritatis quas!</li>
-		<li>Qui, voluptates quibusdam explicabo ut vel eum odit dolor esse quos repellendus, odio incidunt provident consectetur voluptatum dolorem sapiente dignissimos sunt excepturi quas. Cum, sequi unde ipsam commodi reprehenderit rem?</li>
-		<li>Ad accusantium, recusandae omnis commodi mollitia perspiciatis modi nostrum. Veniam nisi doloribus reprehenderit autem asperiores sapiente modi reiciendis voluptates beatae porro nostrum itaque repudiandae earum in, fugiat explicabo et vero.</li>
-	</ul>
+	<Header />
+	
+	<HelperSection id="hero">Hero</HelperSection>
+	<HelperSection id="about">About</HelperSection>
+	<HelperSection id="services">Services</HelperSection>
+	<HelperSection id="cases">Cases</HelperSection>
+	<HelperSection id="team">Team</HelperSection>
+	<HelperSection>Backstage</HelperSection>
+	<HelperSection>Footer</HelperSection>
+	
+	<ButtonToTop href="#hero"/>
 </MainLayout>

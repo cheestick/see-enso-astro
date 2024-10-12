@@ -1,0 +1,88 @@
+---
+import { navData } from 'src/data/config'
+import NavigationLink from './NavigationLink.astro'
+
+
+---
+
+<nav class="nav__body" data-navigation>
+  <ul class="nav__list">
+    {navData.map(({href, caption}) => (
+      <li class="nav__item">
+        <NavigationLink 
+          className="nav__link" 
+          {href} 
+          {caption}/>
+      </li>
+    ))}
+    
+  </ul>
+</nav>
+
+<style>
+  .nav__body {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    
+    width: 100%;
+    height: 100dvh;
+    
+    background-color: var(--color-backdrop);
+    backdrop-filter: var(--backdrop-blur,10px);
+    
+    transform: translateX(-100%);
+    transition: all 250ms ease-in-out;
+    z-index: 10;
+  }
+
+  .nav__list {
+    --text-nav: var(--typo-size-700);
+
+    width: max-content;
+    margin-block-start: 10vh;
+    margin-inline: auto;
+    
+    font-size: var(--text-nav);
+    text-transform: uppercase;
+  }
+  
+  .nav__list :not(:last-child) {
+    margin-block-end: 2vh;
+  } 
+
+  .nav__body.show-navigation {
+    transform: translateX(0);
+  }
+
+  @media (width >= 29.75em) {
+    .nav__body {
+      position: static;
+      height: auto;
+      background-color: transparent;
+      backdrop-filter: none;
+      transform: translateX(0);
+    }
+
+    .nav__list {
+      --text-nav: var(--typo-size-400);
+      --gap: 10px;
+
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--gap);
+      margin: 0;
+    }
+
+    .nav__list :not(:last-child) {
+      margin-block-end: 0;
+    }
+  }
+
+  @media (width > 64em) {
+    .nav__list {
+      --gap: 20px
+    }
+  }
+</style>
