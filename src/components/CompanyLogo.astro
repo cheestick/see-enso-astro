@@ -15,12 +15,38 @@ const {imageUrl, imageDescription="", caption="", visibleCaption=false, width, h
 <figure class="logo">
   <img class="logo__image" src={imageUrl} alt={imageDescription} width={width} height={height}>
   {visibleCaption && <figcaption class="logo__caption">{caption.trim()}</figcaption>}
+  <a href="#" data-link-logo></a>
 </figure>
 
 <style>
   .logo {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     margin-inline-end: auto;
+  }
+
+  .logo__image {
+    --width: 42px;
+    /* width: clamp(2.625rem, 1.01rem + 5.44vw, 4.75rem); */
+    width: var(--width);
+    aspect-ratio: 1;
+  }
+
+  .logo > a[data-link-logo] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (width > 48em) {
+    .logo__image {
+      --width: 48px;
+    }
+  }
+  @media (width > 64em) {
+    .logo__image {
+      --width: 76px;
+    }
   }
 </style>
