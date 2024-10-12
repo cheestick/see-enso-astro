@@ -1,0 +1,63 @@
+---
+
+
+const {className, caption, href, } = Astro.props
+---
+
+<a 
+  {href}
+  class:list={[className, 'navlink']}
+>
+  <span>{caption}</span>
+</a>
+
+<style>
+.navlink {
+  --pb: 6px;
+  --pi: 16px;
+  --fs: inherit;
+
+  display: flex;
+  align-items: center;
+  padding-block: var(--pb);
+  padding-inline: var(--pi);
+  color: var(--text-color);
+  font-size: var(--fs);
+  border-radius: 1000px;
+  transition: all 250ms ease-in-out;
+
+}
+
+.navlink:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.navlink:active {
+  background-color: var(--color-bg-pressed);
+}
+
+.navlink:focus-within{
+  box-shadow: var(--color-shadow-focused);
+  outline: transparent;
+}
+
+@media (width >= 29.75em) {
+  .navlink {
+    --fs: .65em;
+
+    background-color: var(--color-burger);
+    border-radius: 1000px;
+  }
+}
+
+@media (width > 48em) {
+  .navlink {
+    --fs: .85em;
+  }
+
+@media (width > 64em) {
+  .navlink {
+    --fs: 1em;
+  }
+}
+</style>
