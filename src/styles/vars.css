@@ -2,7 +2,7 @@
   --typo-base-font: "Open Sans", Helvetica, Arial, sans-serif;
 
   --typo-size-900: 3.375rem;
-  --typo-size-700: 1.875rem;
+  --typo-size-700: 1.675rem;
   --typo-size-600: 1.5rem;
   --typo-size-500: 1.25rem;
   --typo-size-400: 1.125rem;
@@ -27,6 +27,8 @@
   --swatch-purple-400: #8d57d4;
   --swatch-purple-300: #c395ff;
 
+  --swatch-backdrop: rgba(6, 5, 11, 0.165);
+
   --font-main: var(--typo-base-font);
   --font-weight: 400;
 
@@ -46,4 +48,11 @@
   --color-dark: var(--swatch-purple-700);
   --color-gradient-base: var(--swatch-purple-600);
   --color-border: var(--swatch-neutral-200);
+  --color-backdrop: var(--swatch-backdrop);
+  --color-burger: var(--swatch-neutral-700);
+
+  --backdrop-blur: blur(7px);
+  --color-bg-hover: var(--swatch-purple-700);
+  --color-bg-pressed: var(--swatch-purple-500);
+  --color-shadow-focused: 0 0 16px 2px #9747ff;
 }
