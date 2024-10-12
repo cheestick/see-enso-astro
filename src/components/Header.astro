@@ -3,7 +3,6 @@ import CompanyLogo from './CompanyLogo.astro';
 import Navigation from './Navigation.astro';
 import SiteOptions from './SiteOptions.astro';
 
-
 ---
 
 <header class="header">
@@ -15,19 +14,41 @@ import SiteOptions from './SiteOptions.astro';
 </header>
 
 <style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .header::before {
+    /* --color-backdrop: rgba(25, 35, 39, 0.208); */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-backdrop);
+    backdrop-filter: var(--backdrop-blur, 10px);
+    z-index: -1;
+  }
   .header__container {
-    --side: 15px;
-    --gap: 1.875em;
+    --side: clamp(7px, 1.5vw,20px);
+    --gap: clamp(.4em, 1vw ,1.875em);
 
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--gap);
+
     width: min(90em, calc(100% - 2 * var(--side)));
+    
     margin-inline: auto;
 
     &.spacing {
-      margin-block-start: clamp(17px, 4vw, 33px);
+      margin-block-start: clamp(10px, 1.5vw, 33px);
+      margin-block-end: 6px;
     }
   }
 
