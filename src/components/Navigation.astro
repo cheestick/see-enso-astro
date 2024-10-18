@@ -1,0 +1,27 @@
+---
+import NavBar from './NavBar.astro';
+import ButtonBurger from './ButtonBurger.astro';
+
+---
+
+<div class="nav__wrapper ">
+  <NavBar />
+  <ButtonBurger />    
+</div>  
+
+<style>
+  .nav__wrapper {
+    --gap: 1.25em;
+
+    order: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+  }
+
+  @media screen and (width >= 29.75em) {
+    .nav__wrapper {
+      order: 0;
+    }
+  }
+</style>

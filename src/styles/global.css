@@ -1,114 +1,7 @@
-@font-face {
-  font-family: "Open Sans";
-  src: url("fonts/OpenSans-Light.woff2") format("woff2"),
-    url("fonts/OpenSans-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Open Sans";
-  src: url("fonts/OpenSans-Regular.woff2") format("woff2"),
-    url("fonts/OpenSans-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Open Sans";
-  src: url("fonts/OpenSans-SemiBold.woff2") format("woff2"),
-    url("fonts/OpenSans-SemiBold.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Arupala Grotesk Variable";
-  src: url("fonts/ArupalaGroteskTrial-Light.woff2") format("woff2"),
-    url("fonts/ArupalaGroteskTrial-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-:root {
-  --typo-base-font: "Open Sans", Helvetica, Arial, sans-serif;
-
-  --typo-size-900: 3.375rem;
-  --typo-size-700: 1.875rem;
-  --typo-size-600: 1.5rem;
-  --typo-size-500: 1.25rem;
-  --typo-size-400: 1.125rem;
-  --typo-size-300: 1rem;
-
-  --typo-line-400: 1.3;
-  --typo-line-300: 1.2;
-
-  --typo-spacing-base: -0.01em; /* -1% */
-  --typo-spacing-extra: -0.02em; /* -2% */
-
-  --swatch-neutral-900: #06050b;
-  --swatch-neutral-700: #313131;
-  --swatch-neutral-400: #595959;
-  --swatch-neutral-300: #b3b3b3;
-  --swatch-neutral-200: #f4f4f4;
-
-  --swatch-purple-700: #421371;
-  --swatch-purple-600: #55416a;
-  --swatch-purple-500: #6a21b2;
-  --swatch-purple-400: #8d57d4;
-  --swatch-purple-300: #c395ff;
-
-  --font-main: var(--typo-base-font);
-  --font-weight: 400;
-
-  --line-height-base: var(--typo-line-400);
-  --line-height-extra: var(--typo-line-300);
-
-  --text-size-main: var(--typo-size-400);
-  --text-h1: var(--typo-size-900);
-  --text-color: var(--swatch-neutral-200);
-
-  --bg-color: var(--swatch-neutral-900);
-
-  --color-base: var(--swatch-purple-500);
-  --color-light: var(--swatch-purple-400);
-  --color-lightest: var(--swatch-purple-300);
-  --color-dark: var(--swatch-purple-700);
-  --color-gradient-base: var(--swatch-purple-600);
-}
-
-/* RESET */
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-::before,
-::after {
-  box-sizing: inherit;
-}
-
 body {
-  margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-p,
-blockquote,
-dl,
-dd {
-  margin-block-end: 0;
-}
-
-/* COMMON  */
-body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
   font-family: var(--font-main);
   font-weight: var(--font-weight);
   font-size: var(--text-size-main);
@@ -117,6 +10,7 @@ body {
 
   color: var(--text-color);
   background-color: var(--bg-color);
+  text-wrap: pretty;
 }
 
 h1,
@@ -124,6 +18,16 @@ h2,
 h3,
 h4 {
   text-transform: uppercase;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  line-height: var(--line-height-extra);
+}
+
+a {
+  color: var(--text-color);
 }
 
 button {
@@ -131,7 +35,27 @@ button {
   letter-spacing: var(--typo-spacing-extra);
 }
 
-h1 {
-  font-size: var(--text-h1);
-  line-height: var(--line-height-extra);
+.btn {
+  --stroke: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  height: var(--size, 60px);
+  text-transform: uppercase;
+  font-size: var(--text-size, 1em);
+  border-radius: 50%;
+  border: var(--stroke) solid var(--color-border);
+  overflow: hidden;
+}
+
+.btn__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  background-position: center;
+  background-color: transparent;
 }

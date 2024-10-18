@@ -1,10 +1,22 @@
 ---
 import MainLayout from '@layouts/MainLayout.astro';
+import Header from '@components/Header.astro';
+import HelperSection from '@components/HelperSection.astro';
+import ButtonToTop from '@components/ButtonToTop.astro';
 
 
 ---
 
 <MainLayout title="See Enso - Digital Agency">
-	<h1>See Enso - Digital Agency</h1>
-	<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni quidem esse quia earum, numquam sint eveniet dolorem ipsum laboriosam eaque!</p>
+	<Header />
+	
+	<HelperSection id="hero">Hero</HelperSection>
+	<HelperSection id="about">About</HelperSection>
+	<HelperSection id="services">Services</HelperSection>
+	<HelperSection id="cases">Cases</HelperSection>
+	<HelperSection id="team">Team</HelperSection>
+	<HelperSection>Backstage</HelperSection>
+	<HelperSection>Footer</HelperSection>
+	
+	<ButtonToTop href="#hero"/>
 </MainLayout>
