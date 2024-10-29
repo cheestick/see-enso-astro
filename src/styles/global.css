@@ -35,6 +35,22 @@ button {
   letter-spacing: var(--typo-spacing-extra);
 }
 
+.accent {
+  color: var(--color-accent);
+}
+
+.container {
+  --side: clamp(7px, 1.5vw, 20px);
+  width: min(90rem, calc(100% - 2 * var(--side)));
+  margin-inline: auto;
+}
+
+.section__heading {
+  font-size: var(--text-h2);
+  font-weight: 400;
+  line-height: 1;
+}
+
 .btn {
   --stroke: 2px;
 

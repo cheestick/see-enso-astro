@@ -22,6 +22,7 @@
   --swatch-neutral-200: #f4f4f4;
 
   --swatch-purple-700: #421371;
+  --swatch-purple-650: #5a34ac;
   --swatch-purple-600: #55416a;
   --swatch-purple-500: #6a21b2;
   --swatch-purple-400: #8d57d4;
@@ -37,6 +38,7 @@
 
   --text-size-main: var(--typo-size-400);
   --text-h1: var(--typo-size-900);
+  --text-h2: var(--typo-size-900);
   --text-nav-mobile: var(--typo-size-600);
   --text-button-main: var(--typo-size-500);
   --text-button-mobile: var(--typo-size-200);
@@ -52,6 +54,7 @@
   --color-border: var(--swatch-neutral-200);
   --color-backdrop: var(--swatch-backdrop);
   --color-burger: var(--swatch-neutral-700);
+  --color-accent: var(--swatch-purple-650);
 
   --backdrop-blur: blur(7px);
   --color-bg-hover: var(--swatch-purple-700);

@@ -1,13 +1,47 @@
 ---
 import TeamList from './TeamList.astro';
+import config from '@data/config';
 
+const { team } = config
 
 ---
-<section class="team">
-  <h2 class="team__heading">
-    <span>сильну агенцію</span>
-    <span>будує сильна команда</span>
-  </h2>
-
-  <TeamList />
+<section id="team" class="team">
+  <div class="team__container container">
+    <h2 class="team__heading section__heading">
+      <span class="line first">сильну <span class="accent">агенцію</span></span>
+      <span class="line second">будує сильна <span class="accent">команда</span></span>
+    </h2>
+    
+    <TeamList list={team}/>
+  </div>
 </section>
+
+<style>
+  section {
+    height: 100vh;
+    height: 100dvh;
+    outline: 2px dashed seashell;
+  }
+
+  .team__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 > span {
+    /* display: inline-flex; */
+    /* gap: 0.25em; */
+  }
+  .team__heading { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-self: center;
+    width: max-content;
+  }
+
+  .line.second {
+    /* align-self: flex-end; */
+    margin-inline-start: 7ch;
+  }
+</style>

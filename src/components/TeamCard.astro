@@ -1,15 +1,90 @@
 ---
+const {fullname, position, imageFilename} = Astro.props
 
+const alt = `${fullname}, ${position}`
+const imagePath = `/images/team/${imageFilename}/${imageFilename}`
+const srcSet = {
+  original:`${imagePath}-original.jpg`,
+  mobile: {
+    avif: {
+      x1: `${imagePath}-mobile@1x.avif`,
+      x2: `${imagePath}-mobile@2x.avif`,
+      x3: `${imagePath}-mobile@3x.avif`,
+    },
+    webp: {
+      x1: `${imagePath}-mobile@1x.webp`,
+      x2: `${imagePath}-mobile@2x.webp`,
+      x3: `${imagePath}-mobile@3x.webp`,
+    },
+    jpeg: {
+      x1: `${imagePath}-mobile@1x.jpg`,
+      x2: `${imagePath}-mobile@2x.jpg`,
+      x3: `${imagePath}-mobile@3x.jpg`,
+    },
+  },
+  desktop: {
+    avif: {
+      x1: `${imagePath}@1x.avif`,
+      x2: `${imagePath}@2x.avif`,
+      x3: `${imagePath}@3x.avif`,
+    },
+    webp: {
+      x1: `${imagePath}@1x.webp`,
+      x2: `${imagePath}@2x.webp`,
+      x3: `${imagePath}@3x.webp`,
+    },
+    jpeg: {
+      x1: `${imagePath}@1x.jpg`,
+      x2: `${imagePath}@2x.jpg`,
+      x3: `${imagePath}@3x.jpg`,
+    },
+  }
+}
 ---
 
 <figure class="team__card">
   <picture class="card__picture">
-    <source>
-    <source>
-    <img src="" alt="">
+    <!-- <source 
+      media="(min-width: 640px)"
+      type="image/avif" 
+      srcset=`${srcSet.avif.x1} 1x, 
+              ${srcSet.avif.x2} 2x, 
+              ${srcSet.avif.x3} 3x`/>
+    <source 
+      media="(min-width: 600px)"
+      type="image/webp" 
+      srcset=`${srcSet.webp.x1} 1x, 
+              ${srcSet.webp.x2} 2x, 
+              ${srcSet.webp.x3} 3x` /> -->
+    <source 
+      media="(min-width: 426px)"
+      type="image/jpeg" 
+      srcset=`${srcSet.desktop.jpeg.x1} 1x, 
+              ${srcSet.desktop.jpeg.x2} 2x, 
+              ${srcSet.desktop.jpeg.x3} 3x` />
+    <source 
+      type="image/jpeg" 
+      srcset=`${srcSet.mobile.jpeg.x1} 1x, 
+              ${srcSet.mobile.jpeg.x2} 2x, 
+              ${srcSet.mobile.jpeg.x3} 3x` />
+    <img class="picture__image" src={srcSet.original} {alt} width="140" height="140">
   </picture>
   <figcaption class="card__caption">
-    <h3 class="card__name"></h3>
-    <h4 class="card__position"></h4>
+    <h3 class="card__name">{fullname}</h3>
+    <h4 class="card__position">{position}</h4>
   </figcaption>
 </figure>
+
+<style>
+  .card__picture {
+    width: max-content;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    overflow: hidden;
+  }
+
+  .picture__image {
+    width: clamp(140px, 20vw , 370px)
+  }
+
+</style>

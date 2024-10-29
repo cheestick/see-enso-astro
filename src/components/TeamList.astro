@@ -1,11 +1,38 @@
 ---
+import type { ITeamCard } from '@data/team';
 import TeamCard from './TeamCard.astro';
 
+interface Props {
+  list: ITeamCard[]
+}
 
+const { list } = Astro.props
 ---
 
 <ul class="team__list">
-  <li class="team__item">
-    <TeamCard />
-  </li>
+  {list.map(({fullname, position, imageFilename}) => (
+    <li class="team__item">
+      <TeamCard {fullname} {position} {imageFilename}/>
+    </li>
+  ))}
 </ul>
+
+ <style>
+  .team__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .team__item {
+    transition: all 550ms ease-in-out;
+  }
+  .team__list:has(:hover) .team__item:not(:hover) {
+    filter: brightness(.4)
+  }
+
+  .team__item {
+    /* max-width: 18ch; */
+  }
+
+ </style>
