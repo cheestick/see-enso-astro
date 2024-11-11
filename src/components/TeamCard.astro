@@ -70,20 +70,63 @@ const srcSet = {
   </picture>
   <figcaption class="card__caption">
     <h3 class="card__name">{fullname}</h3>
-    <h4 class="card__position">{position}</h4>
+    <p class="card__position">{position}</p>
   </figcaption>
 </figure>
 
 <style>
   .card__picture {
-    width: max-content;
+    position: relative;
+    /* isolation: isolate; */
+    /* width: max-content; */
+    /* aspect-ratio: 1; */
+    /* border-radius: 100%; */
+    /* overflow: hidden; */
+  }
+
+  .card__picture::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
     aspect-ratio: 1;
-    border-radius: 100%;
-    overflow: hidden;
+    background-image: url('/images/team/deco-avatar.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transform-origin: center;
+    transform: scale(1.15);
   }
 
   .picture__image {
-    width: clamp(140px, 20vw , 370px)
+    width: clamp(140px, 20vw , 370px);
+    border-radius: 100%;
   }
 
+  .card__name {
+    --f-size: var(--typo-size-300);
+    --f-weight: 400;
+
+    font-size: var(--f-size, 1rem);
+    font-weight: var(--f-weight);
+  }
+
+  .card__position {
+    --text-color: var(--swatch-neutral-350);
+    --f-size: var(--typo-size-250);
+    --f-line: var(--typo-line-200);
+    color: var(--text-color);
+    font-size: var(--f-size);
+    line-height: var(--f-line);
+  }
+
+@media screen and (width > 40em) {
+  .card__name {
+    --f-size: var(--typo-size-600);
+  }
+
+  .card__position {
+    --f-size: var(--typo-size-400);
+  }
+}
 </style>
