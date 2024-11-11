@@ -44,24 +44,23 @@ const srcSet = {
 
 <figure class="team__card">
   <picture class="card__picture">
-    <!-- <source 
-      media="(min-width: 640px)"
-      type="image/avif" 
-      srcset=`${srcSet.avif.x1} 1x, 
-              ${srcSet.avif.x2} 2x, 
-              ${srcSet.avif.x3} 3x`/>
     <source 
-      media="(min-width: 600px)"
+      media="(min-width: 426px)"
       type="image/webp" 
-      srcset=`${srcSet.webp.x1} 1x, 
-              ${srcSet.webp.x2} 2x, 
-              ${srcSet.webp.x3} 3x` /> -->
+      srcset=`${srcSet.desktop.webp.x1} 1x, 
+              ${srcSet.desktop.webp.x2} 2x, 
+              ${srcSet.desktop.webp.x3} 3x` />
     <source 
       media="(min-width: 426px)"
       type="image/jpeg" 
       srcset=`${srcSet.desktop.jpeg.x1} 1x, 
               ${srcSet.desktop.jpeg.x2} 2x, 
               ${srcSet.desktop.jpeg.x3} 3x` />
+    <source 
+      type="image/webp" 
+      srcset=`${srcSet.mobile.webp.x1} 1x, 
+              ${srcSet.mobile.webp.x2} 2x, 
+              ${srcSet.mobile.webp.x3} 3x` />
     <source 
       type="image/jpeg" 
       srcset=`${srcSet.mobile.jpeg.x1} 1x, 
