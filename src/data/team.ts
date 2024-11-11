@@ -17,7 +17,7 @@ export default [
   },
   {
     fullname: "Сніжана",
-    position: "UI/UX, графічниц дизайнер",
+    position: "UI/UX, графічний дизайнер",
     imageFilename: "snizhana",
   },
   {
