@@ -74,35 +74,35 @@ const srcSet = {
   </figcaption>
 </figure>
 
-<style>
+<style is:global>
   .card__picture {
-    position: relative;
+    display: grid;
+    grid-template-areas: 'avatar';
     /* isolation: isolate; */
-    /* width: max-content; */
-    /* aspect-ratio: 1; */
-    /* border-radius: 100%; */
-    /* overflow: hidden; */
   }
 
   .card__picture::before {
     content: '';
-    position: absolute;
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
+    grid-area: avatar;
+    /* width: 100%; */
+    /* aspect-ratio: 1; */
     background-image: url('/images/team/deco-avatar.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
     transform-origin: center;
-    transform: scale(1.15);
+    transform: scale(1.16);
   }
 
   .picture__image {
+    grid-area: avatar;
     width: clamp(140px, 20vw , 370px);
     border-radius: 100%;
   }
 
+  .card__caption {
+    margin-block-start: 1rem;
+  }
   .card__name {
     --f-size: var(--typo-size-300);
     --f-weight: 400;
@@ -115,12 +115,13 @@ const srcSet = {
     --text-color: var(--swatch-neutral-350);
     --f-size: var(--typo-size-250);
     --f-line: var(--typo-line-200);
+
     color: var(--text-color);
     font-size: var(--f-size);
     line-height: var(--f-line);
   }
 
-@media screen and (width > 40em) {
+@media screen and (width > 48em) {
   .card__name {
     --f-size: var(--typo-size-600);
   }

@@ -16,32 +16,33 @@ const { team } = config
   </div>
 </section>
 
-<style>
-  section {
-    height: 100vh;
-    height: 100dvh;
-    outline: 2px dashed seashell;
-  }
-
+<style is:global>
   .team__container {
     display: flex;
     flex-direction: column;
   }
 
-  h2 > span {
-    /* display: inline-flex; */
-    /* gap: 0.25em; */
-  }
   .team__heading { 
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-self: center;
-    width: max-content;
+    --fs: 1.275rem;
+    display: grid;
+    grid-template-areas: 
+      'line-one'
+      'line-two';
+    place-content: center;
+    font-size: var(--fs);
+  }
+  .line.first {
+    grid-area: line-one;
   }
 
   .line.second {
-    /* align-self: flex-end; */
-    margin-inline-start: 7ch;
+    grid-area: line-two;
+    margin-inline-start: min(12vw, 7ch);
+  }
+
+  @media screen and (width > 48rem) {
+    .team__heading {
+      --fs: 3.375rem;
+    }
   }
 </style>

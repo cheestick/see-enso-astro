@@ -17,23 +17,34 @@ const { list } = Astro.props
   ))}
 </ul>
 
- <style>
+ <style is:global>
   .team__list {
+    --mbs: 2.75rem;
+
     display: flex;
     flex-basis: 0;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    gap: 1rem;
+    margin-block-start: var(--mbs);
   }
 
   .team__item {
     transition: all 550ms ease-in-out;
   }
+  .team__list:has(:focus-visible) .team__item:not(:focus-visible),
   .team__list:has(:hover) .team__item:not(:hover) {
-    filter: brightness(.4)
+    filter: brightness(.4);
   }
 
-  .team__item {
-    /* max-width: 18ch; */
+  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture,
+  .team__list:has(:hover) .team__item:not(:hover) .card__picture {
+    filter: grayscale(1);
   }
 
+@media screen and (width > 48rem) {
+  .team__list {
+    --mbs: 5.75rem;
+  }
+}
  </style>
