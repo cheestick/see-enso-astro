@@ -1,5 +1,7 @@
 ---
-const {fullname, position, imageFilename} = Astro.props
+const {fullname, position, imageFilename, startAngle = '0deg'} = Astro.props
+
+
 
 const alt = `${fullname}, ${position}`
 const imagePath = `/images/team/${imageFilename}/${imageFilename}`
@@ -74,29 +76,48 @@ const srcSet = {
   </figcaption>
 </figure>
 
-<style is:global>
+<style is:global define:vars={{startAngle}}>
+  /* @property --r-factor {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+} */
+
   .card__picture {
     display: grid;
     grid-template-areas: 'avatar';
-    /* isolation: isolate; */
+    width: fit-content;
   }
 
-  .card__picture::before {
+  .card__picture::before,
+  .card__picture::after {
+    
     content: '';
     grid-area: avatar;
-    /* width: 100%; */
-    /* aspect-ratio: 1; */
-    background-image: url('/images/team/deco-avatar.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
     transform-origin: center;
-    transform: scale(1.16);
+    transform: 
+      scale(var(--s-factor, 1)) 
+      rotateZ(var(--r-factor, 0deg));
+  }
+
+  .card__picture::before {
+    --s-factor: 1.125;
+    --r-factor: var(--startAngle);
+    background-image: url('/images/team/hid-inner-opt.svg');
+  }
+  .card__picture::after {
+    --s-factor: 1.175;
+    --r-factor: calc(-1 * var(--startAngle));
+    background-image: url('/images/team/hid-outer-opt.svg');
   }
 
   .picture__image {
     grid-area: avatar;
-    width: clamp(140px, 20vw , 370px);
+    width: clamp(140px, 20vw , 300px);
+    aspect-ratio: 1;
     border-radius: 100%;
   }
 

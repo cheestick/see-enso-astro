@@ -10,9 +10,9 @@ const { list } = Astro.props
 ---
 
 <ul class="team__list">
-  {list.map(({fullname, position, imageFilename}) => (
+  {list.map(({fullname, position, imageFilename}, index) => (
     <li class="team__item">
-      <TeamCard {fullname} {position} {imageFilename}/>
+      <TeamCard {fullname} {position} {imageFilename} startAngle={`${index*90}deg`}/>
     </li>
   ))}
 </ul>
