@@ -11,7 +11,7 @@ const {className, caption, href, } = Astro.props
   <span>{caption}</span>
 </a>
 
-<style>
+<style is:global>
 .navlink {
   --pb: 6px;
   --pi: 16px;
@@ -54,6 +54,7 @@ const {className, caption, href, } = Astro.props
   .navlink {
     --fs: .85em;
   }
+}
 
 @media (width > 64em) {
   .navlink {

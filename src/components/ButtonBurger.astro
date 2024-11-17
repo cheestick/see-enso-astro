@@ -18,7 +18,7 @@
   const iconBurger = document.querySelector('.icon-burger') as HTMLSpanElement
   const iconClose = document.querySelector('.icon-close') as HTMLSpanElement
 
-  btnBurger?.addEventListener('click', (e) => {
+  btnBurger?.addEventListener('click', (_) => {
     navigation?.classList.toggle('show-navigation')
     if (navigation?.classList.contains('show-navigation')) {
       iconBurger.style.display = 'none'
@@ -30,7 +30,7 @@
   })
 </script>
 
-<style>
+<style is:global>
   .nav__burger {
     --width: 63px;
     --height: 42px;
