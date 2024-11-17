@@ -1,7 +1,7 @@
 ---
 const {fullname, position, imageFilename, startAngle = '0deg'} = Astro.props
 
-
+const endAngle = `${parseInt(startAngle) + 359}deg`;
 
 const alt = `${fullname}, ${position}`
 const imagePath = `/images/team/${imageFilename}/${imageFilename}`
@@ -76,12 +76,18 @@ const srcSet = {
   </figcaption>
 </figure>
 
-<style is:global define:vars={{startAngle}}>
-  /* @property --r-factor {
+<style is:global define:vars={{startAngle, endAngle}}>
+  @property --r-factor {
   syntax: "<angle>";
   inherits: true;
   initial-value: 0deg;
-} */
+}
+
+  @property --endAngle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
 
   .card__picture {
     display: grid;
@@ -91,7 +97,6 @@ const srcSet = {
 
   .card__picture::before,
   .card__picture::after {
-    
     content: '';
     grid-area: avatar;
     background-position: center;
@@ -101,12 +106,15 @@ const srcSet = {
     transform: 
       scale(var(--s-factor, 1)) 
       rotateZ(var(--r-factor, 0deg));
+    animation: hidSpinning 100s infinite linear forwards;
+    /* animation-timeline: view(); */
   }
 
   .card__picture::before {
     --s-factor: 1.125;
     --r-factor: var(--startAngle);
     background-image: url('/images/team/hid-inner-opt.svg');
+    animation-direction: reverse;
   }
   .card__picture::after {
     --s-factor: 1.175;
@@ -149,6 +157,12 @@ const srcSet = {
 
   .card__position {
     --f-size: var(--typo-size-400);
+  }
+}
+
+@keyframes hidSpinning {
+  to {
+    --r-factor: var(--endAngle);
   }
 }
 </style>

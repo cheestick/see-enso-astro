@@ -42,6 +42,19 @@ const { list } = Astro.props
     filter: grayscale(1);
   }
 
+  /* .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::before ,
+  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::after ,
+  .team__list:has(:hover)  .card__picture::before,
+  .team__list:has(:hover)  .card__picture::after {
+    animation-duration: 15s;
+  } */
+  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::before ,
+  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::after ,
+  .team__list:has(:hover) .team__item:not(:hover) .card__picture::before,
+  .team__list:has(:hover) .team__item:not(:hover) .card__picture::after {
+    animation-play-state: paused;
+  }
+
 @media screen and (width > 48rem) {
   .team__list {
     --mbs: 5.75rem;
