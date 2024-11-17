@@ -1,0 +1,168 @@
+---
+const {fullname, position, imageFilename, startAngle = '0deg'} = Astro.props
+
+const endAngle = `${parseInt(startAngle) + 359}deg`;
+
+const alt = `${fullname}, ${position}`
+const imagePath = `/images/team/${imageFilename}/${imageFilename}`
+const srcSet = {
+  original:`${imagePath}-original.jpg`,
+  mobile: {
+    avif: {
+      x1: `${imagePath}-mobile@1x.avif`,
+      x2: `${imagePath}-mobile@2x.avif`,
+      x3: `${imagePath}-mobile@3x.avif`,
+    },
+    webp: {
+      x1: `${imagePath}-mobile@1x.webp`,
+      x2: `${imagePath}-mobile@2x.webp`,
+      x3: `${imagePath}-mobile@3x.webp`,
+    },
+    jpeg: {
+      x1: `${imagePath}-mobile@1x.jpg`,
+      x2: `${imagePath}-mobile@2x.jpg`,
+      x3: `${imagePath}-mobile@3x.jpg`,
+    },
+  },
+  desktop: {
+    avif: {
+      x1: `${imagePath}@1x.avif`,
+      x2: `${imagePath}@2x.avif`,
+      x3: `${imagePath}@3x.avif`,
+    },
+    webp: {
+      x1: `${imagePath}@1x.webp`,
+      x2: `${imagePath}@2x.webp`,
+      x3: `${imagePath}@3x.webp`,
+    },
+    jpeg: {
+      x1: `${imagePath}@1x.jpg`,
+      x2: `${imagePath}@2x.jpg`,
+      x3: `${imagePath}@3x.jpg`,
+    },
+  }
+}
+---
+
+<figure class="team__card">
+  <picture class="card__picture">
+    <source 
+      media="(min-width: 426px)"
+      type="image/webp" 
+      srcset=`${srcSet.desktop.webp.x1} 1x, 
+              ${srcSet.desktop.webp.x2} 2x, 
+              ${srcSet.desktop.webp.x3} 3x` />
+    <source 
+      media="(min-width: 426px)"
+      type="image/jpeg" 
+      srcset=`${srcSet.desktop.jpeg.x1} 1x, 
+              ${srcSet.desktop.jpeg.x2} 2x, 
+              ${srcSet.desktop.jpeg.x3} 3x` />
+    <source 
+      type="image/webp" 
+      srcset=`${srcSet.mobile.webp.x1} 1x, 
+              ${srcSet.mobile.webp.x2} 2x, 
+              ${srcSet.mobile.webp.x3} 3x` />
+    <source 
+      type="image/jpeg" 
+      srcset=`${srcSet.mobile.jpeg.x1} 1x, 
+              ${srcSet.mobile.jpeg.x2} 2x, 
+              ${srcSet.mobile.jpeg.x3} 3x` />
+    <img class="picture__image" src={srcSet.original} {alt} width="140" height="140">
+  </picture>
+  <figcaption class="card__caption">
+    <h3 class="card__name">{fullname}</h3>
+    <p class="card__position">{position}</p>
+  </figcaption>
+</figure>
+
+<style is:global define:vars={{startAngle, endAngle}}>
+  @property --r-factor {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+  @property --endAngle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+  .card__picture {
+    display: grid;
+    grid-template-areas: 'avatar';
+    width: fit-content;
+  }
+
+  .card__picture::before,
+  .card__picture::after {
+    content: '';
+    grid-area: avatar;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transform-origin: center;
+    transform: 
+      scale(var(--s-factor, 1)) 
+      rotateZ(var(--r-factor, 0deg));
+    animation: hidSpinning 100s infinite linear forwards;
+    /* animation-timeline: view(); */
+  }
+
+  .card__picture::before {
+    --s-factor: 1.125;
+    --r-factor: var(--startAngle);
+    background-image: url('/images/team/hid-inner-opt.svg');
+    animation-direction: reverse;
+  }
+  .card__picture::after {
+    --s-factor: 1.175;
+    --r-factor: calc(-1 * var(--startAngle));
+    background-image: url('/images/team/hid-outer-opt.svg');
+  }
+
+  .picture__image {
+    grid-area: avatar;
+    width: clamp(140px, 20vw , 300px);
+    aspect-ratio: 1;
+    border-radius: 100%;
+  }
+
+  .card__caption {
+    margin-block-start: 1rem;
+  }
+  .card__name {
+    --f-size: var(--typo-size-300);
+    --f-weight: 400;
+
+    font-size: var(--f-size, 1rem);
+    font-weight: var(--f-weight);
+  }
+
+  .card__position {
+    --text-color: var(--swatch-neutral-350);
+    --f-size: var(--typo-size-250);
+    --f-line: var(--typo-line-200);
+
+    color: var(--text-color);
+    font-size: var(--f-size);
+    line-height: var(--f-line);
+  }
+
+@media screen and (width > 48em) {
+  .card__name {
+    --f-size: var(--typo-size-600);
+  }
+
+  .card__position {
+    --f-size: var(--typo-size-400);
+  }
+}
+
+@keyframes hidSpinning {
+  to {
+    --r-factor: var(--endAngle);
+  }
+}
+</style>

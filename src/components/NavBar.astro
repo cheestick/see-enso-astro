@@ -1,13 +1,14 @@
 ---
-import { navData } from 'src/data/config'
+import config from 'src/data/config'
 import NavigationLink from './NavigationLink.astro'
 
+const {mainNavData} = config
 
 ---
 
 <nav class="nav__body" data-navigation>
   <ul class="nav__list">
-    {navData.map(({href, caption}) => (
+    {mainNavData.map(({href, caption}) => (
       <li class="nav__item">
         <NavigationLink 
           className="nav__link" 
