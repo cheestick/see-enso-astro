@@ -16,43 +16,44 @@
   </picture>
   <img class="logo-main" src="/images/hero/see-enso-da-hero.svg" alt="">
   <div class="deco">
-    <img style="--delay: 750ms;" src="/images/hero/halo-l-1.svg" alt="">
-    <img style="--delay: 650ms;" src="/images/hero/halo-l-2.svg" alt="">
-    <img style="--delay: 550ms;" src="/images/hero/halo-l-3.svg" alt="">
-    <img style="--delay: 450ms;" src="/images/hero/halo-l-4.svg" alt="">
-    <img style="--delay: 350ms;" src="/images/hero/halo-l-5.svg" alt="">
-    <img style="--delay: 250ms;" src="/images/hero/halo-l-6.svg" alt="">
+    <img style="--delay: 750ms;" src="/images/hero/halo-l-1.svg" alt="" width="800" height="800">
+    <img style="--delay: 650ms;" src="/images/hero/halo-l-2.svg" alt="" width="800" height="800">
+    <img style="--delay: 550ms;" src="/images/hero/halo-l-3.svg" alt="" width="800" height="800">
+    <img style="--delay: 450ms;" src="/images/hero/halo-l-4.svg" alt="" width="800" height="800">
+    <img style="--delay: 350ms;" src="/images/hero/halo-l-5.svg" alt="" width="800" height="800">
+    <!-- <img style="--delay: 250ms;" src="/images/hero/halo-l-6.svg" alt="" width="800" height="800"> -->
   </div>
 </section>
 
 <style is:global>
   .hero {
     display: grid;
-    grid-template-areas: 'hero';
-    place-items: center;
-    width: 100%;
     max-width: 100%;
     height: 100vh;
     height: 100dvh;
-    /* overflow: hidden; */
+    grid-template-areas: 'hero';
+    place-items: center;
+    place-content: center;
+    overflow: hidden;
   }
 
   .hero__picture {
+    grid-area: hero;
     width: 100%;
     height: 100%;
-    grid-area: hero;
   }
 
   .hero__picture img {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    /* min-height: 100dvh; */
     object-fit: cover;
     object-position: center center;
   }
 
   .logo-main {
     grid-area: hero;
-    width: min(90vw, 320px);
+    width: min(75vw, 320px);
   }
 
   @property --s-factor {
@@ -66,6 +67,7 @@
     grid-area: hero;
     display: grid;
     grid-template-areas: deco;
+    place-items: center;
     transform-origin: center;
     transform: 
               translateY(50px)
@@ -74,17 +76,18 @@
 
   .deco > img {
     grid-area: deco;
-    /* max-width: 100%; */
+    min-width: fit-content;
+    aspect-ratio: 1;
     transform: scale(var(--s-factor));
     animation: decoScale 2.2s infinite ease alternate;
     animation-delay: var(--delay, 0s);
   }
 
-@media screen and (width > 40em ) {
+/* @media screen and (width > 40em ) {
   .deco {
     --deco-scale: 1;
   }
-}
+} */
 
 @keyframes decoScale {
   to {

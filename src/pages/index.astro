@@ -1,7 +1,7 @@
 ---
 import MainLayout from '@layouts/MainLayout.astro';
 import Header from '@components/Header.astro';
-import HeroSection from '@components/HeroSection.astro';
+import SectionHero from '@components/SectionHero.astro';
 import ButtonToTop from '@components/ButtonToTop.astro';
 import SectionTeam from '@components/SectionTeam.astro';
 import HelperSection from '@components/HelperSection.astro';
@@ -12,8 +12,9 @@ import HelperSection from '@components/HelperSection.astro';
 <MainLayout title="See Enso - Digital Agency">
 	<Header />
 	
-	<HeroSection/>
-	<section class="dummy__section">
+	<SectionHero/>
+	
+	<!-- <section class="dummy__section">
 		<img class="dummy__img" src="/images/dummy/section-about.jpg" alt="">
 	</section>
 	<section class="dummy__section">
@@ -21,19 +22,23 @@ import HelperSection from '@components/HelperSection.astro';
 	</section>
 	<section class="dummy__section">
 		<img class="dummy__img" src="/images/dummy/section-cases.jpg" alt="">
-	</section>
+	</section> -->
+
 	<!-- <HelperSection id="about">About</HelperSection> -->
 	<!-- <HelperSection id="services">Services</HelperSection> -->
 	<!-- <HelperSection id="cases">Cases</HelperSection> -->
-	<SectionTeam/>
+
+	<!-- <SectionTeam/> -->
+
 	<!-- <HelperSection>Backstage</HelperSection> -->
 	<!-- <HelperSection>Footer</HelperSection> -->
-	<section class="dummy__section">
+
+	<!-- <section class="dummy__section">
 		<img class="dummy__img" src="/images/dummy/section-last.jpg" alt="">
 	</section>
 	<section class="dummy__section" style="margin-top: 4rem;">
 		<img class="dummy__img" src="/images/dummy/section-footer.jpg" alt="">
-	</section>
+	</section> -->
 	
 	<!-- <ButtonToTop href="#hero"/> -->
 </MainLayout>
