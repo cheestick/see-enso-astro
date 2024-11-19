@@ -13,12 +13,39 @@ import HelperSection from '@components/HelperSection.astro';
 	<Header />
 	
 	<HeroSection/>
+	<section class="dummy__section">
+		<img class="dummy__img" src="/images/dummy/section-about.jpg" alt="">
+	</section>
+	<section class="dummy__section">
+		<img class="dummy__img" src="/images/dummy/section-services.jpg" alt="">
+	</section>
+	<section class="dummy__section">
+		<img class="dummy__img" src="/images/dummy/section-cases.jpg" alt="">
+	</section>
 	<!-- <HelperSection id="about">About</HelperSection> -->
 	<!-- <HelperSection id="services">Services</HelperSection> -->
 	<!-- <HelperSection id="cases">Cases</HelperSection> -->
-	<SectionTeam>
+	<SectionTeam/>
 	<!-- <HelperSection>Backstage</HelperSection> -->
 	<!-- <HelperSection>Footer</HelperSection> -->
+	<section class="dummy__section">
+		<img class="dummy__img" src="/images/dummy/section-last.jpg" alt="">
+	</section>
+	<section class="dummy__section" style="margin-top: 4rem;">
+		<img class="dummy__img" src="/images/dummy/section-footer.jpg" alt="">
+	</section>
 	
 	<!-- <ButtonToTop href="#hero"/> -->
 </MainLayout>
+
+<style>
+.dummy__section {
+	display: grid;
+	place-items: center;
+}
+.dummy__img {
+	width: 100%;
+	object-fit: contain;
+	object-position: center;
+	}
+</style>
