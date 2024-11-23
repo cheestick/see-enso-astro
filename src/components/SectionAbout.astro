@@ -13,8 +13,8 @@
       <p>Ми SEE ENSO Digital - агенція повного циклу, яка спеціалізується на створенні візуального контенту, маркетингу, комунікаціях та графічному дизайні. </p>
       <p>Ми віримо, що головним показником нашого успіх є успіх вашого бренду.</p>
       <p>В SEE ENSO ми прагнемо побачити Вас, відчути Ваші сенси та побудувати гармонійні робочі стосунки на довгі роки.</p>
-      <div>
-        <img src="" alt="">
+      <div class="deco-enso-bg">
+        <img class="deco-enso-sign" src="/images/about/enso-sign.svg" alt="" width="360" height="360">
       </div>
       <p>ENSO в японській філософії символізує вічний цикл життя, уособлює універсальність, цілісність і гармонію. Саме цю ідею ми закладаємо у нашу з вами роботу.</p>
       <p>Прийнято вважати, що характер людини повністю проявляється в тому, як він малює цей символ; тільки той, хто володіє чистим і цільним духом, може створити справжній ENSO.</p>
@@ -28,4 +28,26 @@
     min-height: 100dvh;
   }
 
+  .deco-enso-bg {
+    display: grid;
+    place-items: center;
+    width: 392px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background-color: transparent;
+    background-image: 
+            radial-gradient(
+              circle at center, 
+              #f4f4f4 25%, 
+              #00000000 63%, 
+              #00000000);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .deco-enso-sign {
+    width: 260px;
+    aspect-ratio: 1;
+  }
 </style>
