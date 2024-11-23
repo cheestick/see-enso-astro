@@ -68,7 +68,7 @@ const srcSet = {
       srcset=`${srcSet.mobile.jpeg.x1} 1x, 
               ${srcSet.mobile.jpeg.x2} 2x, 
               ${srcSet.mobile.jpeg.x3} 3x` />
-    <img class="picture__image" src={srcSet.original} {alt} width="140" height="140">
+    <img loading="lazy" class="picture__image" src={srcSet.original} {alt} width="140" height="140">
   </picture>
   <figcaption class="card__caption">
     <h3 class="card__name">{fullname}</h3>
