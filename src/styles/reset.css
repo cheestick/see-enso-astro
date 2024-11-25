@@ -65,7 +65,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:focus-within {
+  html {
     scroll-behavior: auto;
   }
   *,

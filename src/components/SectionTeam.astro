@@ -1,0 +1,48 @@
+---
+import TeamList from './TeamList.astro';
+import config from '@data/config';
+
+const { team } = config
+
+---
+<section id="team" class="team">
+  <div class="team__container container">
+    <h2 class="section__heading team__heading">
+      <span class="line first">сильну <span class="accent">агенцію</span></span>
+      <span class="line second">будує сильна <span class="accent">команда</span></span>
+    </h2>
+    
+    <TeamList list={team}/>
+  </div>
+</section>
+
+<style is:global>
+  .team {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+
+  .team__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .team__heading { 
+    place-content: center;
+    /* grid-template-areas: 
+      'line-one'
+      'line-two'; */
+  }
+  .line.first {
+    /* grid-area: line-one; */
+  }
+
+  .line.second {
+    /* grid-area: line-two; */
+    margin-inline-start: min(12vw, 7ch);
+  }
+</style>

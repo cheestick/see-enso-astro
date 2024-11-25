@@ -7,10 +7,12 @@
   --typo-size-500: 1.25rem;
   --typo-size-400: 1.125rem;
   --typo-size-300: 1rem;
+  --typo-size-250: 0.875rem;
   --typo-size-200: 0.75rem;
 
   --typo-line-400: 1.3;
   --typo-line-300: 1.2;
+  --typo-line-200: 1.1;
 
   --typo-spacing-base: -0.01em; /* -1% */
   --typo-spacing-extra: -0.02em; /* -2% */
@@ -18,10 +20,12 @@
   --swatch-neutral-900: #06050b;
   --swatch-neutral-700: #313131;
   --swatch-neutral-400: #595959;
+  --swatch-neutral-350: #9f9f9f;
   --swatch-neutral-300: #b3b3b3;
   --swatch-neutral-200: #f4f4f4;
 
   --swatch-purple-700: #421371;
+  --swatch-purple-650: #5a34ac;
   --swatch-purple-600: #55416a;
   --swatch-purple-500: #6a21b2;
   --swatch-purple-400: #8d57d4;
@@ -35,8 +39,11 @@
   --line-height-base: var(--typo-line-400);
   --line-height-extra: var(--typo-line-300);
 
+  --z-nav-menu: 5000;
+
   --text-size-main: var(--typo-size-400);
   --text-h1: var(--typo-size-900);
+  --text-h2: var(--typo-size-900);
   --text-nav-mobile: var(--typo-size-600);
   --text-button-main: var(--typo-size-500);
   --text-button-mobile: var(--typo-size-200);
@@ -52,6 +59,7 @@
   --color-border: var(--swatch-neutral-200);
   --color-backdrop: var(--swatch-backdrop);
   --color-burger: var(--swatch-neutral-700);
+  --color-accent: var(--swatch-purple-650);
 
   --backdrop-blur: blur(7px);
   --color-bg-hover: var(--swatch-purple-700);

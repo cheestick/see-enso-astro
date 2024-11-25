@@ -13,12 +13,13 @@ import SiteOptions from './SiteOptions.astro';
   </div>
 </header>
 
-<style>
+<style is:global>
   .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1000;
   }
 
   .header::before {
