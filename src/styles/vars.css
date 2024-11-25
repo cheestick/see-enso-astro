@@ -39,6 +39,8 @@
   --line-height-base: var(--typo-line-400);
   --line-height-extra: var(--typo-line-300);
 
+  --z-nav-menu: 5000;
+
   --text-size-main: var(--typo-size-400);
   --text-h1: var(--typo-size-900);
   --text-h2: var(--typo-size-900);
