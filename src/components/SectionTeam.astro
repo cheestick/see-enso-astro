@@ -7,7 +7,7 @@ const { team } = config
 ---
 <section id="team" class="team">
   <div class="team__container container">
-    <h2 class="team__heading section__heading">
+    <h2 class="section__heading team__heading">
       <span class="line first">сильну <span class="accent">агенцію</span></span>
       <span class="line second">будує сильна <span class="accent">команда</span></span>
     </h2>
@@ -22,6 +22,8 @@ const { team } = config
     height: 100dvh;
     overflow: hidden;
   }
+
+
   .team__container {
     display: flex;
     flex-direction: column;
@@ -30,26 +32,17 @@ const { team } = config
   }
 
   .team__heading { 
-    --fs: 1.275rem;
-    display: grid;
-    grid-template-areas: 
-      'line-one'
-      'line-two';
     place-content: center;
-    font-size: var(--fs);
+    /* grid-template-areas: 
+      'line-one'
+      'line-two'; */
   }
   .line.first {
-    grid-area: line-one;
+    /* grid-area: line-one; */
   }
 
   .line.second {
-    grid-area: line-two;
+    /* grid-area: line-two; */
     margin-inline-start: min(12vw, 7ch);
-  }
-
-  @media screen and (width > 48rem) {
-    .team__heading {
-      --fs: 3.375rem;
-    }
   }
 </style>

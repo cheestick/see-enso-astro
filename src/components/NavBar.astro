@@ -1,5 +1,5 @@
 ---
-import config from 'src/data/config'
+import config from '@data/config'
 import NavigationLink from './NavigationLink.astro'
 
 const {mainNavData} = config
@@ -34,7 +34,7 @@ const {mainNavData} = config
     
     transform: translateX(-100%);
     transition: all 250ms ease-in-out;
-    z-index: 10;
+    /* z-index: 1000; */
   }
 
   .nav__list {
