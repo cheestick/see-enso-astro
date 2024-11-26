@@ -1,0 +1,21 @@
+---
+
+---
+
+<span class="tag"><slot/></span>
+
+<style is:global>
+  .tag {
+    --f-s: clamp(0.625rem, 0.3897rem + 1.1765vw, 1.125rem);
+    --color: #b3b3b3;
+    --stroke: 1px;
+
+    display: inline-block;
+    padding-block: clamp(0.25rem, 0.0735rem + 0.8824vw, 0.625rem);
+    padding-inline: clamp(0.5625rem, 0.2096rem + 1.7647vw, 1.3125rem);
+    color: var(--color);
+    font-size: var(--f-s);
+    border: var(--stroke) solid var(--color);
+    border-radius: 999px;
+  }
+</style>
