@@ -12,8 +12,8 @@ const {casesData} = config
       <span class="line line2">що <span class="accent">відображають</span></span>
       <span class="line line3">нашу агенцію</span>
     </h2>
-    <div class="section-cases__scroller">
-      <div class="cases-cards">
+    <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
+      <div  class="cases-cards" >
       {
         casesData?.map((card) => (
           <CardCase 
@@ -26,13 +26,23 @@ const {casesData} = config
   </div>
 </section>
 
+<script >
+let caseScroller = document.querySelector('div[data-scrollable-horizontal]') as HTMLDivElement;
+ 
+caseScroller?.addEventListener('wheel', (e) => {
+    e.preventDefault()
+    caseScroller.scrollLeft += e.deltaY + e.deltaX
+  });
+
+</script>
+
 <style is:global>
 .section-cases {
   margin-block-start: clamp(6.875rem, 4.8162rem + 10.2941vw, 11.25rem);
 }
 
-.section-cases.container {
-  /* overflow-y: auto; */
+.section-cases .container {
+  /* overflow: hidden; */
 }
 .section__heading.cases__heading {
   width: fit-content;
@@ -47,13 +57,21 @@ const {casesData} = config
 }
 
 .section-cases__scroller {
-  overflow-x: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; 
+
+  @media screen and (width > 60rem) {
+    scroll-snap-type: none ;
+  }
 }
 
 .cases-cards {
   display: flex;
   gap: 1rem;
   width: fit-content;
-
+  scroll-snap-stop: always;
 }
 </style>
