@@ -5,7 +5,7 @@ import type { ICaseCard } from '@data/cases'
 const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
 ---
 
-<article class="card-case">
+<article class="card-case" tabindex="-1">
   <h3 class="card-case__heading">{heading}</h3>
   <p class="card-case__description">{description}</p>
   <img class="card-case__thumb" src={thumbUrl} alt="" width="186" height="143"/>
@@ -20,18 +20,41 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
   .card-case {
     --color-border: var(--swatch-neutral-200);
     --stroke: 2px;
-    --r: clamp(1.0625rem, 0.386rem + 3.3824vw, 2.5rem);;
+    /* --r: clamp(1.0625rem, 0.386rem + 3.3824vw, 2.5rem); */
+    --r: clamp(0.75rem, 0.4643rem + 1.4286vw, 1.75rem);
+    /* --p-b: clamp(1rem, 0.1765rem + 4.1176vw, 2.75rem); */
+    --p-b: clamp(0.5rem, 0.2143rem + 1.4286vw, 1.5rem);
+    --p-i: var(--p-b);
+    --w: clamp(13.75rem, 9.3929rem + 21.7857vw, 29rem);
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto auto 1fr auto;
 
-    width: clamp(17.75rem, 8.6618rem + 45.4412vw, 37.0625rem);
-    padding-block: clamp(1rem, 0.1765rem + 4.1176vw, 2.75rem);
-    padding-inline: clamp(1rem, 0.1765rem + 4.1176vw, 2.75rem);
-    border: var(--stroke) solid var(--color-border);
+    width: var(--w);
+    aspect-ratio: 4/5;
+    /* max-height: 100%; */
+    padding-block: var(--p-b);
+    padding-inline: var(--p-i);
+    border: 
+            var(--stroke) 
+            solid 
+            var(--color-border);
     border-radius: var(--r);
+    
     overflow: hidden;
+    scroll-snap-align: center;
+    isolation: isolate;
+
+    background-color: inherit;
+    transition: background-color 500ms ease;
+  }
+
+  .card-case:hover,
+  .card-case:focus,
+  .card-case:focus-within,
+  .card-case:focus-visible {
+    background-color: var(--color-accent);
   }
 
   .card-case__heading {
@@ -45,6 +68,7 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
     --f-s: clamp(0.625rem, 0.3897rem + 1.1765vw, 1.125rem);
 
     grid-column: 1 / 3;
+    grid-row: 2/4;
     margin-block-start: clamp(0.375rem, -0.8015rem + 5.8824vw, 2.875rem);
     font-size: var(--f-s);
   }
@@ -53,13 +77,14 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
     --rotate: -11deg;
 
     grid-column: 2 / 4;
-    grid-row: 3 / 4;
-    place-self: end;
+    grid-row: 2 / 4;
+    place-self: center;
     width: clamp(11.625rem, 7.2132rem + 22.0588vw, 21rem);
     aspect-ratio: 5 / 4;
     background-image: linear-gradient(90deg, violet, pink);
     rotate: var(--rotate);
-    transform: translateX(25%);
+    transform: translateX(30%);
+    z-index: -1;
   }
 
   .card-case:nth-child(2n) .card-case__thumb {
@@ -72,6 +97,5 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
   display: flex;
   flex-wrap: wrap;
   gap: clamp(0.375rem, 0.1985rem + 0.8824vw, 0.75rem);
-  max-width: 70%;
 }
 </style>
