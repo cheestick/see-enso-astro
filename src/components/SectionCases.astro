@@ -5,13 +5,17 @@ const {casesData} = config
 
 ---
 
-<section id="cases" class="section-cases">
+<section id="cases" class="cases">
   <div class="container">
     <h2 class="section__heading cases__heading">
       <span class="line line1">кейси,</span>
       <span class="line line2">що <span class="accent">відображають</span></span>
       <span class="line line3">нашу агенцію</span>
     </h2>
+    <div class="cases__scroller-nav">
+      <button class="scroller-nav__button" type="button" data-button-backward><span>{"<-----"}</span></button>
+      <button class="scroller-nav__button" type="button" data-button-forward><span>{"----->"}</span></button>
+    </div>
     <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
       <div  class="cases-cards" >
       {
@@ -27,22 +31,30 @@ const {casesData} = config
 </section>
 
 <script >
-let caseScroller = document.querySelector('div[data-scrollable-horizontal]') as HTMLDivElement;
- 
+let caseScroller = document.querySelector('div[data-scrollable-horizontal]') as HTMLDivElement
+let casesBackwardButton = document.querySelector('[data-button-backward]') as HTMLButtonElement
+let casesForwardButton = document.querySelector('[data-button-forward]') as HTMLButtonElement
+
 caseScroller?.addEventListener('wheel', (e) => {
     e.preventDefault()
     caseScroller.scrollLeft += e.deltaY + e.deltaX
   });
 
+casesBackwardButton?.addEventListener('click', (e) => {
+  caseScroller.scrollLeft -= 250
+})
+casesForwardButton?.addEventListener('click', (e) => {
+  caseScroller.scrollLeft += 250
+})
 </script>
 
 <style is:global>
-.section-cases {
+.cases {
   margin-block-start: clamp(6.875rem, 4.8162rem + 10.2941vw, 11.25rem);
 }
 
-.section-cases .container {
-  /* overflow: hidden; */
+.cases .container {
+  margin-block-start: var(--section-interval);
 }
 .section__heading.cases__heading {
   width: fit-content;
@@ -56,12 +68,34 @@ caseScroller?.addEventListener('wheel', (e) => {
   margin-inline-start: 6ch;
 }
 
+.cases__scroller-nav {
+  margin-block-start: 1.875rem;
+}
+
+.scroller-nav__button {
+  display: inline-flex;
+  align-items: center;
+  width: 85px;
+  height: 42px;
+  padding-block: 21px;
+  padding-inline: 21px;
+  border: none;
+  border-radius: 15rem;
+  background-color: gray;
+}
+
+.scroller-nav__button:hover {
+  background-color: lightgray;
+}
+
 .section-cases__scroller {
+  margin-block-start: 1.25rem;
   overflow-x: auto;
   overflow-y: auto;
   overscroll-behavior-inline: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; 
+  scroll-behavior: smooth;
 
   @media screen and (width > 60rem) {
     scroll-snap-type: none ;
