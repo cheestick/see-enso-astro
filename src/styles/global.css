@@ -46,6 +46,10 @@ button {
   margin-inline: auto;
 }
 
+body > section[id] {
+  scroll-margin-block-start: var(--scroll-offset-start);
+}
+
 .section__heading {
   --f-size: clamp(1.3125rem, 0.3419rem + 4.8529vw, 3.375rem);
 
