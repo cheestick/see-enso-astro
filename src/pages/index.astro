@@ -2,10 +2,11 @@
 import MainLayout from '@layouts/MainLayout.astro';
 import Header from '@components/Header.astro';
 import SectionHero from '@components/SectionHero.astro';
-import ButtonToTop from '@components/ButtonToTop.astro';
 import SectionTeam from '@components/SectionTeam.astro';
-import HelperSection from '@components/HelperSection.astro';
 import SectionAbout from '@components/SectionAbout.astro';
+import SectionCases from '@components/SectionCases.astro';
+import HelperSection from '@components/HelperSection.astro';
+import ButtonToTop from '@components/ButtonToTop.astro';
 
 
 ---
@@ -18,13 +19,9 @@ import SectionAbout from '@components/SectionAbout.astro';
 	<!-- <section class="dummy__section">
 		<img class="dummy__img" src="/images/dummy/section-services.jpg" alt="">
 	</section> -->
-	<!-- <section class="dummy__section">
-		<img class="dummy__img" src="/images/dummy/section-cases.jpg" alt="">
-	</section> -->
-
 	<!-- <HelperSection id="services">Services</HelperSection> -->
-	<!-- <HelperSection id="cases">Cases</HelperSection> -->
-
+	
+	<SectionCases />
 	<SectionTeam/>
 
 	<!-- <HelperSection>Backstage</HelperSection> -->

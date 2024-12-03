@@ -11,6 +11,7 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior: none;
 }
 
 body {
@@ -35,7 +36,7 @@ canvas {
   display: block;
   max-width: 100%;
   height: auto;
-  /* vertical-align: middle; */
+  vertical-align: middle;
   font-style: italic;
   background-repeat: no-repeat;
   background-size: cover;
