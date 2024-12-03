@@ -26,14 +26,17 @@
   .about {
     min-height: 100vh;
     min-height: 100dvh;
-    scroll-margin-block-start: clamp(5rem, 3.8235rem + 5.8824vw, 7.5rem);
+  }
+
+  .about > .container {
+    margin-block-start: var(--section-interval);
   }
 
   .section__heading.about__heading {
-    --f-s: clamp(1.3125rem, 0.3419rem + 4.8529vw, 3.375rem);
+    /* --f-s: clamp(1.3125rem, 0.3419rem + 4.8529vw, 3.375rem); */
     width: 20ch;
-    font-size: var(--f-s);
-    margin-block-start: clamp(10.125rem, 5.3603rem + 23.8235vw, 20.25rem);
+    /* font-size: var(--f-s); */
+    /* margin-block-start: clamp(10.125rem, 5.3603rem + 23.8235vw, 20.25rem); */
   }
   .about__heading {
     .line1 {
