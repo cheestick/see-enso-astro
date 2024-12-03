@@ -13,8 +13,12 @@ const {casesData} = config
       <span class="line line3">нашу агенцію</span>
     </h2>
     <div class="cases__scroller-nav">
-      <button class="scroller-nav__button" type="button" data-button-backward><span>{"<-----"}</span></button>
-      <button class="scroller-nav__button" type="button" data-button-forward><span>{"----->"}</span></button>
+      <button class="scroller-nav__button" type="button" data-button-backward>
+        <img src="/images/arrow.svg" alt="">
+      </button>
+      <button class="scroller-nav__button" type="button" data-button-forward>
+        <img src="/images/arrow.svg" alt="">
+      </button>
     </div>
     <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
       <div  class="cases-cards" >
@@ -37,7 +41,7 @@ let casesForwardButton = document.querySelector('[data-button-forward]') as HTML
 
 caseScroller?.addEventListener('wheel', (e) => {
     e.preventDefault()
-    caseScroller.scrollLeft += e.deltaY + e.deltaX
+    caseScroller.scrollLeft += 5*e.deltaY + e.deltaX
   });
 
 casesBackwardButton?.addEventListener('click', (e) => {
@@ -69,24 +73,45 @@ casesForwardButton?.addEventListener('click', (e) => {
 }
 
 .cases__scroller-nav {
+  --gap: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
   margin-block-start: 1.875rem;
+
+  @media (width > 26.5625rem) {
+    --gap: 1.25rem;
+    justify-content: end;
+    margin-inline-end: 10%;
+  }
 }
 
 .scroller-nav__button {
+  --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem);
+  --py: var(--px);
+  --br: 15rem;
+  --c-bg: var(--swatch-neutral-700);
+
   display: inline-flex;
   align-items: center;
-  width: 85px;
-  height: 42px;
-  padding-block: 21px;
-  padding-inline: 21px;
+  padding-block: var(--py);
+  padding-inline: var(--px);
   border: none;
-  border-radius: 15rem;
-  background-color: gray;
+  border-radius: var(--br);
+  background-color: var(--c-bg);
 }
 
-.scroller-nav__button:hover {
-  background-color: lightgray;
+.scroller-nav__button:hover,
+.scroller-nav__button:focus-within {
+  --c-bg: var(--swatch-neutral-400);
 }
+
+[data-button-forward] img {
+  rotate: 180deg;
+} 
+[data-button-backward] img {
+  rotate: 0deg;
+} 
 
 .section-cases__scroller {
   margin-block-start: 1.25rem;
@@ -96,6 +121,9 @@ casesForwardButton?.addEventListener('click', (e) => {
   scroll-snap-type: x mandatory;
   scrollbar-width: none; 
   scroll-behavior: smooth;
+  mask-image: linear-gradient(90deg, transparent, white 3%, white 97%, transparent);
+  mask-size: 100%;
+  mask-repeat: no-repeat;
 
   @media screen and (width > 60rem) {
     scroll-snap-type: none ;
