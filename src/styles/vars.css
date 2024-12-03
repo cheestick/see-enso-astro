@@ -65,4 +65,6 @@
   --color-bg-hover: var(--swatch-purple-700);
   --color-bg-pressed: var(--swatch-purple-500);
   --color-shadow-focused: 0 0 16px 2px #9747ff;
+
+  --section-interval: clamp(5.625rem, 4.0179rem + 8.0357vw, 11.25rem);
 }
