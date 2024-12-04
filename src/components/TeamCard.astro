@@ -106,7 +106,7 @@ const srcSet = {
     transform: 
       scale(var(--s-factor, 1)) 
       rotateZ(var(--r-factor, 0deg));
-    animation: hidSpinning 100s infinite linear forwards;
+    animation: hidSpinning 100s infinite linear alternate;
     /* animation-timeline: view(); */
   }
 
@@ -114,7 +114,7 @@ const srcSet = {
     --s-factor: 1.125;
     --r-factor: var(--startAngle);
     background-image: url('/images/team/hid-inner-opt.svg');
-    animation-direction: reverse;
+    animation-direction: alternate-reverse;
   }
   .card__picture::after {
     --s-factor: 1.175;
