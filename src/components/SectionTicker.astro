@@ -37,7 +37,7 @@ const itemsCount = srcBrandList.length
   --items-length: calc(var(--item-width) * var(--items-count));
   --items-gap-length: calc((var(--items-count) - 1) * var(--item-space));
   --track-width: calc(var(--items-length) + var(--items-gap-length));
-  --animation-timer: 60s;
+  --animation-timer: calc(var(--items-count) * 12s);
   --animation-offset-x: calc((-1 * var(--track-width)) + var(--container-width));
 
   display: flex;
