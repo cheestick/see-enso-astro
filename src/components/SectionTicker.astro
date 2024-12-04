@@ -1,0 +1,72 @@
+---
+const imageCollection = await Astro.glob('../../public/images/brands/*.{png,jpg}')
+const srcBrandList = imageCollection.map(col => col.default.src)
+const itemsCount = srcBrandList.length
+---
+
+<section id="ticker" class="ticker">
+  <div class="container ticker__container">
+    <h2 class="section__heading visually-hidden"><span>нам</span> <span>довіряють</span></h2>
+    <div class="ticker__carousel">
+      <div class="carousel__track" style={`--items-count: ${itemsCount}`}>
+        
+        {
+          srcBrandList.map( src => <img class="carousel__image" {src} alt="" width="300" height="169"/>)
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+.ticker__container {
+  margin-block-start: var(--section-interval);
+}
+
+.ticker__carousel {
+  width: 100%;
+  overflow: clip;
+  /* overflow-clip-margin: 5rem; */
+  mask-image: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
+}
+
+.carousel__track {
+  --container-width: 100%;
+  --item-width: clamp(7.8125rem, 5.3125rem + 12.5vw, 16.5625rem);
+  --item-space: 28px;
+  --items-length: calc(var(--item-width) * var(--items-count));
+  --items-gap-length: calc((var(--items-count) - 1) * var(--item-space));
+  --track-width: calc(var(--items-length) + var(--items-gap-length));
+  --animation-timer: 60s;
+  --animation-offset-x: calc((-1 * var(--track-width)) + var(--container-width));
+
+  display: flex;
+  gap: var(--item-space);
+  width: fit-content;
+  animation: 
+            autoSlide 
+            var(--animation-timer) 
+            linear infinite alternate;
+}
+
+.carousel__track:is(:hover, :focus-within) {
+  animation-play-state: paused;
+}
+
+.ticker__carousel .carousel__image {
+  width: var(--item-width);
+  aspect-ratio: 16/9;
+  filter: brightness(.25);
+  transition: filter 550ms ease;
+}
+
+.ticker__carousel .carousel__image:is(:hover, :focus-within) {
+  filter: brightness(1);
+}
+
+@keyframes autoSlide {
+  to { 
+    transform: translateX(var(--animation-offset-x)); 
+  }
+}
+</style>
