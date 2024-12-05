@@ -1,6 +1,7 @@
 ---
 const imageCollection = await Astro.glob('../../public/images/brands/*.{png,jpg}')
 const srcBrandList = imageCollection.map(col => col.default.src)
+
 const itemsCount = srcBrandList.length
 ---
 
@@ -9,9 +10,8 @@ const itemsCount = srcBrandList.length
     <h2 class="section__heading visually-hidden"><span>нам</span> <span>довіряють</span></h2>
     <div class="ticker__carousel">
       <div class="carousel__track" style={`--items-count: ${itemsCount}`}>
-        
         {
-          srcBrandList.map( src => <img class="carousel__image" {src} alt="" width="300" height="169"/>)
+          srcBrandList.map( src => <img class="carousel__image" {src} alt="" loading="lazy" width="300" height="169"/>)
         }
       </div>
     </div>
