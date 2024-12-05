@@ -7,14 +7,16 @@ export interface ISEServices {
   title: string;
   price: number;
   duration: number;
+  previewUrl: string;
   variation: IVariation[];
 }
 
-export default [
+export const seServices: ISEServices[] = [
   {
     title: "ФОТОЗЙОМКИ",
     price: 300,
     duration: 5,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Студійна зйомка",
@@ -37,6 +39,7 @@ export default [
     title: "ПРЕПРОДАКШН",
     price: 500,
     duration: 7,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Розробка ідеї/концепції",
@@ -56,6 +59,7 @@ export default [
     title: "ПРОДАКШН",
     price: 700,
     duration: 4,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Зйомка відеоконтенту для соцмереж",
@@ -82,6 +86,7 @@ export default [
     title: "ПОСТПРОДАКШН",
     price: 800,
     duration: 14,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Монтаж",
@@ -111,6 +116,7 @@ export default [
     title: "ГРАФІЧНИЙ ДИЗАЙН",
     price: 550,
     duration: 14,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Дизайн-система для Instagram",
@@ -134,6 +140,7 @@ export default [
     title: "СТВОРЕННЯ САЙТІВ",
     price: 600,
     duration: 10,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Landing page",
@@ -161,6 +168,7 @@ export default [
     title: "ПОСЛУГИ З КОМУНІКАЦІЇ ТА PR",
     price: 700,
     duration: 5,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "Розробка комунікаційної стратегії",
@@ -181,6 +189,7 @@ export default [
     title: "SMM",
     price: 900,
     duration: 6,
+    previewUrl: "/images/services/photography/photography@1x.webp",
     variation: [
       {
         v: "TikTok, Instagram, Facebook, LinkedIn",
@@ -213,4 +222,4 @@ export default [
       },
     ],
   },
-] as ISEServices[];
+];

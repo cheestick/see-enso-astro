@@ -1,6 +1,6 @@
 import mainNavData from "./nav";
 import casesData from "./cases";
-import seServices from "./services";
+import { seServices } from "./services";
 import team from "./team";
 
 export default {
