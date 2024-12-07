@@ -3,7 +3,7 @@ export interface IVariation {
   extra?: string;
 }
 
-export interface ISEServices {
+export interface ISEService {
   title: string;
   price: number;
   duration: number;
@@ -11,7 +11,7 @@ export interface ISEServices {
   variation: IVariation[];
 }
 
-export const seServices: ISEServices[] = [
+export const seServices: ISEService[] = [
   {
     title: "ФОТОЗЙОМКИ",
     price: 300,
@@ -165,7 +165,7 @@ export const seServices: ISEServices[] = [
     ],
   },
   {
-    title: "ПОСЛУГИ З КОМУНІКАЦІЇ ТА PR",
+    title: "PR та комунікація",
     price: 700,
     duration: 5,
     previewUrl: "/images/services/photography/photography@1x.webp",
