@@ -2,11 +2,10 @@
 import MainLayout from '@layouts/MainLayout.astro';
 import Header from '@components/Header.astro';
 import SectionHero from '@components/SectionHero.astro';
-import SectionTeam from '@components/SectionTeam.astro';
 import SectionAbout from '@components/SectionAbout.astro';
+import SectionServices from '@components/SectionServices.astro';
 import SectionCases from '@components/SectionCases.astro';
-import HelperSection from '@components/HelperSection.astro';
-import ButtonToTop from '@components/ButtonToTop.astro';
+import SectionTeam from '@components/SectionTeam.astro';
 import SectionTicker from '@components/SectionTicker.astro';
 
 
@@ -14,27 +13,12 @@ import SectionTicker from '@components/SectionTicker.astro';
 
 <MainLayout title="See Enso - Digital Agency">
 	<Header />
-	
 	<SectionHero/>
 	<SectionAbout />
-	<!-- <section class="dummy__section">
-		<img class="dummy__img" src="/images/dummy/section-services.jpg" alt="">
-	</section> -->
-	<!-- <HelperSection id="services">Services</HelperSection> -->
-	
+	<SectionServices />	
 	<SectionCases />
 	<SectionTeam/>
-
-	<!-- <HelperSection>Backstage</HelperSection> -->
-	<!-- <HelperSection>Footer</HelperSection> -->
-
 	<SectionTicker />
-
-	<!-- <section class="dummy__section" style="margin-top: 4rem;">
-		<img class="dummy__img" src="/images/dummy/section-footer.jpg" alt="">
-	</section> -->
-	
-	<!-- <ButtonToTop href="#hero"/> -->
 </MainLayout>
 
 <style>
