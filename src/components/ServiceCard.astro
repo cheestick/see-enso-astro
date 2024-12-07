@@ -1,0 +1,121 @@
+---
+/* @jsxImportSource astro */
+import type { ISEService } from '@data/services';
+
+interface Props {
+  service: ISEService;
+  idx: number;
+}
+
+const {service, idx} = Astro.props
+const tabDetailsIdx = String(idx + 1).padStart(2,"0")
+const {duration, price, previewUrl, variation} = service
+---
+
+<div class="service__details" data-tab-details={tabDetailsIdx}>
+  <ol class="details__list">
+    { 
+      variation?.map(({v, extra}) => (
+        <li class="list__item">
+          <span class="main">{v}</span>
+          {extra && <span class="extra">{extra}</span>}
+        </li>
+        ))
+    }
+  </ol>
+  <div class="service__price">
+    <span>від {price}$</span>
+  </div>
+  <div class="service__duration accent">
+    <span>{duration} днів</span>
+  </div>
+  <picture class="service__thumb">
+    <img 
+        class="thumb__image" 
+        src={previewUrl}
+        alt="photography"/>
+  </picture>
+</div>
+
+<style is:global>
+  .service__details {
+    display: none;
+    /* grid-template-columns: auto; */
+    isolation: isolate;
+  }
+
+  .service__details > * {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+   .details__list {
+    display: grid;
+    place-content: center;
+    /* height: fit-content; */
+    aspect-ratio: 1;
+    border-radius: 100%;
+    border: 2px solid var(--swatch-purple-500);
+    gap: clamp(0.75rem, 0.3036rem + 2.2321vw, 2.3125rem);
+    counter-reset: service-items;
+  }
+
+  .list__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    place-content: start ;
+    column-gap: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
+  }
+
+  .list__item::before {
+    grid-column: 1/2;
+    content: counter(service-items, decimal-leading-zero) ".";
+    display: inline-block;
+    /* margin-inline-end: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem); */
+    counter-increment: service-items;
+  }
+
+  .list__item > .main {
+    grid-column: 2/3;
+  }
+
+  .list__item > .extra {
+    grid-column: 2 / 3;
+    grid-row: 2/3;
+    font-size: 0.75em;
+    font-style: italic;
+  }
+
+  .service__duration,
+  .service__price {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 83px; */
+    aspect-ratio: 1;
+    padding-inline: 32px;
+    background-color: var(--swatch-neutral-900);
+    border-radius: 100%;
+    box-shadow: var(--shadow-small);
+  }
+
+  .service__duration {
+    /* width: 68px; */
+    padding-inline: 21px;
+  }
+
+  .service__thumb {
+    width: minmax(192px, 593px);
+    aspect-ratio: 1;
+    border-radius: 100%;
+    border: 2px solid var(--swatch-purple-500);
+    overflow: hidden;
+  }
+
+  .thumb__image {
+    width: 100%;
+    aspect-ratio: 1;
+    /* object-fit: cover; */
+  }
+
+</style>

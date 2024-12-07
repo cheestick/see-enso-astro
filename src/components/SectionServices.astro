@@ -1,5 +1,6 @@
 ---
-
+import ServiceCard from './ServiceCard.astro';
+import { seServices } from '@data/services';
 ---
 
 <section id="services" class="services">
@@ -10,32 +11,28 @@
     </h2>
     <div class="tabs services__tabs">
       <div class="tabs__nav">
-        <label class="tab nav__control">
-          <input type="radio" name="se-services" id="" data-tab="tab01" checked>
-          <span class="tab-caption">фотографія</span>
-        </label>
-        <label class="tab nav__control">
-          <input type="radio" name="se-services" id="" data-tab="tab02">
-          <span class="tab-caption">продакшн</span>
-        </label>
+        {
+          seServices?.map((service, idx) => {
+            return ( 
+              <label class="tab nav__control">
+                <input 
+                  type="radio" 
+                  name="se-services" 
+                  data-tab={String(idx + 1).padStart(2, '0')} 
+                  checked={idx === 0}/>
+                <span class="tab-caption">{service.title}</span>
+              </label>
+            )
+          })
+        }
       </div>
 
       <div class="tab__content">
-        <ol
-          class="content__list"
-          data-tab="tab01">
-          <li class="list__item">Портрет</li>
-          <li class="list__item">Ню</li>
-          <li class="list__item">Жанрове</li>
-          <li class="list__item">Івенти</li>
-        </ol>
-        <ol 
-          class="content__list"
-          data-tab="tab02">
-          <li class="list__item">Відеозйомка</li>
-          <li class="list__item">Бекстейдж</li>
-          <li class="list__item">Звук</li>
-        </ol>
+        {
+          seServices?.map((service, idx) =>{
+            return <ServiceCard {service} {idx}/>
+          })
+        }
       </div>
     </div>
   </div>
@@ -52,17 +49,28 @@
 
   .services__tabs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(310px, 100%), 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); */
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    align-items: start;
+    gap: 0.75rem;
     margin-block-start: clamp(1.5rem, 0.2857rem + 6.0714vw, 5.75rem);
   }
 
   .tabs__nav {
     order: 2;
+    width: fit-content;
+    /* justify-self: end; */
     display: flex;
     flex: 1 1 100%;
     flex-wrap: wrap;
     align-items: start;
+    justify-content: start;
     gap: 12px 6px;
+
+    @media (width >= 40rem) {
+      flex-direction: column;
+      align-content: center;
+    }
   }
 
   .tab.nav__control {
@@ -73,6 +81,7 @@
     border-radius: 10ch;
     background-color: var(--swatch-neutral-700);
     transition: all 450ms ease;
+    cursor: pointer;
   }
 
   .tab.nav__control:has([data-tab]:checked) {
@@ -88,31 +97,16 @@
     text-transform: uppercase;
   }
   
-  .tabs:has([data-tab*="01"]:checked) .tab__content > [data-tab*="01"],
-  .tabs:has([data-tab*="02"]:checked) .tab__content > [data-tab*="02"]
-  {
-    display: flex;
-    flex-direction: column;
+  .tabs:has([data-tab="01"]:checked) .service__details[data-tab-details="01"],
+  .tabs:has([data-tab="02"]:checked) .service__details[data-tab-details="02"],
+  .tabs:has([data-tab="03"]:checked) .service__details[data-tab-details="03"],
+  .tabs:has([data-tab="04"]:checked) .service__details[data-tab-details="04"],
+  .tabs:has([data-tab="05"]:checked) .service__details[data-tab-details="05"],
+  .tabs:has([data-tab="06"]:checked) .service__details[data-tab-details="06"],
+  .tabs:has([data-tab="07"]:checked) .service__details[data-tab-details="07"], 
+  .tabs:has([data-tab="08"]:checked) .service__details[data-tab-details="08"] {
+    display: grid;
   }
-
-  .tab__content > .content__list {
-    display: none;
-    gap: clamp(0.75rem, 0.3036rem + 2.2321vw, 2.3125rem);
-    counter-reset: service-items;
-  }
-
-  .content__list > .list__item::before {
-    content: counter(service-items, decimal-leading-zero) ".";
-    display: inline-block;
-    margin-inline-end: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
-    counter-increment: service-items;
-  }
-
-  .content__list > .list__item {
-    
-  }
-
-
 
 @media screen and (width > 26.75rem) {
     .services__heading {
