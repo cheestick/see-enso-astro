@@ -1,0 +1,123 @@
+---
+
+---
+
+<section id="services" class="services">
+  <div class="container services__container">
+    <h2 class="section__heading services__heading">
+      <span>перелік наших</span>
+      <span class="accent line2">послуг</span>
+    </h2>
+    <div class="tabs services__tabs">
+      <div class="tabs__nav">
+        <label class="tab nav__control">
+          <input type="radio" name="se-services" id="" data-tab="tab01" checked>
+          <span class="tab-caption">фотографія</span>
+        </label>
+        <label class="tab nav__control">
+          <input type="radio" name="se-services" id="" data-tab="tab02">
+          <span class="tab-caption">продакшн</span>
+        </label>
+      </div>
+
+      <div class="tab__content">
+        <ol
+          class="content__list"
+          data-tab="tab01">
+          <li class="list__item">Портрет</li>
+          <li class="list__item">Ню</li>
+          <li class="list__item">Жанрове</li>
+          <li class="list__item">Івенти</li>
+        </ol>
+        <ol 
+          class="content__list"
+          data-tab="tab02">
+          <li class="list__item">Відеозйомка</li>
+          <li class="list__item">Бекстейдж</li>
+          <li class="list__item">Звук</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .services__container {
+    margin-block-start: var(--section-interval);
+  }
+
+  .services__heading > .line2 {
+    margin-inline-start: 12ch;
+  }
+
+  .services__tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(310px, 100%), 1fr));
+    margin-block-start: clamp(1.5rem, 0.2857rem + 6.0714vw, 5.75rem);
+  }
+
+  .tabs__nav {
+    order: 2;
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 12px 6px;
+  }
+
+  .tab.nav__control {
+    display: inline-block;
+    width: fit-content;
+    padding-block: 6px;
+    padding-inline: 16px;
+    border-radius: 10ch;
+    background-color: var(--swatch-neutral-700);
+    transition: all 450ms ease;
+  }
+
+  .tab.nav__control:has([data-tab]:checked) {
+    color: var(--swatch-neutral-400);
+    background-color: var(--swatch-neutral-200);
+  }
+
+  .tab > input[type='radio'] {
+    display: none;
+  }
+
+  .tab-caption {
+    text-transform: uppercase;
+  }
+  
+  .tabs:has([data-tab*="01"]:checked) .tab__content > [data-tab*="01"],
+  .tabs:has([data-tab*="02"]:checked) .tab__content > [data-tab*="02"]
+  {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tab__content > .content__list {
+    display: none;
+    gap: clamp(0.75rem, 0.3036rem + 2.2321vw, 2.3125rem);
+    counter-reset: service-items;
+  }
+
+  .content__list > .list__item::before {
+    content: counter(service-items, decimal-leading-zero) ".";
+    display: inline-block;
+    margin-inline-end: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
+    counter-increment: service-items;
+  }
+
+  .content__list > .list__item {
+    
+  }
+
+
+
+@media screen and (width > 26.75rem) {
+    .services__heading {
+      width: fit-content;
+      margin-inline: auto;
+    }
+  }
+</style>
