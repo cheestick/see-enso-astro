@@ -12,7 +12,7 @@ import { seServices } from '@data/services';
     <div class="tabs services__tabs">
       <div class="tabs__nav">
         {
-          seServices?.map((service, idx) => {
+          seServices?.map(({title, variation}, idx) => {
             return ( 
               <label class="tab nav__control">
                 <input 
@@ -20,7 +20,10 @@ import { seServices } from '@data/services';
                   name="se-services" 
                   data-tab={String(idx + 1).padStart(2, '0')} 
                   checked={idx === 0}/>
-                <span class="tab-caption">{service.title}</span>
+                <span class="tab-caption">
+                  {title}:
+                  <span class="tab-caption__extra">{variation.length.toString().padStart(2, "0")}</span>
+                </span>
               </label>
             )
           })
@@ -82,11 +85,21 @@ import { seServices } from '@data/services';
     background-color: var(--swatch-neutral-700);
     transition: all 450ms ease;
     cursor: pointer;
+
+    @media (width >= 40rem) {
+      color: var(--swatch-neutral-400);
+      background-color: transparent;
+    }
   }
 
   .tab.nav__control:has([data-tab]:checked) {
     color: var(--swatch-neutral-400);
     background-color: var(--swatch-neutral-200);
+
+    @media (width >= 40rem) {
+      color: var(--swatch-neutral-200);
+      background-color: transparent;
+    }
   }
 
   .tab > input[type='radio'] {
@@ -94,7 +107,18 @@ import { seServices } from '@data/services';
   }
 
   .tab-caption {
+    font-size: clamp(0.875rem, 0.5893rem + 1.4286vw, 1.875rem);
     text-transform: uppercase;
+  }
+
+  .tab-caption__extra {
+    display: none;
+    font-size: clamp(0.75rem, 0.6786rem + 0.3571vw, 1rem);
+    vertical-align: super;
+
+    @media (width >= 40rem) {
+      display: inline;
+    }
   }
   
   .tabs:has([data-tab="01"]:checked) .service__details[data-tab-details="01"],
