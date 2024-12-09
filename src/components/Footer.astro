@@ -1,0 +1,34 @@
+---
+import FeedbackFrom from './FeedbackFrom.astro';
+import ContactList from './ContactList.astro';
+
+---
+
+<footer class="footer">
+  <div class="container footer__container">
+    <div class="feedback-group">
+      <h3 class="section__heading">
+        <span>Бажаєте отримати</span>
+        <span>консультацію?</span>
+      </h3>
+      <FeedbackFrom />
+    </div>
+    <div id="contacts" class="contacts-group">
+      <h3 class="section__heading">ми в <span class="accent">соцмережах</span></h3>
+      <p>Діджитал агенція, що створює цілісний продукт</p>
+      <ContactList />
+    </div>
+    <div class="policy-group">
+      <p>Політика Конфіденційності</p>
+      <p>Договір Оферти</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+</script>
+
+<style is:global>
+
+</style>

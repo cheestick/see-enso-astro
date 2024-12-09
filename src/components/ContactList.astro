@@ -1,0 +1,22 @@
+---
+import config from '@data/config'
+
+const {seContactInfo} = config
+---
+
+<ul class="contacts__list">
+    {
+        seContactInfo?.map(({link, icon, caption}) => (
+            <li>
+                <a href={link}>
+                    <i>{icon}</i>
+                    <span>{caption}</span>
+                </a>
+            </li>
+        ))
+    }
+</ul>
+
+<style>
+
+</style>
