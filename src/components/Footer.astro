@@ -7,17 +7,20 @@ import ContactList from './ContactList.astro';
 <footer class="footer">
   <div class="container footer__container">
     <div class="feedback-group">
-      <h3 class="section__heading">
+      <h3 class="feedback-gpoup__heading">
         <span>Бажаєте отримати</span>
         <span>консультацію?</span>
       </h3>
+      <p class="feedback__cta">Залиште свої дані і наш менеджер з вами зв’яжеться.</p>
       <FeedbackFrom />
     </div>
+
     <div id="contacts" class="contacts-group">
       <h3 class="section__heading">ми в <span class="accent">соцмережах</span></h3>
       <p>Діджитал агенція, що створює цілісний продукт</p>
       <ContactList />
     </div>
+
     <div class="policy-group">
       <p>Політика Конфіденційності</p>
       <p>Договір Оферти</p>
@@ -30,5 +33,25 @@ import ContactList from './ContactList.astro';
 </script>
 
 <style is:global>
+  .feedback-gpoup__heading {
+    --fluid-20-30: clamp(1.25rem, 0.9659rem + 1.4205vw, 1.875rem);
+    display: grid;
+    width: min(30ch, 100%);
+    font-size: var(--fluid-20-30);
 
+    @media (width > 26.5625rem) {
+      display: block;
+      width: fit-content;
+    }
+  }
+  .feedback-gpoup__heading > span + span {
+    place-self: end;
+    margin-inline-start: auto;
+  }
+.feedback__cta {
+  --fluid-14-18: clamp(0.875rem, 0.6587rem + 0.7286vw, 1.125rem);
+  --fluid-30-12: clamp(0.75rem, 2.8484rem + -3.2787vw, 1.875rem);
+  font-size: var(--fluid-14-18);
+  margin-block-start: var(--fluid-30-12);
+}
 </style>

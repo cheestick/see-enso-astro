@@ -2,14 +2,13 @@
 
 ---
 
-<form class="form feedback-form">
-    <p class="feedback-form">Залиште свої дані і наш менеджер з вами зв’яжеться.</p>
+<form class="form feedback-form" autocomplete="off">
+    <input class="field" type="text" name="fullname" id="" placeholder="Ім'я" required>
+    <input class="field" type="tel" name="phone" id="" placeholder="Номер телефону" required>
+    <input class="field" type="email" name="email" id="" placeholder="Електронна пошта" required>
+    <textarea class="field" name="message" id="" rows="4" placeholder="Ваше запитання" required></textarea>
     
-    <input type="text" name="" id="" placeholder="Ім'я">
-    <input type="tel" name="" id="" placeholder="Номер телефону">
-    <textarea name="" id="" rows="3" placeholder="Ваше запитання"></textarea>
-    
-    <button type="submit">відправити</button>
+    <button class="button-submit" type="submit">відправити</button>
 </form>
 
 <script>
@@ -17,5 +16,60 @@
 </script>
 
 <style>
-  
+    .feedback-form {
+        --fluid-12-18: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
+        --fluid-20-30: clamp(1.25rem, 0.7092rem + 1.8215vw, 1.875rem);
+
+        display: grid;
+        gap: 17px;
+        font-size: var(--fluid-12-18);
+        margin-block-start: var(--fluid-20-30);
+    }
+
+    .feedback-form .field {
+        padding-block: 14px;
+        padding-inline: 21px;
+        background-color: transparent;
+        border: 2px solid var(--swatch-neutral-300);
+        border-radius: 50px;
+        color: var(--swatch-neutral-300);
+    }
+
+    .feedback-form textarea.field {
+        border-radius: 20px;
+    }
+
+    .feedback-form .field:focus-within,
+    .feedback-form .button-submit:focus-within {
+        outline: 2px solid var(--swatch-neutral-200);
+        outline-offset: 2px;
+    }
+
+    .feedback-form input::placeholder,
+    .feedback-form textarea::placeholder {
+        /* color: inherit; */
+    }
+
+    .feedback-form .button-submit {
+        --fluid-12-20: clamp(0.75rem, 0.5227rem + 1.1364vw, 1.25rem);
+
+        place-self: start;
+        padding-block: 13px;
+        padding-inline: 26px;
+        font-size: var(--fluid-12-20);
+        color: var(--swatch-neutral-900);
+        background-color: var(--swatch-neutral-200);
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 250ms ease;
+    }
+
+    .feedback-form .button-submit:is(:hover, :focus-within) {
+        opacity: 80%;
+    }
+
+    .feedback-form .button-submit:active {
+        opacity: 50%;
+    }
 </style>
