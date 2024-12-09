@@ -52,8 +52,8 @@ import { seServices } from '@data/services';
 
   .services__tabs {
     display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); */
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(1fr, min(100%, 500px))); */
     align-items: start;
     gap: 0.75rem;
     margin-block-start: clamp(1.5rem, 0.2857rem + 6.0714vw, 5.75rem);
@@ -68,7 +68,7 @@ import { seServices } from '@data/services';
     flex-wrap: wrap;
     align-items: start;
     justify-content: start;
-    gap: 12px 6px;
+    gap: clamp(0.75rem, 0.5039rem + 0.829vw, 1.25rem) 6px;
 
     @media (width >= 40rem) {
       flex-direction: column;
@@ -87,6 +87,7 @@ import { seServices } from '@data/services';
     cursor: pointer;
 
     @media (width >= 40rem) {
+      padding-block: 0;
       color: var(--swatch-neutral-400);
       background-color: transparent;
     }

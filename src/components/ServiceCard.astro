@@ -13,66 +13,98 @@ const {duration, price, previewUrl, variation} = service
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
-  <ol class="details__list">
-    { 
-      variation?.map(({v, extra}) => (
-        <li class="list__item">
-          <span class="main">{v}</span>
-          {extra && <span class="extra">{extra}</span>}
-        </li>
-        ))
-    }
-  </ol>
-  <div class="service__price">
-    <span>від {price}$</span>
-  </div>
-  <div class="service__duration accent">
-    <span>{duration} днів</span>
-  </div>
-  <picture class="service__thumb">
-    <img 
-        class="thumb__image" 
-        src={previewUrl}
-        alt="photography"/>
-  </picture>
+    <div class="details__info-group">
+        <ol class="details__list">
+            { variation?.map(({v, extra}) => (
+                  <li class="list__item">
+                      <span class="main">{v}</span>
+                      {/* {extra && <span class="extra">{extra}</span>} */}
+                  </li>
+              ))
+            }
+        </ol>
+
+        <div class="service__price">
+            <span>від {price}$</span>
+        </div>
+
+        <div class="service__duration accent">
+            <span>{duration} днів</span>
+        </div>
+    </div>
+
+    <picture class="service__thumb">
+        <img 
+            class="thumb__image" 
+            src={previewUrl}
+            alt="photography"/>
+    </picture>
 </div>
 
 <style is:global>
-  .service__details {
-    display: none;
-    /* grid-template-columns: auto; */
-    isolation: isolate;
-  }
+    .service__details {
+        display: none;
+        isolation: isolate;
+        grid-template-columns: 1fr auto;
+        position: relative;
+    }
 
-  .service__details > * {
-    grid-row: 1;
+    .details__info-group {
+        display: grid;
+        height: fit-content;
+        /* margin-inline-start: -5rem; */
+    }
+
+    .details__info-group > * {
+        grid-column: 1;
+        grid-row: 1;
+        /* place-self: center start; */
+        /* align-self: center;
+        justify-self: start; */
+    }
+
+  .details__info-group::before {
     grid-column: 1;
-  }
-
-   .details__list {
-    display: grid;
-    place-content: center;
-    /* height: fit-content; */
+    grid-row: 1;
+    /* align-self: center; */
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    content: '';
+    display: block;
     aspect-ratio: 1;
     border-radius: 100%;
     border: 2px solid var(--swatch-purple-500);
+    margin-inline-start: -2rem;
+  }
+
+   .details__list {
+    place-self: center;
+    display: grid;
+    place-content: center;
+    padding-block: 5rem;
+    /*aspect-ratio: 1;
+    border-radius: 100%;
+    border: 2px solid var(--swatch-purple-500); */
     gap: clamp(0.75rem, 0.3036rem + 2.2321vw, 2.3125rem);
+    font-size: clamp(0.875rem, 0.7519rem + 0.4145vw, 1.125rem);
     counter-reset: service-items;
   }
 
   .list__item {
+    --gap-decimal-marker: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
     display: grid;
     grid-template-columns: auto 1fr;
-    place-content: start ;
-    column-gap: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
+    place-content: start;
+    max-width: clamp(13.125rem, 5.5544rem + 25.5009vw, 21.875rem);
+    column-gap: var(--gap-decimal-marker);
   }
 
   .list__item::before {
     grid-column: 1/2;
+    counter-increment: service-items;
     content: counter(service-items, decimal-leading-zero) ".";
     display: inline-block;
-    /* margin-inline-end: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem); */
-    counter-increment: service-items;
   }
 
   .list__item > .main {
@@ -82,8 +114,7 @@ const {duration, price, previewUrl, variation} = service
   .list__item > .extra {
     grid-column: 2 / 3;
     grid-row: 2/3;
-    font-size: 0.75em;
-    font-style: italic;
+    font-size: 0.8em;
   }
 
   .service__duration,
@@ -99,13 +130,22 @@ const {duration, price, previewUrl, variation} = service
     box-shadow: var(--shadow-small);
   }
 
+  .service__price {
+    place-self: end center;
+    font-size: clamp(0.875rem, 0.6587rem + 0.7286vw, 1.125rem);
+    transform: translateY(50%);
+  }
+
   .service__duration {
-    /* width: 68px; */
+    place-self: end;
     padding-inline: 21px;
+    font-size: clamp(0.75rem, 0.5337rem + 0.7286vw, 1rem);
   }
 
   .service__thumb {
-    width: minmax(192px, 593px);
+    place-self: center;
+    width: 160px;
+    /* margin-inline-start: -25%; */
     aspect-ratio: 1;
     border-radius: 100%;
     border: 2px solid var(--swatch-purple-500);
