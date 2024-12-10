@@ -3,10 +3,39 @@
 ---
 
 <form class="form feedback-form" autocomplete="off">
-    <input class="field" type="text" name="fullname" id="" placeholder="Ім'я" required>
-    <input class="field" type="tel" name="phone" id="" placeholder="Номер телефону" required>
-    <input class="field" type="email" name="email" id="" placeholder="Електронна пошта" required>
-    <textarea class="field" name="message" id="" rows="4" placeholder="Ваше запитання" required></textarea>
+    <input 
+        class="field"
+        type="text"
+        name="fullname"
+        placeholder="Ім'я"
+        minlength="1"
+        maxlength="30"
+        required/>
+    <input 
+        class="field"
+        type="tel"
+        name="phone"
+        placeholder="Номер телефону"
+        minlength="5"
+        maxlength="20"
+        required/>
+    <input
+        class="field"
+        type="email"
+        name="email"
+        placeholder="Електронна пошта"
+        minlength="5"
+        maxlength="50"
+        required/>
+    <textarea
+        class="field"
+        name="message"
+        rows="4"
+        placeholder="Ваше запитання"
+        minlength="10"
+        maxlength="500"
+        required>
+    </textarea>
     
     <button class="button-submit" type="submit">відправити</button>
 </form>
@@ -37,6 +66,7 @@
 
     .feedback-form textarea.field {
         border-radius: 20px;
+        resize: none;
     }
 
     .feedback-form .field:focus-within,
