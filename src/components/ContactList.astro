@@ -4,19 +4,36 @@ import config from '@data/config'
 const {seContactInfo} = config
 ---
 
-<ul class="contacts__list">
+<ul class="contact__list">
     {
-        seContactInfo?.map(({link, icon, caption}) => (
-            <li>
-                <a href={link}>
-                    <i>{icon}</i>
-                    <span>{caption}</span>
-                </a>
-            </li>
-        ))
+        seContactInfo?.map(({link, icon, caption}) => {
+            const inNewTab = !(link.includes('tel:') || link.includes('mail:'))
+            return (
+                <li class="list__item">
+                    <a 
+                        class="contact__link"
+                        href={link}
+                        target={inNewTab ? "_blank" : "_self"}
+                        rel={inNewTab ? "noopener noreferrer" : ''}>
+                        <i>{icon}</i>
+                        <span>{caption}</span>
+                    </a>
+                </li>)
+            }
+        )
     }
 </ul>
 
 <style>
-
+    .contact__list {
+      --fluid-10-12: clamp(0.625rem, 0.5363rem + 0.3339vw, 0.75rem);
+      --fluid-16-18: clamp(1rem, 0.8451rem + 0.5831vw, 1.125rem);
+      --fluid-20-65: clamp(1.25rem, -0.7455rem + 7.5125vw, 4.0625rem);
+        display: flex;
+        flex-direction: column;
+        gap: var(--fluid-10-12);
+        font-size: var(--fluid-16-18);
+        text-transform: uppercase;
+        margin-block-start: var(--fluid-20-65);
+    }
 </style>
