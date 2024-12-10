@@ -122,11 +122,16 @@ const srcSet = {
     background-image: url('/images/team/hid-outer-opt.svg');
   }
 
+  .card__picture:hover .picture__image {
+    /* transform: scale(1.1); */
+  }
+
   .picture__image {
     grid-area: avatar;
     width: clamp(140px, 20vw , 300px);
     aspect-ratio: 1;
     border-radius: 100%;
+    transition: all 350ms ease;
   }
 
   .card__caption {
