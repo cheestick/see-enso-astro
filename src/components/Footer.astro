@@ -18,19 +18,22 @@ import ContactList from './ContactList.astro';
         <div id="contacts" class="contact-group">
             <h3 class="section__heading contact__heading">ми в <span class="accent">соцмережах</span></h3>
             <p class="info">Діджитал агенція, що створює цілісний продукт</p>
+            
             <ContactList />
+
+            <div class="policy-group">
+                <p>Політика Конфіденційності</p>
+                <p>Договір Оферти</p>
+            </div>
         </div>
 
-        <div class="policy-group">
-            <p>Політика Конфіденційності</p>
-            <p>Договір Оферти</p>
-        </div>
     </div>
 </footer>
 
 <style is:global>
     .footer__container {
       margin-block-start: var(--section-interval);
+      margin-block-end: 50px;
     }
     .feedback-gpoup__heading {
       --fluid-20-30: clamp(1.25rem, 0.9659rem + 1.4205vw, 1.875rem);
@@ -57,17 +60,21 @@ import ContactList from './ContactList.astro';
     }
 
     .contact-group {
+        width: fit-content;
+        margin-inline: auto;
         margin-block-start: var(--section-interval);
     }
 
     .contact__heading {
         display: block;
+        width: fit-content;
     }
 
     .contact-group .info {
       --fluid-14-18: clamp(0.875rem, 0.7614rem + 0.5682vw, 1.125rem);
       --fluid-30-65: clamp(1.875rem, 0.3229rem + 5.8431vw, 4.0625rem);
         font-size: var(--fluid-14-18);
+        width: 23ch;
         margin-block-start: var(--fluid-30-65);
     }
 
