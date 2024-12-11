@@ -32,7 +32,7 @@ export const seContactInfo: ISEContactInfo[] = [
   {
     icon: "/images/email.svg",
     caption: "enso.filmmaker@gmail.com",
-    link: "mail:enso.filmmaker@gmail.com",
+    link: "mailto:enso.filmmaker@gmail.com",
   },
   // {
   //   icon: "/images/tiktok.svg",
