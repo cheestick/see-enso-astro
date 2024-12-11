@@ -7,8 +7,20 @@ const {seContactInfo} = config
 <ul class="contact__list">
     {
         seContactInfo?.map(({link, icon, caption}) => {
-            const inNewTab = !(link.includes('tel:') || link.includes('mail:'))
-            const [title, domain] = caption.split('@')            
+            const inNewTab = !(link?.includes('tel:') || link?.includes('mail:'))
+            const [title, domain] = caption.split('@')
+            if (!link) {
+                return (
+                    <li class="list__item">
+                        <span class="contact__link">
+                            <img class="contact__icon" src={icon} alt={`Лінк на ${caption} компанії`} width="70" height="70"/>
+                            <span class="contact__caption">
+                                {title}{domain && <span class="caption__at">@{domain}</span>}
+                            </span>
+                        </span>
+                    </li>)
+            } 
+
             return (
                 <li class="list__item">
                     <a 
@@ -47,6 +59,7 @@ const {seContactInfo} = config
         display: flex;
         align-items: center;
         gap: var(--fluid-10-20);
+        transition: opacity 500ms ease;
     }
 
     .contact__list .contact__icon {
@@ -60,9 +73,18 @@ const {seContactInfo} = config
         --fluid-14-18: clamp(0.875rem, 0.6976rem + 0.6678vw, 1.125rem);
         font-size: var(--fluid-14-18); 
     }
-
     .caption__at {
       --fluid-10-14: clamp(0.625rem, 0.4476rem + 0.6678vw, 0.875rem);
         font-size: var(--fluid-10-14);
+    }
+
+    .contact__list:has(:hover, :focus-within)  .contact__link:not(:hover, :focus-within) {
+        opacity: .3;
+    }
+
+    .contact__link:focus-within {
+        outline: 2px solid var(--swatch-neutral-200);
+        outline-offset: 2px;
+        border-radius: 5rem;
     }
 </style>
