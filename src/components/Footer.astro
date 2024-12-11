@@ -18,23 +18,39 @@ import ContactList from './ContactList.astro';
         <div id="contacts" class="contact-group">
             <h3 class="section__heading contact__heading">ми в <span class="accent">соцмережах</span></h3>
             <p class="info">Діджитал агенція, що створює цілісний продукт</p>
-            
             <ContactList />
-
-            <div class="policy-group">
-                <p>Політика Конфіденційності</p>
-                <p>Договір Оферти</p>
-            </div>
         </div>
 
+        <div class="policy-group">
+            <p>Політика Конфіденційності</p>
+            <p>Договір Оферти</p>
+        </div>
     </div>
 </footer>
 
 <style is:global>
     .footer__container {
-      margin-block-start: var(--section-interval);
-      margin-block-end: 50px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 12px;
+        margin-block-start: var(--section-interval);
+        margin-block-end: 50px;
     }
+
+    .footer__container > .feedback-group {
+        grid-column: 1 / -1;
+        place-self: center;
+    }
+
+    .footer__container > .contact-group {
+        grid-column: 2 / -1;
+        display: grid;
+    }
+
+    .footer__container > .policy-group {
+        grid-column: 2 / -1;
+    }
+
     .feedback-gpoup__heading {
       --fluid-20-30: clamp(1.25rem, 0.9659rem + 1.4205vw, 1.875rem);
         display: grid;
@@ -61,7 +77,7 @@ import ContactList from './ContactList.astro';
 
     .contact-group {
         width: fit-content;
-        margin-inline: auto;
+        /* margin-inline: auto; */
         margin-block-start: var(--section-interval);
     }
 
@@ -83,5 +99,40 @@ import ContactList from './ContactList.astro';
         color: var(--swatch-neutral-700);
         font-size: var(--fluid-14-18);
         margin-block-start: 110px;
+    }
+
+    @media (width > 48rem) {
+        .footer__container {
+            grid-template-columns: repeat(12, 1fr);
+            /* column-gap: 20px; */
+        }
+        .footer__container > .contact-group {
+            grid-column: 2 / 8;
+            grid-row: 1 / 1;
+            grid-template-columns: subgrid;
+            margin-block-start: 0;
+
+            .contact__heading {
+                grid-column: 1 / 8;
+            }
+
+            .contact__list {
+                grid-column: 2 / 8;
+            }
+
+            .info {
+                grid-column: 2 / 8;
+                grid-row: 3;
+            }
+        }
+
+        .footer__container > .feedback-group {
+            grid-column: 8 / span 5;
+        }
+
+
+        .footer__container > .policy-group {
+            grid-column: 10 / -1;
+        }
     }
 </style>

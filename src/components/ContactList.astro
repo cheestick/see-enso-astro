@@ -7,7 +7,7 @@ const {seContactInfo} = config
 <ul class="contact__list">
     {
         seContactInfo?.map(({link, icon, caption}) => {
-            const inNewTab = !(link?.includes('tel:') || link?.includes('mail:'))
+            const inNewTab = !(link?.includes('tel:') || link?.includes('mailto:'))
             const [title, domain] = caption.split('@')
             if (!link) {
                 return (
@@ -59,7 +59,7 @@ const {seContactInfo} = config
         display: flex;
         align-items: center;
         gap: var(--fluid-10-20);
-        transition: opacity 500ms ease;
+        transition: opacity 600ms ease;
     }
 
     .contact__list .contact__icon {
