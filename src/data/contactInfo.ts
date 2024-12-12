@@ -27,7 +27,7 @@ export const seContactInfo: ISEContactInfo[] = [
   {
     icon: "/images/youtube.svg",
     caption: "youtube",
-    link: "https://youtube.com",
+    link: "https://www.youtube.com/@see-enso",
   },
   {
     icon: "/images/email.svg",
