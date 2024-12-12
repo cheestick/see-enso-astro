@@ -1,0 +1,172 @@
+---
+import FeedbackFrom from './FeedbackFrom.astro';
+import ContactList from './ContactList.astro';
+
+---
+
+<footer class="footer">
+    <div class="container footer__container">
+        <div class="feedback-group">
+            <h3 class="feedback-gpoup__heading">
+                <span>Бажаєте отримати</span>
+                <span>консультацію?</span>
+            </h3>
+            <p class="feedback__cta">Залиште свої дані і наш менеджер з вами зв’яжеться.</p>
+            <FeedbackFrom />
+        </div>
+
+        <div id="contacts" class="contact-group deco">
+            <h3 class="section__heading contact__heading">ми в <span class="accent">соцмережах</span></h3>
+            <p class="info">Діджитал агенція, що створює цілісний продукт</p>
+            <ContactList />
+        </div>
+
+        <div class="policy-group">
+            <p>Політика Конфіденційності</p>
+            <p>Договір Оферти</p>
+        </div>
+    </div>
+</footer>
+
+<style is:global>
+    .footer {
+        overflow: clip;
+        @media (width > 48rem) {
+            overflow: visible;
+        }
+    }
+
+    .footer__container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 12px;
+        margin-block-start: var(--section-interval);
+        margin-block-end: 50px;
+    }
+
+    .footer__container > .feedback-group {
+        grid-column: 1 / -1;
+        place-self: center;
+    }
+
+    .footer__container > .contact-group {
+        grid-column: 2 / -1;
+        display: grid;
+        isolation: isolate;
+        position: relative;
+    }
+
+    .footer__container > .policy-group {
+        grid-column: 2 / -1;
+    }
+
+    .contact-group.deco::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        transform: translate(-40.2%, -4%);
+        z-index: -1;
+        width: 270vw;
+        aspect-ratio: 1;
+        border-radius: 100%;
+        box-shadow: var(--shadow-bg);
+        transition: transform 500ms ease;
+    }
+
+    .feedback-gpoup__heading {
+      --fluid-20-30: clamp(1.25rem, 0.9659rem + 1.4205vw, 1.875rem);
+        display: grid;
+        width: min(30ch, 100%);
+        font-size: var(--fluid-20-30);
+
+        @media (width > 26.5625rem) {
+            display: block;
+            width: fit-content;
+        }
+    }
+
+    .feedback-gpoup__heading > span + span {
+        place-self: end;
+        margin-inline-start: auto;
+    }
+
+    .feedback__cta {
+      --fluid-14-18: clamp(0.875rem, 0.6587rem + 0.7286vw, 1.125rem);
+      --fluid-30-12: clamp(0.75rem, 2.8484rem + -3.2787vw, 1.875rem);
+        font-size: var(--fluid-14-18);
+        margin-block-start: var(--fluid-30-12);
+    }
+
+    .contact-group {
+        width: fit-content;
+        /* margin-inline: auto; */
+        margin-block-start: var(--section-interval);
+    }
+
+    .contact__heading {
+      --fluid-24-54: clamp(1.5rem, 0.7141rem + 2.9586vw, 3.375rem);
+        display: block;
+        width: fit-content;
+        font-size: var(--fluid-24-54);
+    }
+
+    .contact-group .info {
+      --fluid-14-18: clamp(0.875rem, 0.7614rem + 0.5682vw, 1.125rem);
+      --fluid-30-65: clamp(1.875rem, 0.3229rem + 5.8431vw, 4.0625rem);
+        font-size: var(--fluid-14-18);
+        width: 23ch;
+        margin-block-start: var(--fluid-30-65);
+    }
+
+    .policy-group {
+      --fluid-14-18: clamp(0.875rem, 0.7614rem + 0.5682vw, 1.125rem);
+        color: var(--swatch-neutral-700);
+        font-size: var(--fluid-14-18);
+        margin-block-start: 110px;
+    }
+
+    @media (width > 48rem) {
+        .footer__container {
+            grid-template-columns: repeat(12, 1fr);
+            /* column-gap: 20px; */
+        }
+        .footer__container > .contact-group {
+            grid-column: 2 / 8;
+            grid-row: 1 / 1;
+            grid-template-columns: subgrid;
+            margin-block-start: 0;
+
+            .contact__heading {
+                grid-column: 1 / 8;
+            }
+
+            .contact__list {
+                grid-column: 2 / 8;
+            }
+
+            .info {
+                grid-column: 2 / 8;
+                grid-row: 3;
+            }
+        }
+
+        .contact-group.deco::before {
+         --fluid-704-928: clamp(44rem, 2rem + 87.5vw, 58rem);
+            left: 0;
+            width: var(--fluid-704-928);
+            transform: translate(-15%, -14%);
+            border-radius: 100%;
+            box-shadow: var(--shadow-footer);
+        }
+
+        .footer__container > .feedback-group {
+            grid-column: 8 / span 5;
+        }
+
+        .footer__container > .policy-group {
+            grid-column: 10 / -1;
+        }
+    }
+</style>

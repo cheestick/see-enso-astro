@@ -1,3 +1,8 @@
+html {
+  scrollbar-color: var(--swatch-purple-650) rgba(0 0 0 / 0);
+  scrollbar-width: thin;
+}
+
 body {
   position: relative;
   max-width: 100%;
@@ -46,7 +51,7 @@ button {
   margin-inline: auto;
 }
 
-body > section[id] {
+body > * {
   scroll-margin-block-start: var(--scroll-offset-start);
 }
 
