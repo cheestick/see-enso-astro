@@ -1,3 +1,8 @@
+html {
+  scrollbar-color: var(--swatch-purple-650) rgba(0 0 0 / 0);
+  scrollbar-width: thin;
+}
+
 body {
   position: relative;
   max-width: 100%;
