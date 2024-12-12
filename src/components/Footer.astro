@@ -15,7 +15,7 @@ import ContactList from './ContactList.astro';
             <FeedbackFrom />
         </div>
 
-        <div id="contacts" class="contact-group">
+        <div id="contacts" class="contact-group deco">
             <h3 class="section__heading contact__heading">ми в <span class="accent">соцмережах</span></h3>
             <p class="info">Діджитал агенція, що створює цілісний продукт</p>
             <ContactList />
@@ -29,6 +29,13 @@ import ContactList from './ContactList.astro';
 </footer>
 
 <style is:global>
+    .footer {
+        overflow: clip;
+        @media (width > 48rem) {
+            overflow: visible;
+        }
+    }
+
     .footer__container {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -45,10 +52,27 @@ import ContactList from './ContactList.astro';
     .footer__container > .contact-group {
         grid-column: 2 / -1;
         display: grid;
+        isolation: isolate;
+        position: relative;
     }
 
     .footer__container > .policy-group {
         grid-column: 2 / -1;
+    }
+
+    .contact-group.deco::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        transform: translate(-40.2%, -4%);
+        z-index: -1;
+        width: 270vw;
+        aspect-ratio: 1;
+        border-radius: 100%;
+        box-shadow: var(--shadow-bg);
+        transition: transform 500ms ease;
     }
 
     .feedback-gpoup__heading {
@@ -82,8 +106,10 @@ import ContactList from './ContactList.astro';
     }
 
     .contact__heading {
+      --fluid-24-54: clamp(1.5rem, 0.7141rem + 2.9586vw, 3.375rem);
         display: block;
         width: fit-content;
+        font-size: var(--fluid-24-54);
     }
 
     .contact-group .info {
@@ -126,10 +152,18 @@ import ContactList from './ContactList.astro';
             }
         }
 
+        .contact-group.deco::before {
+         --fluid-704-928: clamp(44rem, 2rem + 87.5vw, 58rem);
+            left: 0;
+            width: var(--fluid-704-928);
+            transform: translate(-25%, -14%);
+            border-radius: 100%;
+            box-shadow: var(--shadow-footer);
+        }
+
         .footer__container > .feedback-group {
             grid-column: 8 / span 5;
         }
-
 
         .footer__container > .policy-group {
             grid-column: 10 / -1;
