@@ -66,6 +66,24 @@
   --color-bg-pressed: var(--swatch-purple-500);
   --color-shadow-focused: 0 0 16px 2px #9747ff;
 
+  --shadow-bg: 0 -584px 164px 0 rgba(212, 171, 252, 0),
+    0 -374px 150px 0 rgba(212, 171, 252, 0.03),
+    0 -210px 126px 0 rgba(212, 171, 252, 0.1),
+    0 -94px 94px 0 rgba(212, 171, 252, 0.17),
+    0 -23px 51px 0 rgba(212, 171, 252, 0.2);
+
+  --shadow-small: 31px -30px 12px 0 rgba(89, 52, 171, 0.01),
+    20px -19px 11px 0 rgba(89, 52, 171, 0.6),
+    11px -11px 9px 0 rgba(89, 52, 171, 0.2),
+    5px -5px 7px 0 rgba(89, 52, 171, 0.34),
+    1px -1px 4px 9px rgba(89, 52, 171, 0.39);
+
+  --shadow-footer: 0 4px 4px 0 rgba(0, 0, 0, 0.25),
+    1309px -1065px 472px 0 rgba(255, 219, 244, 0.01),
+    837px -682px 432px 0 rgba(255, 219, 244, 0.09),
+    471px -383px 364px rgba(255, 219, 244, 0.3),
+    209px -170px 270px rgba(255, 219, 244, 0.51);
+
   --section-interval: clamp(5.625rem, 4.0179rem + 8.0357vw, 11.25rem);
   --scroll-offset-start: clamp(5rem, 3.8235rem + 5.8824vw, 7.5rem);
 }
