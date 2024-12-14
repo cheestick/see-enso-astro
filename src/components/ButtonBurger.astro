@@ -5,7 +5,9 @@
   <button 
     class="nav__burger" 
     type="button" 
-    aria-label="бургер меню"
+    aria-label="показати меню"
+    aria-expanded="false"
+    aria-controls="navbar"
     data-burger 
   >
     <span class="icon-burger"></span>
@@ -18,16 +20,52 @@
   const iconBurger = document.querySelector('.icon-burger') as HTMLSpanElement
   const iconClose = document.querySelector('.icon-close') as HTMLSpanElement
 
-  btnBurger?.addEventListener('click', (_) => {
-    navigation?.classList.toggle('show-navigation')
-    if (navigation?.classList.contains('show-navigation')) {
-      iconBurger.style.display = 'none'
-      iconClose.style.display = 'block'
-    } else {
-      iconBurger.style.display = 'block'
-      iconClose.style.display = 'none'
-    }
-  })
+  const media = window?.matchMedia("(width <= 35em)")
+
+  function updateNavbar(isMobileDevice: boolean) {
+      const navLinks = navigation?.querySelectorAll('nav a.navlink')
+      if (isMobileDevice) {
+          navigation?.setAttribute('inert', '')
+          navLinks?.forEach(link => link.addEventListener('click', hideMenu))
+      } else {
+          navigation?.removeAttribute('inert')
+          navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
+      }
+  }
+
+  function showMenu() {
+    document.body.querySelectorAll('body > * + *')?.forEach(el => el.setAttribute('inert', ''))
+    navigation?.classList.add('show-navigation')
+    navigation?.removeAttribute('inert')
+    btnBurger.setAttribute('aria-expanded', 'true')
+    btnBurger.setAttribute('aria-label', "сховати меню")
+    iconBurger.style.display = 'none'
+    iconClose.style.display = 'block'
+  }
+
+  function hideMenu() {
+    document.body.querySelectorAll('body > * + *')?.forEach(el => el.removeAttribute('inert'))
+    navigation?.classList.remove('show-navigation')
+    navigation?.setAttribute('inert', '')
+    btnBurger.setAttribute('aria-expanded', 'false')
+    btnBurger.setAttribute('aria-label', "показати меню")
+    iconBurger.style.display = 'block'
+    iconClose.style.display = 'none'
+  }
+
+  function toggleMenu() {
+      const isMenuOpened = navigation?.classList.contains('show-navigation')
+      if (!isMenuOpened) {
+          showMenu()
+      } else {
+         hideMenu()
+      }
+  }
+
+    updateNavbar(media.matches)
+    btnBurger?.addEventListener('click', toggleMenu)
+    media.addEventListener('change', (e) => updateNavbar(e.matches))
+    
 </script>
 
 <style is:global>
@@ -60,7 +98,8 @@
     background-image: url("/images/icons/menu-cross.svg");
   }
 
-@media screen and (width >= 29.75em) {
+  /* 29.75em */
+@media screen and (width > 35rem) {
    .nav__burger {
       display: none;
     }
