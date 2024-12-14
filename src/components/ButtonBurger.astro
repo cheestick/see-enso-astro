@@ -15,26 +15,29 @@
   </button>
 
 <script>
+  const bodyDirectChildren = document.body.querySelectorAll('body > * + *')
   const navigation = document.querySelector('[data-navigation]')
+  const navLinks = navigation?.querySelectorAll('nav a.navlink')
   const btnBurger = document.querySelector('[data-burger]') as HTMLButtonElement
   const iconBurger = document.querySelector('.icon-burger') as HTMLSpanElement
   const iconClose = document.querySelector('.icon-close') as HTMLSpanElement
 
   const media = window?.matchMedia("(width <= 35em)")
 
-  function updateNavbar(isMobileDevice: boolean) {
-      const navLinks = navigation?.querySelectorAll('nav a.navlink')
-      if (isMobileDevice) {
+  function updateNavbar(isMobileWidth: boolean) {
+      if (isMobileWidth) {
           navigation?.setAttribute('inert', '')
+          navigation?.addEventListener('click', hideMenu)
           navLinks?.forEach(link => link.addEventListener('click', hideMenu))
       } else {
           navigation?.removeAttribute('inert')
+          navigation?.removeEventListener('click', hideMenu)
           navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
       }
   }
 
   function showMenu() {
-    document.body.querySelectorAll('body > * + *')?.forEach(el => el.setAttribute('inert', ''))
+    bodyDirectChildren?.forEach(el => el.setAttribute('inert', ''))
     navigation?.classList.add('show-navigation')
     navigation?.removeAttribute('inert')
     btnBurger.setAttribute('aria-expanded', 'true')
@@ -44,7 +47,7 @@
   }
 
   function hideMenu() {
-    document.body.querySelectorAll('body > * + *')?.forEach(el => el.removeAttribute('inert'))
+    bodyDirectChildren?.forEach(el => el.removeAttribute('inert'))
     navigation?.classList.remove('show-navigation')
     navigation?.setAttribute('inert', '')
     btnBurger.setAttribute('aria-expanded', 'false')
@@ -58,14 +61,28 @@
       if (!isMenuOpened) {
           showMenu()
       } else {
-         hideMenu()
+          hideMenu()
+      }
+  }
+
+  function onMediaQueryChange(e: MediaQueryListEvent) {
+      updateNavbar(e.matches)
+  }
+
+  function onScreenOrientationChange(e: Event) {
+      const screen = e.target
+      if (screen && 'type' in screen) {
+          const isScreenOrientationLandscape = screen.type === 'landscape-primary' || 'landscape-secondary'     
+          if (!isScreenOrientationLandscape) return
+
+          hideMenu()
       }
   }
 
     updateNavbar(media.matches)
     btnBurger?.addEventListener('click', toggleMenu)
-    media.addEventListener('change', (e) => updateNavbar(e.matches))
-    
+    media.addEventListener('change', onMediaQueryChange)
+    screen.orientation.addEventListener('change', onScreenOrientationChange)
 </script>
 
 <style is:global>
@@ -73,35 +90,34 @@
     --width: 63px;
     --height: 42px;
     --radius: calc(var(--height) / 2);
-    
-    width: var(--width);
-    height: var(--height);
-    background-color: var(--color-burger);
-    border: 0;
-    border-radius: var(--radius);
-    overflow: hidden;
-    z-index: 110;
+      width: var(--width);
+      height: var(--height);
+      background-color: var(--color-burger);
+      border: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      z-index: 110;
   }
 
 
   .icon-burger, .icon-close {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
   }
   .icon-burger {
-    background-image: url("/images/icons/menu-burger.svg");
+      background-image: url("/images/icons/menu-burger.svg");
   }
   .icon-close {
-    background-image: url("/images/icons/menu-cross.svg");
+      background-image: url("/images/icons/menu-cross.svg");
   }
 
   /* 29.75em */
 @media screen and (width > 35rem) {
-   .nav__burger {
+  .nav__burger {
       display: none;
-    }
-  } 
+  }
+} 
 </style>
