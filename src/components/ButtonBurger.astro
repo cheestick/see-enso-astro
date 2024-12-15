@@ -15,26 +15,17 @@
   </button>
 
 <script>
-  const bodyDirectChildren = document.body.querySelectorAll('body > * + *')
-  const navigation = document.querySelector('[data-navigation]')
-  const navLinks = navigation?.querySelectorAll('nav a.navlink')
-  const btnBurger = document.querySelector('[data-burger]') as HTMLButtonElement
-  const iconBurger = document.querySelector('.icon-burger') as HTMLSpanElement
-  const iconClose = document.querySelector('.icon-close') as HTMLSpanElement
+  const bodyDirectChildren = document.body.querySelectorAll<HTMLElement>('body > * + *')
+  const navigation = document.querySelector<HTMLElement>('[data-navigation]')
+  const navLinks = navigation?.querySelectorAll<HTMLAnchorElement>('nav a.navlink')
+  const btnBurger = document.querySelector<HTMLButtonElement>('[data-burger]') 
+  const iconBurger = document.querySelector<HTMLSpanElement>('.icon-burger')
+  const iconClose = document.querySelector<HTMLSpanElement>('.icon-close')
+  
+  const MEDIA_MOBILE = '(width <= 35em)'
+  const media = window?.matchMedia(MEDIA_MOBILE)
 
-  const media = window?.matchMedia("(width <= 35em)")
-
-  function updateNavbar(needUpdate: boolean) {
-      if (needUpdate) {
-          navigation?.setAttribute('inert', '')
-          navigation?.addEventListener('click', hideMenu)
-          navLinks?.forEach(link => link.addEventListener('click', hideMenu))
-      } else {
-          navigation?.removeAttribute('inert')
-          navigation?.removeEventListener('click', hideMenu)
-          navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
-      }
-  }
+  const isMenuOpened = () => navigation?.classList.contains('show-navigation')
 
   // function updateNavLinks(needUpdate: boolean) {
   //     if (needUpdate) {
@@ -52,61 +43,88 @@
   //     }
   // }
 
-  function toggleDirectChildrenInertAttribute(directChildren: NodeListOf<HTMLElement>) {
-    const attribute = 'inert'
-    const hasInertAttribute = (el: HTMLElement) => el.hasAttribute(attribute)
-    const toggleAttribute = (el: HTMLElement) => { 
-        if (hasInertAttribute(el)) {  el.removeAttribute(attribute) } 
-        else {  el.setAttribute(attribute, '') }
-    }
+  // function toggleDirectChildrenInertAttribute(directChildren: NodeListOf<HTMLElement>) {
+  //   const attribute = 'inert'
+  //   const hasInertAttribute = (el: HTMLElement) => el.hasAttribute(attribute)
+  //   const toggleAttribute = (el: HTMLElement) => { 
+  //       if (hasInertAttribute(el)) {  el.removeAttribute(attribute) } 
+  //       else {  el.setAttribute(attribute, '') }
+  //   }
         
-      directChildren.forEach(toggleAttribute)
-}
+  //     directChildren.forEach(toggleAttribute)
+  // }
+
+  function swapBurgerIconsVisibility(from: HTMLSpanElement, to: HTMLSpanElement) {
+    from.style.display = 'none'
+    to.style.display = 'block'
+  }
 
   function showMenu() {
       bodyDirectChildren?.forEach(el => el.setAttribute('inert', ''))
       navigation?.classList.add('show-navigation')
       navigation?.removeAttribute('inert')
-      btnBurger.setAttribute('aria-expanded', 'true')
-      btnBurger.setAttribute('aria-label', "сховати меню")
-      iconBurger.style.display = 'none'
-      iconClose.style.display = 'block'
+      btnBurger?.setAttribute('aria-expanded', 'true')
+      btnBurger?.setAttribute('aria-label', "сховати меню")
+      swapBurgerIconsVisibility(iconBurger!, iconClose!)
   }
 
   function hideMenu() {
       bodyDirectChildren?.forEach(el => el.removeAttribute('inert'))
       navigation?.classList.remove('show-navigation')
       navigation?.setAttribute('inert', '')
-      btnBurger.setAttribute('aria-expanded', 'false')
-      btnBurger.setAttribute('aria-label', "показати меню")
-      iconBurger.style.display = 'block'
-      iconClose.style.display = 'none'
+      btnBurger?.setAttribute('aria-expanded', 'false')
+      btnBurger?.setAttribute('aria-label', "показати меню")
+      swapBurgerIconsVisibility(iconClose!, iconBurger!)
   }
 
   function toggleMenu() {
-    const isMenuOpened = navigation?.classList.contains('show-navigation')
-      if (!isMenuOpened) {  showMenu()  }
-      else {  hideMenu()  }
+      if (!isMenuOpened()) { showMenu() } 
+      else  { hideMenu() }
+  }
+
+  function updateNavbar(hasMobileAppearance: boolean) {
+      if (hasMobileAppearance) {
+          navigation?.setAttribute('inert', '')
+          navigation?.addEventListener('click', hideMenu)
+          navLinks?.forEach(link => link.addEventListener('click', hideMenu))
+          btnBurger?.removeAttribute('inert')
+      } else {
+          navigation?.removeAttribute('inert')
+          navigation?.removeEventListener('click', hideMenu)
+          navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
+          btnBurger?.setAttribute('inert', '')
+      }
   }
 
   function onMediaQueryChange(e: MediaQueryListEvent) {
-      updateNavbar(e.matches)
+    const hasMobileMenuAppearance = e.matches
+      if (isMenuOpened()) hideMenu()
+      updateNavbar(hasMobileMenuAppearance)
   }
 
-  function onScreenOrientationChange(e: Event) {
-      const screen = e.target
-      if (screen && 'type' in screen) {
-          const isScreenOrientationLandscape = screen.type === 'landscape-primary' || 'landscape-secondary'     
-          if (!isScreenOrientationLandscape) return
+  // function onScreenOrientationChange(e: Event) {
+  //     const screen = e.target
+  //     if (screen && 'type' in screen) {
+  //         const isScreenOrientationLandscape = screen.type === 'landscape-primary' || 'landscape-secondary'     
+  //         if (!isScreenOrientationLandscape) return
+  //         hideMenu()
+  //     }
+  // }
 
-          hideMenu()
-      }
-  }
+  // function onWindowResize(e: Event) {
+  //     if (e.target instanceof Window) { 
+  //       const browserWindow = e.target
+  //       const isMenuMobile = browserWindow.matchMedia(MEDIA_MOBILE)
+  //         if (isMenuMobile) return
+  //         toggleMenu()
+  //     }
+  // }
 
     updateNavbar(media.matches)
     btnBurger?.addEventListener('click', toggleMenu)
     media.addEventListener('change', onMediaQueryChange)
-    screen.orientation.addEventListener('change', onScreenOrientationChange)
+    // screen.orientation.addEventListener('change', onScreenOrientationChange)
+    // window.addEventListener('resize', onWindowResize)
 </script>
 
 <style is:global>
@@ -121,8 +139,12 @@
       border-radius: var(--radius);
       overflow: hidden;
       z-index: 110;
+      transition: outline 250ms ease;
   }
 
+  button.nav__burger:is(:hover, :focus) {
+      outline: 2px solid var(--swatch-neutral-200);
+  }
 
   .icon-burger, .icon-close {
       display: inline-block;
