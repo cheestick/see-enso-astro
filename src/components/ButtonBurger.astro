@@ -24,8 +24,8 @@
 
   const media = window?.matchMedia("(width <= 35em)")
 
-  function updateNavbar(isMobileWidth: boolean) {
-      if (isMobileWidth) {
+  function updateNavbar(needUpdate: boolean) {
+      if (needUpdate) {
           navigation?.setAttribute('inert', '')
           navigation?.addEventListener('click', hideMenu)
           navLinks?.forEach(link => link.addEventListener('click', hideMenu))
@@ -36,33 +36,57 @@
       }
   }
 
+  // function updateNavLinks(needUpdate: boolean) {
+  //     if (needUpdate) {
+  //         navLinks?.forEach(link => link.addEventListener('click', hideMenu))
+  //     } else {
+  //         navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
+  //     }
+  // }
+
+  // function updateBurgerButton(needUpdate: boolean) {
+  //     if (needUpdate) {
+
+  //     } else {
+        
+  //     }
+  // }
+
+  function toggleDirectChildrenInertAttribute(directChildren: NodeListOf<HTMLElement>) {
+    const attribute = 'inert'
+    const hasInertAttribute = (el: HTMLElement) => el.hasAttribute(attribute)
+    const toggleAttribute = (el: HTMLElement) => { 
+        if (hasInertAttribute(el)) {  el.removeAttribute(attribute) } 
+        else {  el.setAttribute(attribute, '') }
+    }
+        
+      directChildren.forEach(toggleAttribute)
+}
+
   function showMenu() {
-    bodyDirectChildren?.forEach(el => el.setAttribute('inert', ''))
-    navigation?.classList.add('show-navigation')
-    navigation?.removeAttribute('inert')
-    btnBurger.setAttribute('aria-expanded', 'true')
-    btnBurger.setAttribute('aria-label', "сховати меню")
-    iconBurger.style.display = 'none'
-    iconClose.style.display = 'block'
+      bodyDirectChildren?.forEach(el => el.setAttribute('inert', ''))
+      navigation?.classList.add('show-navigation')
+      navigation?.removeAttribute('inert')
+      btnBurger.setAttribute('aria-expanded', 'true')
+      btnBurger.setAttribute('aria-label', "сховати меню")
+      iconBurger.style.display = 'none'
+      iconClose.style.display = 'block'
   }
 
   function hideMenu() {
-    bodyDirectChildren?.forEach(el => el.removeAttribute('inert'))
-    navigation?.classList.remove('show-navigation')
-    navigation?.setAttribute('inert', '')
-    btnBurger.setAttribute('aria-expanded', 'false')
-    btnBurger.setAttribute('aria-label', "показати меню")
-    iconBurger.style.display = 'block'
-    iconClose.style.display = 'none'
+      bodyDirectChildren?.forEach(el => el.removeAttribute('inert'))
+      navigation?.classList.remove('show-navigation')
+      navigation?.setAttribute('inert', '')
+      btnBurger.setAttribute('aria-expanded', 'false')
+      btnBurger.setAttribute('aria-label', "показати меню")
+      iconBurger.style.display = 'block'
+      iconClose.style.display = 'none'
   }
 
   function toggleMenu() {
-      const isMenuOpened = navigation?.classList.contains('show-navigation')
-      if (!isMenuOpened) {
-          showMenu()
-      } else {
-          hideMenu()
-      }
+    const isMenuOpened = navigation?.classList.contains('show-navigation')
+      if (!isMenuOpened) {  showMenu()  }
+      else {  hideMenu()  }
   }
 
   function onMediaQueryChange(e: MediaQueryListEvent) {
