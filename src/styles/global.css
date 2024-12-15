@@ -59,6 +59,14 @@ body:has(nav.show-navigation) {
   overflow: hidden;
 }
 
+[inert] {
+  cursor: default;
+  pointer-events: none;
+  touch-action: none;
+  user-select: none;
+  filter: brightness(0.3);
+}
+
 .section__heading {
   --f-size: clamp(1.3125rem, 0.3419rem + 4.8529vw, 3.375rem);
 
