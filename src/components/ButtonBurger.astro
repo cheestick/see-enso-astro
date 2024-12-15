@@ -27,73 +27,63 @@
 
   const isMenuOpened = () => navigation?.classList.contains('show-navigation')
 
-  // function updateNavLinks(needUpdate: boolean) {
-  //     if (needUpdate) {
-  //         navLinks?.forEach(link => link.addEventListener('click', hideMenu))
-  //     } else {
-  //         navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
-  //     }
-  // }
-
-  // function updateBurgerButton(needUpdate: boolean) {
-  //     if (needUpdate) {
-
-  //     } else {
-        
-  //     }
-  // }
-
-  // function toggleDirectChildrenInertAttribute(directChildren: NodeListOf<HTMLElement>) {
-  //   const attribute = 'inert'
-  //   const hasInertAttribute = (el: HTMLElement) => el.hasAttribute(attribute)
-  //   const toggleAttribute = (el: HTMLElement) => { 
-  //       if (hasInertAttribute(el)) {  el.removeAttribute(attribute) } 
-  //       else {  el.setAttribute(attribute, '') }
-  //   }
-        
-  //     directChildren.forEach(toggleAttribute)
-  // }
+  function makeElementInert(element: HTMLElement) { element.setAttribute('inert', '') }
+  function stopElementBeingInert (element: HTMLElement) { element.removeAttribute('inert')}
+  function addElementOnClickBehavior(element: HTMLElement, behavior: () => void) {
+      element.addEventListener('click', behavior)
+  }
+  function removeElementOnClickBehavior(element: HTMLElement, behavior: () => void) {
+      element.removeEventListener('click', behavior)
+  }
 
   function swapBurgerIconsVisibility(from: HTMLSpanElement, to: HTMLSpanElement) {
     from.style.display = 'none'
     to.style.display = 'block'
   }
 
-  function showMenu() {
-      bodyDirectChildren?.forEach(el => el.setAttribute('inert', ''))
-      navigation?.classList.add('show-navigation')
-      navigation?.removeAttribute('inert')
+  function setBurgerButtonAriaAttributeMenuShown () {
       btnBurger?.setAttribute('aria-expanded', 'true')
       btnBurger?.setAttribute('aria-label', "сховати меню")
+  }
+
+  function setBurgerButtonAriaAttributeMenuClosed () {
+      btnBurger?.setAttribute('aria-expanded', 'false')
+      btnBurger?.setAttribute('aria-label', "показати меню")
+  }
+
+  function showMenu() {
+      bodyDirectChildren?.forEach(el => makeElementInert(el))
+      navigation?.classList.add('show-navigation')
+      stopElementBeingInert(navigation!)
+      setBurgerButtonAriaAttributeMenuShown()
       swapBurgerIconsVisibility(iconBurger!, iconClose!)
   }
 
   function hideMenu() {
-      bodyDirectChildren?.forEach(el => el.removeAttribute('inert'))
+      bodyDirectChildren?.forEach(el => stopElementBeingInert(el))
       navigation?.classList.remove('show-navigation')
-      navigation?.setAttribute('inert', '')
-      btnBurger?.setAttribute('aria-expanded', 'false')
-      btnBurger?.setAttribute('aria-label', "показати меню")
+      makeElementInert(navigation!)
+      setBurgerButtonAriaAttributeMenuClosed()
       swapBurgerIconsVisibility(iconClose!, iconBurger!)
   }
 
   function toggleMenu() {
-      if (!isMenuOpened()) { showMenu() } 
-      else  { hideMenu() }
+      if (!isMenuOpened()) showMenu()
+      else hideMenu()
   }
 
-  function updateNavbar(hasMobileAppearance: boolean) {
-      if (hasMobileAppearance) {
-          navigation?.setAttribute('inert', '')
-          navigation?.addEventListener('click', hideMenu)
-          navLinks?.forEach(link => link.addEventListener('click', hideMenu))
-          btnBurger?.removeAttribute('inert')
+  function updateNavbar(appearMobile: boolean) {
+      if (appearMobile) {
+          makeElementInert(navigation!)
+          addElementOnClickBehavior(navigation!, hideMenu)
+          navLinks?.forEach(navLink => addElementOnClickBehavior(navLink, hideMenu))
+          stopElementBeingInert(btnBurger!)
       } else {
-          navigation?.removeAttribute('inert')
-          navigation?.removeEventListener('click', hideMenu)
-          navLinks?.forEach(link => link.removeEventListener('click', hideMenu))
-          btnBurger?.setAttribute('inert', '')
-      }
+          stopElementBeingInert(navigation!)
+          removeElementOnClickBehavior(navigation!, hideMenu)
+          navLinks?.forEach(navLink => removeElementOnClickBehavior(navLink, hideMenu))
+          makeElementInert(btnBurger!)
+        }
   }
 
   function onMediaQueryChange(e: MediaQueryListEvent) {
@@ -102,29 +92,9 @@
       updateNavbar(hasMobileMenuAppearance)
   }
 
-  // function onScreenOrientationChange(e: Event) {
-  //     const screen = e.target
-  //     if (screen && 'type' in screen) {
-  //         const isScreenOrientationLandscape = screen.type === 'landscape-primary' || 'landscape-secondary'     
-  //         if (!isScreenOrientationLandscape) return
-  //         hideMenu()
-  //     }
-  // }
-
-  // function onWindowResize(e: Event) {
-  //     if (e.target instanceof Window) { 
-  //       const browserWindow = e.target
-  //       const isMenuMobile = browserWindow.matchMedia(MEDIA_MOBILE)
-  //         if (isMenuMobile) return
-  //         toggleMenu()
-  //     }
-  // }
-
     updateNavbar(media.matches)
     btnBurger?.addEventListener('click', toggleMenu)
     media.addEventListener('change', onMediaQueryChange)
-    // screen.orientation.addEventListener('change', onScreenOrientationChange)
-    // window.addEventListener('resize', onWindowResize)
 </script>
 
 <style is:global>
