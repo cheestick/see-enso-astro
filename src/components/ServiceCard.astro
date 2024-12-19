@@ -89,7 +89,7 @@ const firstElmentDelay = 80
     }
   }
 
-  .list__item {
+  .details__list .list__item {
     --gap-decimal-marker: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
       display: grid;
       grid-template-columns: auto 1fr;
@@ -98,7 +98,7 @@ const firstElmentDelay = 80
       z-index: 15;
   }
 
-  .list__item::before {
+  .details__list .list__item::before {
     grid-column: 1/2;
     counter-increment: service-items;
     content: counter(service-items, decimal-leading-zero) ".";
