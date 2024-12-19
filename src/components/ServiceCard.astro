@@ -1,0 +1,177 @@
+---
+/* @jsxImportSource astro */
+import type { ISEService } from '@data/services';
+
+interface Props {
+  service: ISEService;
+  idx: number;
+}
+
+const {service, idx} = Astro.props
+const tabDetailsIdx = String(idx + 1).padStart(2,"0")
+const {duration, price, previewUrl, variation} = service
+const detailsCount = variation.length
+const firstElmentDelay = 80
+---
+
+<div class="service__details" data-tab-details={tabDetailsIdx}>
+    <div class="details__info-group">
+        <ol class="details__list">
+            { variation?.map(({v, extra}, idx) => (
+                  <li class="list__item" style={`--animation-delay: ${firstElmentDelay*idx}ms`}>
+                      <span class="main">{v}</span>{/* {extra && <span class="extra">{extra}</span>} */}
+                  </li>
+              ))
+            }
+        </ol>
+
+        <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
+            <span>від {price}$</span>
+        </div>
+
+        <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
+            <span>{duration} днів</span>
+        </div>
+    </div>
+
+    <picture class="service__thumb">
+        <img 
+            class="thumb__image" 
+            src={previewUrl}
+            alt="photography"/>
+    </picture>
+</div>
+
+<style is:global>
+  .service__details {
+      display: none;
+      position: relative;
+      isolation: isolate;
+      align-items: start;
+
+      @media (width >= 40rem) {
+        flex-direction: row-reverse;
+      }
+  }
+
+  .details__info-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      width: fit-content;
+  }
+
+   .details__list {
+    grid-column: 1/-1;
+    grid-row: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: clamp(0.75rem, 0.3036rem + 2.2321vw, 2.3125rem);
+    font-size: clamp(0.875rem, 0.7519rem + 0.4145vw, 1.125rem);
+    counter-reset: service-items;
+    
+    aspect-ratio: 1;
+    min-width: 26em;
+    /* width: fit-content; */
+    padding-inline-start: 4rem;
+    border-radius: 100%;
+    border: 2px solid var(--swatch-purple-500);
+    background-color: var(--bg-color);
+
+    @media (width >= 40rem) {
+      --fluid-200-80: clamp(5rem, 21.1082rem + -17.9104vw, 12.5rem);
+        min-width: 27em;
+        padding-inline-start: 4.5rem;
+        margin-inline-start: calc(-1 * var(--fluid-200-80));
+    }
+  }
+
+  .details__list .list__item {
+    --gap-decimal-marker: clamp(0.5rem, 0.2857rem + 1.0714vw, 1.25rem);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      place-content: start;
+      column-gap: var(--gap-decimal-marker);
+      z-index: 15;
+  }
+
+  .details__list .list__item::before {
+    grid-column: 1/2;
+    counter-increment: service-items;
+    content: counter(service-items, decimal-leading-zero) ".";
+    display: inline-block;
+  }
+
+  .list__item > .main {
+    grid-column: 2/3;
+  }
+
+  .list__item > .extra {
+    display: none;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    font-size: 0.8em;
+  }
+
+  .service__duration,
+  .service__price {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding-inline: 1.25em;
+    background-color: var(--swatch-neutral-900);
+    border-radius: 100%;
+    box-shadow: var(--shadow-small);
+  }
+
+  .service__price {
+    grid-column: 2/4;
+    grid-row: 2/3;
+    align-self: start;
+    justify-self: end;
+    translate: -10% -40%;
+    font-size: clamp(0.875rem, 0.6587rem + 0.7286vw, 1.125rem);
+    z-index: 11;
+  }
+
+  .service__duration {
+    grid-column: 3/5;
+    grid-row: 2/3;
+    align-self: start;
+    justify-self: end;
+    translate: -25% -110%;
+    font-size: clamp(0.75rem, 0.5337rem + 0.7286vw, 1rem);
+    z-index: 12;
+  }
+
+  .service__thumb {
+      z-index: 1;
+      width: var(--_diameter, 250px);
+      aspect-ratio: 1;
+      margin-block-start: 5%;
+      margin-inline-start: -15%;
+      background-color: var(--bg-color);
+      border-radius: 100%;
+      border: 2px solid var(--swatch-purple-500);
+      overflow: hidden;
+
+    @media (width >= 40rem) {
+      --fluid-400-500: clamp(25rem, 17.8265rem + 14.9254vw, 31.25rem);
+      --_diameter: var(--fluid-400-500);
+        z-index: -1;
+        margin-block-start: 0;
+        margin-inline-start: 0;
+    }
+  }
+
+  .thumb__image {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+  }
+
+</style>

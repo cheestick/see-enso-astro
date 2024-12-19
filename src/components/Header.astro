@@ -20,6 +20,9 @@ import SiteOptions from './SiteOptions.astro';
     left: 0;
     width: 100%;
     z-index: 1000;
+    isolation: isolate;
+    overscroll-behavior: contain;
+    touch-action: none;
   }
 
   .header::before {

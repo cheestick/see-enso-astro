@@ -1,0 +1,198 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import { seServices } from '@data/services';
+---
+
+<section id="services" class="services">
+  <div class="container services__container">
+    <h2 class="section__heading services__heading">
+      <span>перелік наших</span>
+      <span class="accent line2">послуг</span>
+    </h2>
+    <div class="tabs services__tabs">
+      <div class="tabs__nav">
+        {
+          seServices?.map(({title, variation}, idx) => {
+            return ( 
+              <label class="tab nav__control">
+                <input 
+                  type="radio" 
+                  name="se-services" 
+                  data-tab={String(idx + 1).padStart(2, '0')} 
+                  checked={idx === 0}/>
+                <span class="tab-caption">
+                  {title}:
+                  <span class="tab-caption__extra">{variation.length.toString().padStart(2, "0")}</span>
+                </span>
+              </label>
+            )
+          })
+        }
+      </div>
+
+      <div class="tab__content">
+        {
+          seServices?.map((service, idx) =>{
+            return <ServiceCard {service} {idx}/>
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .services {
+    overflow-x: clip;
+  }
+
+  .services__container {
+    margin-block-start: var(--section-interval);
+  }
+
+  .services__heading > .line2 {
+    margin-inline-start: 12ch;
+  }
+
+  .services__tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+    align-items: start;
+    margin-block-start: clamp(1.5rem, 0.2857rem + 6.0714vw, 5.75rem);
+
+     @media (width > 48rem) {
+        grid-template-columns: 1fr auto;  
+    }
+  }
+
+  .tabs__nav {
+    order: 2;
+    width: fit-content;
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: end;
+    gap: clamp(0.75rem, 0.5039rem + 0.829vw, 1.25rem) 6px;
+
+    @media (width > 48rem) {
+      --fluid-0-60: clamp(0rem, -4.3041rem + 8.9552vw, 3.75rem);
+        justify-self: center;
+        flex-direction: column;
+        align-content: start;
+        width: max-content;
+        margin-inline: var(--fluid-0-60);
+    }
+  }
+
+  .tab.nav__control {
+    --fluid-12-30: clamp(0.75rem, 0.2785rem + 1.7751vw, 1.875rem);
+      display: inline-block;
+      width: fit-content;
+      padding-block: 6px;
+      padding-inline: 16px;
+      border-radius: 10ch;
+      background-color: var(--swatch-neutral-700);
+      font-size: var(--fluid-12-30);
+      transition: all 450ms ease;
+      cursor: pointer;
+
+    @media (width > 48rem) {
+      padding-block: 0;
+      color: var(--swatch-neutral-400);
+      background-color: transparent;
+    }
+  }
+
+  .tab.nav__control:has([data-tab]:checked) {
+    color: var(--swatch-neutral-400);
+    background-color: var(--swatch-neutral-200);
+
+    @media (width > 48rem) {
+      color: var(--swatch-neutral-200);
+      background-color: transparent;
+    }
+  }
+
+  .tab > input[type='radio'] {
+    display: none;
+  }
+
+  .tab-caption {
+      text-transform: uppercase;
+  }
+
+  .tab-caption__extra {
+    display: none;
+    font-size: clamp(0.75rem, 0.6786rem + 0.3571vw, 1rem);
+    vertical-align: super;
+
+    @media (width >= 40rem) {
+      display: inline;
+    }
+  }
+  
+  .tabs:has([data-tab="01"]:checked) .service__details[data-tab-details="01"],
+  .tabs:has([data-tab="02"]:checked) .service__details[data-tab-details="02"],
+  .tabs:has([data-tab="03"]:checked) .service__details[data-tab-details="03"],
+  .tabs:has([data-tab="04"]:checked) .service__details[data-tab-details="04"],
+  .tabs:has([data-tab="05"]:checked) .service__details[data-tab-details="05"],
+  .tabs:has([data-tab="06"]:checked) .service__details[data-tab-details="06"],
+  .tabs:has([data-tab="07"]:checked) .service__details[data-tab-details="07"], 
+  .tabs:has([data-tab="08"]:checked) .service__details[data-tab-details="08"] {
+      display: flex;
+      flex-wrap: nowrap;
+      width: max-content;
+
+    .list__item {
+        opacity: 0;
+        transform: translateX(-10ch);
+        animation: 
+            fadeIn 1.2s linear forwards, 
+            slideIn 450ms linear forwards;
+        animation-delay: var(--animation-delay, 0);
+    }
+
+    .service__price > span,
+    .service__duration > span {
+        opacity: 0;
+        animation: fadeIn 1s linear forwards;
+        animation-delay: var(--animation-delay, 0)
+    }
+
+    .service__thumb > img {
+        /* opacity: 0.1; */
+        /* animation: fadeIn 700ms linear forwards; */
+        animation-delay: var(--animation-delay, 0);
+    } 
+  }
+
+  .tab__content {
+      margin-inline-start: -4rem;
+  }
+
+@media screen and (width > 26.75rem) {
+    .services__heading {
+      width: fit-content;
+      margin-inline: auto;
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes toRight {
+    to {
+        translate: 0rem;
+    }
+}
+</style>
