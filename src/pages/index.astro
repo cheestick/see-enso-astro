@@ -7,28 +7,32 @@ import SectionServices from '@components/SectionServices.astro';
 import SectionCases from '@components/SectionCases.astro';
 import SectionTeam from '@components/SectionTeam.astro';
 import SectionTicker from '@components/SectionTicker.astro';
+import ButtonToTop from '@components/ButtonToTop.astro';
 
 
 ---
 
 <MainLayout title="See Enso - Digital Agency">
-	<Header />
-	<SectionHero/>
-	<SectionAbout />
-	<SectionServices />	
-	<SectionCases />
-	<SectionTeam/>
-	<SectionTicker />
+    <Header /> 
+    <main>
+        <SectionHero/>
+        <SectionAbout/>
+        <SectionServices />	
+        <SectionCases/>
+        <SectionTeam/>
+        <SectionTicker/>
+    </main>
+  <!-- <ButtonToTop href="#hero"/> -->
 </MainLayout>
 
 <style>
 .dummy__section {
-	display: grid;
-	place-items: center;
+    display: grid;
+    place-items: center;
 }
 .dummy__img {
-	width: 100%;
-	object-fit: contain;
-	object-position: center;
-	}
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
 </style>

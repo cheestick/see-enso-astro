@@ -1,0 +1,90 @@
+---
+import config from '@data/config'
+
+const {seContactInfo} = config
+---
+
+<ul class="contact__list">
+    {
+        seContactInfo?.map(({link, icon, caption}) => {
+            const inNewTab = !(link?.includes('tel:') || link?.includes('mailto:'))
+            const [title, domain] = caption.split('@')
+            if (!link) {
+                return (
+                    <li class="list__item">
+                        <span class="contact__link">
+                            <img class="contact__icon" src={icon} alt={`Лінк на ${caption} компанії`} width="70" height="70"/>
+                            <span class="contact__caption">
+                                {title}{domain && <span class="caption__at">@{domain}</span>}
+                        </span>
+                        </span>
+                    </li>)
+            } 
+
+            return (
+                <li class="list__item">
+                    <a 
+                        class="contact__link"
+                        href={link}
+                        target={inNewTab ? "_blank" : "_self"}
+                        rel={inNewTab ? "noopener noreferrer" : ''}>
+                        <img class="contact__icon" src={icon} alt={`Лінк на ${caption} компанії`} width="70" height="70"/>
+                        <span class="contact__caption">
+                            {title}{domain && <span class="caption__at">@{domain}</span>}
+                        </span>
+                    </a>
+                </li>)
+            }
+        )
+    }
+</ul>
+
+<style>
+    .contact__list {
+      --fluid-10-12: clamp(0.625rem, 0.5363rem + 0.3339vw, 0.75rem);
+      --fluid-16-18: clamp(1rem, 0.8451rem + 0.5831vw, 1.125rem);
+      --fluid-20-65: clamp(1.25rem, -0.7455rem + 7.5125vw, 4.0625rem);
+        display: flex;
+        flex-direction: column;
+        gap: var(--fluid-10-12);
+        width: max-content;
+        /* font-size: var(--fluid-16-18); */
+        text-transform: uppercase;
+        margin-block-start: var(--fluid-20-65);
+    }
+
+    .contact__list .contact__link{
+      /* --fluid-12-20: clamp(0.75rem, 0.3952rem + 1.3356vw, 1.25rem); */
+      --fluid-10-20: clamp(0.625rem, 0.1816rem + 1.6694vw, 1.25rem);
+        display: flex;
+        align-items: center;
+        gap: var(--fluid-10-20);
+        transition: opacity 600ms ease;
+    }
+
+    .contact__list .contact__icon {
+      /* --fluid-55-70: clamp(3.4375rem, 2.7723rem + 2.5042vw, 4.375rem); */
+      --fluid-40-70: clamp(2.5rem, 1.1697rem + 5.0083vw, 4.375rem);
+      width: var(--fluid-40-70);
+      aspect-ratio: 1;
+    }
+
+    .contact__list .contact__link .contact__caption {
+        --fluid-14-18: clamp(0.875rem, 0.6976rem + 0.6678vw, 1.125rem);
+        font-size: var(--fluid-14-18); 
+    }
+    .caption__at {
+      --fluid-10-14: clamp(0.625rem, 0.4476rem + 0.6678vw, 0.875rem);
+        font-size: var(--fluid-10-14);
+    }
+
+    .contact__list:has(:hover, :focus-within)  .contact__link:not(:hover, :focus-within) {
+        opacity: .3;
+    }
+
+    .contact__link:focus-within {
+        outline: 2px solid var(--swatch-neutral-200);
+        outline-offset: 2px;
+        border-radius: 5rem;
+    }
+</style>
