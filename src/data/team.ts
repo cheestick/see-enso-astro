@@ -25,4 +25,4 @@ export default [
     position: "СММ",
     imageFilename: "lena",
   },
-];
+] as ITeamCard[];
