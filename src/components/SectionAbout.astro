@@ -24,8 +24,9 @@
 
 <style is:global>
   .about {
-    min-height: 100vh;
-    min-height: 100dvh;
+    /* min-height: 100vh; */
+    /* min-height: 100dvh; */
+    /* background-image: var(--swatch-gradient-haze); */
   }
 
   .about > .container {
@@ -73,31 +74,27 @@
   }
 
   .deco-enso-bg {
-    display: grid;
-    place-items: center;
-    width: clamp(min(392px, 100%), 60% , 43.75rem);
-    aspect-ratio: 1;
-    border-radius: 100%;
-    background-color: transparent;
-    background-image: 
-            radial-gradient(
-              circle at center, 
-              #f4f4f4ea 25%, 
-              #00000000 63%, 
-              #00000000);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    --deco-gradient-spot: radial-gradient( circle at center, #f4f4f4ea 25%, #00000000 63% );
+      display: grid;
+      place-items: center;
+      width: clamp(min(392px, 100%), 60% , 43.75rem);
+      aspect-ratio: 1;
+      border-radius: 100%;
+      background-color: transparent;
+      background-image: var(--deco-gradient-spot);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
   }
 
   .deco-enso-sign {
-    width: clamp(min(260px, 63%), 65% ,360px);
-    aspect-ratio: 1;
+      width: clamp(min(260px, 63%), 65% ,360px);
+      aspect-ratio: 1;
   }
 
   @media screen and (width > 26.75rem) {
     .section__heading.about__heading {
-       margin-inline: auto;
+      margin-inline: auto;
     }
 
     .about-grid {
