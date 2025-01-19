@@ -30,7 +30,7 @@
     <textarea
         class="field"
         name="message"
-        rows="4"
+        rows="5"
         placeholder="Ваше запитання"
         minlength="10"
         maxlength="500"
@@ -53,12 +53,16 @@
         font-size: var(--fluid-12-18);
         width: 100%;
         margin-block-start: var(--fluid-20-30);
+        position: relative;
+        isolation: isolate;
+        z-index: 50;
     }
 
     .feedback-form .field {
         padding-block: 14px;
         padding-inline: 21px;
-        background-color: transparent;
+        background-color: rgba(0,0,0, 0.65);
+        backdrop-filter: blur(40px);
         border: 2px solid var(--swatch-neutral-300);
         border-radius: 50px;
         color: var(--swatch-neutral-300);
@@ -67,6 +71,7 @@
     .feedback-form textarea.field {
         border-radius: 20px;
         resize: none;
+        scrollbar-width: none;
     }
 
     .feedback-form .field:focus-within,
@@ -96,10 +101,13 @@
     }
 
     .feedback-form .button-submit:is(:hover, :focus-within) {
-        opacity: 80%;
+        /* opacity: 80%; */
+        background-color: rgb(from var(--swatch-neutral-200) r g b / .8);
     }
 
     .feedback-form .button-submit:active {
-        opacity: 50%;
+        /* opacity: 50%; */
+        background-color: rgb(from var(--swatch-neutral-200) r g b / .65);
+
     }
 </style>

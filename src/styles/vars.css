@@ -33,6 +33,12 @@
 
   --swatch-backdrop: rgba(6, 5, 11, 0.165);
 
+  --swatch-gradient-haze: linear-gradient(
+    to bottom,
+    var(--swatch-purple-600) 0%,
+    var(--swatch-neutral-900) 22%
+  );
+
   --font-main: var(--typo-base-font);
   --font-weight: 400;
 
