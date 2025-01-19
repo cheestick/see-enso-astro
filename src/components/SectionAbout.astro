@@ -3,6 +3,7 @@
 ---
 
 <section id="about" class="about">
+  <div class="deco-planet-haze"></div>
   <div class="container">
     <h2 class="section__heading about__heading">
       <span class="line1">Кожен проєкт</span>
@@ -24,14 +25,50 @@
 
 <style is:global>
   .about {
-    /* min-height: 100vh; */
-    /* min-height: 100dvh; */
-    /* background-image: var(--swatch-gradient-haze); */
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
+    mask-image: linear-gradient(transparent 1%, #000000 10%);
+  }
+
+  .deco-planet-haze {
+    --space-multiplier: 1;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); 
+    clip-path: polygon(0 -200%, 100% -200%, 100% 30%, 0 30%);
+    margin-block-start: calc( var(--space-multiplier) * var(--section-interval));
+
+    @media (orientation: landscape) and (width <= 48rem) {
+      --space-multiplier: 2;
+    }
+  }
+
+  .deco-planet-haze::before {
+    --gradient-haze: linear-gradient(
+        to bottom,
+        var(--swatch-purple-600) 0%,
+        var(--swatch-neutral-900) 8% );
+      content: '';
+      display: block;
+      width: 135vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-image: var(--gradient-haze);
+      box-shadow: var(--shadow-bg);
   }
 
   .about > .container {
-    margin-block-start: var(--section-interval);
+    --space-multiplier: 2;
+    padding-block-start: calc(var(--space-multiplier) * var(--section-interval));
+
+    @media (orientation: landscape) and (width <= 48rem) {
+      --space-multiplier: 2.75;
+    }
   }
+  
 
   .section__heading.about__heading {
     /* --f-s: clamp(1.3125rem, 0.3419rem + 4.8529vw, 3.375rem); */
@@ -51,13 +88,13 @@
   .about-grid {
     margin-block-start: clamp(1.875rem, 0.4632rem + 7.0588vw, 4.875rem);
   }
+
   .about__text {
-    /* --color-bg: hsl(0 0 0 / .35); */
     --fs: clamp(0.875rem, 0.7724rem + 0.5128vw, 1.125rem);
     max-width: 31ch;
     font-size: var(--fs);
-    /* background-color: var(--color-bg); */
   }
+
   .about__text + .about__text {
     margin-block-start: 1rem;
   }
