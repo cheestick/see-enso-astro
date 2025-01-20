@@ -60,7 +60,7 @@ import { seServices } from '@data/services';
     align-items: start;
     margin-block-start: clamp(1.5rem, 0.2857rem + 6.0714vw, 5.75rem);
 
-     @media (width > 48rem) {
+    @media (width > 48rem) {
         grid-template-columns: 1fr auto;  
     }
   }
@@ -139,7 +139,8 @@ import { seServices } from '@data/services';
   .tabs:has([data-tab="05"]:checked) .service__details[data-tab-details="05"],
   .tabs:has([data-tab="06"]:checked) .service__details[data-tab-details="06"],
   .tabs:has([data-tab="07"]:checked) .service__details[data-tab-details="07"], 
-  .tabs:has([data-tab="08"]:checked) .service__details[data-tab-details="08"] {
+  .tabs:has([data-tab="08"]:checked) .service__details[data-tab-details="08"],
+  .tabs:has([data-tab="09"]:checked) .service__details[data-tab-details="09"] {
       display: flex;
       flex-wrap: nowrap;
       width: max-content;
