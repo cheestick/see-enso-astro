@@ -88,33 +88,17 @@ const srcSet = {
   inherits: true;
   initial-value: 0deg;
 }
-  .team__card {
-    position: relative;
-    width: clamp(140px, 20vw , 300px);
-    isolation: isolate;
-  }
 
-  /* .card__picture {
+  .card__picture {
     display: grid;
     grid-template-areas: 'avatar';
     width: fit-content;
-  } */
-
-  .card__picture {
-    /* width: fit-content; */
-    width: 100%;
-    border-radius: 100%;
-    overflow: clip;
   }
 
   .card__picture::before,
   .card__picture::after {
     content: '';
-    position: absolute;
-    top: 0;
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
+    grid-area: avatar;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -124,7 +108,6 @@ const srcSet = {
       rotateZ(var(--r-factor, 0deg));
     animation: hidSpinning 100s infinite linear alternate;
     /* animation-timeline: view(); */
-    z-index: -1;
   }
 
   .card__picture::before {
@@ -139,16 +122,15 @@ const srcSet = {
     background-image: url('/images/team/hid-outer-opt.svg');
   }
 
-  .card__picture:is(:hover, :focus-within) .picture__image {
-    transform: scale(1.1); 
+  .card__picture:hover .picture__image {
+    /* transform: scale(1.1); */
   }
 
   .picture__image {
-    /* grid-area: avatar; */
-    /* width: clamp(140px, 20vw , 300px); */
-    width: 100%;
+    grid-area: avatar;
+    width: clamp(140px, 20vw , 300px);
     aspect-ratio: 1;
-    /* border-radius: 100%; */
+    border-radius: 100%;
     transition: all 350ms ease;
   }
 
