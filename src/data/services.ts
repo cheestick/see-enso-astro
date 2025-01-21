@@ -16,7 +16,7 @@ export const seServices: ISEService[] = [
     title: "SMM",
     price: 900,
     duration: 6,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/smm.png",
     variation: [
       {
         v: "FB, Inst, TikTok, LinkedIn",
@@ -42,7 +42,7 @@ export const seServices: ISEService[] = [
     title: "ТАРГЕТ ТА PPC",
     price: 700,
     duration: 7,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/advertising.png",
     variation: [
       {
         v: "Таргетована реклама",
@@ -65,7 +65,7 @@ export const seServices: ISEService[] = [
     title: "ГРАФІЧНИЙ ДИЗАЙН",
     price: 550,
     duration: 14,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/design.png",
     variation: [
       {
         v: "Логотип",
@@ -91,7 +91,7 @@ export const seServices: ISEService[] = [
     title: "РОЗРОБКА САЙТІВ",
     price: 600,
     duration: 10,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/websites.png",
     variation: [
       {
         v: "Лендинг",
@@ -117,7 +117,7 @@ export const seServices: ISEService[] = [
     title: "ПРЕПРОДАКШН",
     price: 500,
     duration: 7,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/preproduction.png",
     variation: [
       {
         v: "Розробка ідеї, концепції",
@@ -137,7 +137,7 @@ export const seServices: ISEService[] = [
     title: "ПРОДАКШН",
     price: 700,
     duration: 4,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/production.png",
     variation: [
       {
         v: "Відео для бізнесу",
@@ -163,7 +163,7 @@ export const seServices: ISEService[] = [
     title: "ПОСТПРОДАКШН",
     price: 800,
     duration: 14,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/postproduction.png",
     variation: [
       {
         v: "Анімація та 3D рендери",
@@ -186,7 +186,7 @@ export const seServices: ISEService[] = [
     title: "ФОТОЗЙОМКИ",
     price: 300,
     duration: 5,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/photo.png",
     variation: [
       {
         v: "Студійні фото",
@@ -209,7 +209,7 @@ export const seServices: ISEService[] = [
     title: "PR та комунікація",
     price: 700,
     duration: 5,
-    previewUrl: "/images/services/photography/photography@1x.webp",
+    previewUrl: "/images/services/pr.png",
     variation: [
       {
         v: "Комунікаційні стратегії",
