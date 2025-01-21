@@ -17,6 +17,7 @@
   --typo-spacing-base: -0.01em; /* -1% */
   --typo-spacing-extra: -0.02em; /* -2% */
 
+  --swatch-neutral-900a: #06050bb7;
   --swatch-neutral-900: #06050b;
   --swatch-neutral-700: #313131;
   --swatch-neutral-400: #595959;
@@ -56,6 +57,7 @@
   --text-color: var(--swatch-neutral-200);
 
   --bg-color: var(--swatch-neutral-900);
+  --bg-color-a: var(--swatch-neutral-900a);
 
   --color-base: var(--swatch-purple-500);
   --color-light: var(--swatch-purple-400);
