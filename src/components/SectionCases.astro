@@ -1,8 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import CardCase from './CardCase.astro';
-import config from '@data/config'
-const {casesData} = config
 
 const cases = await getCollection('cases')
 ---
@@ -89,8 +87,9 @@ casesForwardButton?.addEventListener('click', (e) => {
 }
 
 .scroller-nav__button {
+  /* --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem); */
+  --py: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
   --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem);
-  --py: var(--px);
   --br: 15rem;
   --c-bg: var(--swatch-neutral-700);
 

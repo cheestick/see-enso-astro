@@ -29,13 +29,14 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
   .card-case {
     --color-case-bg: hsla(259, 53%, 18%, 0.4);
     --color-border: var(--swatch-neutral-200);
-    --stroke: 2px;
+    --stroke: 1px;
     /* --r: clamp(1.0625rem, 0.386rem + 3.3824vw, 2.5rem); */
     --r: clamp(0.75rem, 0.4643rem + 1.4286vw, 1.75rem);
     /* --p-b: clamp(1rem, 0.1765rem + 4.1176vw, 2.75rem); */
     --p-b: clamp(0.5rem, 0.2143rem + 1.4286vw, 1.5rem);
     --p-i: var(--p-b);
-    --w: clamp(13.75rem, 9.3929rem + 21.7857vw, 29rem);
+    /* --w: clamp(13.75rem, 9.3929rem + 21.7857vw, 29rem); */
+    --w: clamp(13.75rem, 7.5806rem + 23.2258vw, 25rem);
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
