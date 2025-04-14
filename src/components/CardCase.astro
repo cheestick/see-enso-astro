@@ -1,5 +1,4 @@
 ---
-// import type { ICaseCard } from '@data/cases'
 import Tag from '@components/Tag.astro'
 import Image from 'astro/components/Image.astro'
 import type { CollectionEntry } from 'astro:content';
@@ -11,7 +10,7 @@ interface Props {
 const {title, description, tags, thumbUrl } = Astro.props.case.data
 ---
 
-<article style="--image-rotation: 30deg;" class="card-case" tabindex="-1" title={title}>
+<article style="--image-rotation: -25deg;" class="card-case" tabindex="-1" title={title}>
   <h3 class="card-case__heading">{title}</h3>
   <p class="card-case__description">{description}</p>
   <Image 
@@ -30,21 +29,19 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
     --color-case-bg: hsla(259, 53%, 18%, 0.4);
     --color-border: var(--swatch-neutral-200);
     --stroke: 1px;
-    /* --r: clamp(1.0625rem, 0.386rem + 3.3824vw, 2.5rem); */
     --r: clamp(0.75rem, 0.4643rem + 1.4286vw, 1.75rem);
-    /* --p-b: clamp(1rem, 0.1765rem + 4.1176vw, 2.75rem); */
     --p-b: clamp(0.5rem, 0.2143rem + 1.4286vw, 1.5rem);
     --p-i: var(--p-b);
-    /* --w: clamp(13.75rem, 9.3929rem + 21.7857vw, 29rem); */
     --w: clamp(13.75rem, 7.5806rem + 23.2258vw, 25rem);
 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto 1fr auto;
+    grid-row: 1/5;
 
+    display: grid;
+    grid-template-rows: subgrid;
+    row-gap: 1.75rem;
+    
     width: var(--w);
-    aspect-ratio: 4/5;
-    /* max-height: 100%; */
+    /* aspect-ratio: 4/5; */
     padding-block: var(--p-b);
     padding-inline: var(--p-i);
     border: 
@@ -69,23 +66,20 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
   }
 
   .card-case__heading {
-    /* --f-s: clamp(0.875rem, 0.4044rem + 2.3529vw, 1.875rem); */
     --f-s: clamp(0.75rem, 0.3387rem + 1.5484vw, 1.5rem);
 
-    grid-column: 1 / -1;
+    grid-column: 1 / 3;
+    grid-row: 1;
     font-size: var(--f-s);
     text-wrap: pretty;
   }
 
   .card-case__description {
-    /* --f-s: clamp(0.625rem, 0.3897rem + 1.1765vw, 1.125rem); */
     --f-s: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
-      grid-column: 1 / 3;
       grid-row: 2/4;
+      grid-column: 1/3 ;
 
-      max-inline-size: 25ch;
-      margin-block-start: clamp(0.375rem, -0.8015rem + 5.8824vw, 2.875rem);
-      /* place-self: center; */
+      max-inline-size: 24ch;
 
       font-size: var(--f-s);
       text-wrap: pretty;
@@ -94,15 +88,21 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
   .card-case__thumb {
     --rotate: calc(-1 * var(--image-rotation, 0deg));
 
-    grid-column: 2 / 4;
-    grid-row: 2 / 4;
-    place-self: center;
+    grid-column: 1 / 3;
+    grid-row: 1 / 5;
+    align-self: center;
+    justify-self: end;
     width: clamp(11.625rem, 7.2132rem + 22.0588vw, 21rem);
     aspect-ratio: 1.333;
-    /* background-image: linear-gradient(90deg, violet, pink); */
-    rotate: var(--rotate);
-    transform: translateX(30%);
+    mask-image: linear-gradient(90deg, transparent, white 60%, white 60%, transparent);
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    transform: 
+                translateX(30%) 
+                rotateZ(var(--rotate));
+    transform-origin: center ;
     z-index: -1;
+    
   }
 
   .card-case:nth-child(2n) .card-case__thumb {
@@ -110,11 +110,11 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
   }
 
   .card-case__tags {
-  grid-column: 1 / 4;
+  grid-column: 1 / 3;
   grid-row: 4 / 5;
+  place-items: start;
   display: flex;
   flex-wrap: wrap;
-  /* gap: clamp(0.375rem, 0.1985rem + 0.8824vw, 0.75rem); */
   gap: clamp(0.25rem, 0.0444rem + 0.7742vw, 0.625rem);
 }
 </style>

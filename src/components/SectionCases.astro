@@ -21,7 +21,7 @@ const cases = await getCollection('cases')
       </button>
     </div>
     <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
-      <div  class="cases-cards" >
+      <div  class="cases-cards subgrid-parent" >
       {
         cases?.map((card) => (
           <CardCase 
@@ -87,7 +87,6 @@ casesForwardButton?.addEventListener('click', (e) => {
 }
 
 .scroller-nav__button {
-  /* --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem); */
   --py: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
   --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem);
   --br: 15rem;
@@ -131,10 +130,14 @@ casesForwardButton?.addEventListener('click', (e) => {
   }
 }
 
+.subgrid-parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: 0.75rem;
+}
+
 .cases-cards {
-  display: flex;
-  gap: 1rem;
-  width: fit-content;
   scroll-snap-stop: always;
 }
 </style>
