@@ -1,7 +1,7 @@
 ---
-import Tag from '@components/Tag.astro'
-import Image from 'astro/components/Image.astro'
+import {Image} from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import Tag from '@components/Tag.astro'
 
 interface Props {
   case: CollectionEntry<'cases'>
