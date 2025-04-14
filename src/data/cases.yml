@@ -1,0 +1,35 @@
+- id: case01
+  title: "СММ ВЕДЕННЯ  СОЦ. МЕРЕЖ ФОНДУ “БЛАГОМАЙ”"
+  description: "Повне СММ ведення від контент плану до постингу. Монтаж Reels, створення візуального контенту, копірайтинг дописів, таргетована реклама (від стратегії до якісних показників)"
+  thumbUrl: "../assets/cases/01.png"
+  // thumbUrl: "/images/cases/01.png"
+  tags: ["Ведення сторінки", "Дизайн", "Таргет"]
+  link: "https://www.instagram.com/blagomayfund/"
+
+- id: case02
+  title: "ТАРГЕТ+СТВОРЕННЯ ДОПИСІВ СОЦ МЕРЕЖ “СОС ДИТЯЧІ МІСТЕЧКА УКРАЇНА”"
+  description: "Написання текстів та дизайн дописів, зйомка та монтаж Reels, одного з проектів фонду, таргетована реклама соцмереж вцілому."
+  thumbUrl: "../assets/cases/02.png"
+  tags: ["Таргет", "Створення дописів", "Дизайн"]
+  link: "https://www.instagram.com/sos_cv_ukraine/"
+
+- id: case03
+  title: "ПРОВЕДЕННЯ СЕРІЇ ONLINE ВЕБІНАРІВ"
+  description: "Створення креативів для таргету та обкладинок в соц. мережі та на ютуб. Організація, трансляція та технічний  супровід лекторів та вебінарів."
+  thumbUrl: "../assets/cases/03.png"
+  tags: ["Організація", "Дизайн", "Тех. супровід"]
+  link: "https://www.youtube.com/playlist?list=PLCY4teqJXrLcbd2_fqkZTrlah8vm83Y2f"
+
+- id: case04
+  title: "ПРОМОЦІЯ СЕРІЇ ONLINE ВЕБІНАРІВ"
+  description: "Промоція в соц мережах, таргетована реклама, реєстраційні форми, розсилка запрошень та  презентаційних матеріалів.\nЗбільшення бази нових  учасників в чотири рази!"
+  thumbUrl: "../assets/cases/04.png"
+  tags: ["Email маркетинг", "Таргет", "Дизайн"]
+  link: ""
+
+- id: case05
+  title: "ВЕДЕННЯ РОЗДІЛУ ПРОЄКТУ НА САЙТІ “СОС ДИТЯЧІ МІСТЕЧКА УКРАЇНА”"
+  description: "Ведення та наповнення розділу проєкту на сайті (написання статей, підбір контенту, додавання новин та вебінарів, ведення сторінки проєкту в цілому)."
+  thumbUrl: "../assets/cases/05.png"
+  tags: ["Підбір контенту", "Копірайтинг", "Адміністрування"]
+  link: "https://sos-ukraine.org/grantovi-proyekty/pravo-na-sim-yu-usunennya-systemnyh-progalyn-pidtrymka-reform-systemy-zahystu-ditej-v-albaniyi-bilorusi-virmeniyi-pivnichnij-makedoniyi-ta-ukrayini/"

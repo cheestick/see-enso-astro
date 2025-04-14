@@ -1,8 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
 import CardCase from './CardCase.astro';
-import config from '@data/config'
-const {casesData} = config
 
+const cases = await getCollection('cases')
 ---
 
 <section id="cases" class="cases">
@@ -21,11 +21,11 @@ const {casesData} = config
       </button>
     </div>
     <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
-      <div  class="cases-cards" >
+      <div  class="cases-cards subgrid-parent" >
       {
-        casesData?.map((card) => (
+        cases?.map((card) => (
           <CardCase 
-            {...card}
+            case={card}
           />
         ))
       }
@@ -87,8 +87,8 @@ casesForwardButton?.addEventListener('click', (e) => {
 }
 
 .scroller-nav__button {
+  --py: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
   --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem);
-  --py: var(--px);
   --br: 15rem;
   --c-bg: var(--swatch-neutral-700);
 
@@ -130,10 +130,14 @@ casesForwardButton?.addEventListener('click', (e) => {
   }
 }
 
+.subgrid-parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: 0.75rem;
+}
+
 .cases-cards {
-  display: flex;
-  gap: 1rem;
-  width: fit-content;
   scroll-snap-stop: always;
 }
 </style>
