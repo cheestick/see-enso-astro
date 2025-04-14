@@ -11,7 +11,7 @@ interface Props {
 const {title, description, tags, thumbUrl } = Astro.props.case.data
 ---
 
-<article style="--image-rotation: 0deg;" class="card-case" tabindex="-1" title={title}>
+<article style="--image-rotation: 30deg;" class="card-case" tabindex="-1" title={title}>
   <h3 class="card-case__heading">{title}</h3>
   <p class="card-case__description">{description}</p>
   <Image 
@@ -85,6 +85,7 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
 
       max-inline-size: 25ch;
       margin-block-start: clamp(0.375rem, -0.8015rem + 5.8824vw, 2.875rem);
+      /* place-self: center; */
 
       font-size: var(--f-s);
       text-wrap: pretty;
@@ -100,7 +101,7 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
     aspect-ratio: 1.333;
     /* background-image: linear-gradient(90deg, violet, pink); */
     rotate: var(--rotate);
-    transform: translateX(20%);
+    transform: translateX(30%);
     z-index: -1;
   }
 
