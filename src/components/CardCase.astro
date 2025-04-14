@@ -1,14 +1,23 @@
 ---
+// import type { ICaseCard } from '@data/cases'
 import Tag from '@components/Tag.astro'
-import type { ICaseCard } from '@data/cases'
+import Image from 'astro/components/Image.astro'
+import type { CollectionEntry } from 'astro:content';
 
-const {heading, description, tags, thumbUrl } = Astro.props as ICaseCard
+interface Props {
+  case: CollectionEntry<'cases'>
+}
+
+const {title, description, tags, thumbUrl } = Astro.props.case.data
+console.log(tags);
+
 ---
 
 <article style="--image-rotation: 0deg;" class="card-case" tabindex="-1">
-  <h3 class="card-case__heading">{heading}</h3>
+  <h3 class="card-case__heading">{title}</h3>
   <p class="card-case__description">{description}</p>
-  <img class="card-case__thumb" src={thumbUrl} alt="" width="192" height="144"/>
+  <!-- <img class="card-case__thumb" src={thumbUrl} alt="" width="192" height="144"/> -->
+  <Image class="card-case__thumb" src={thumbUrl} alt="" width={384} height={288}  format='avif' quality={35}/>
   <div class="card-case__tags">
     {
       tags?.map((tag) => (<Tag>{tag}</Tag>))

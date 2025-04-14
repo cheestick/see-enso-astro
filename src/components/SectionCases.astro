@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import CardCase from './CardCase.astro';
 import config from '@data/config'
 const {casesData} = config
 
+const cases = await getCollection('cases')
 ---
 
 <section id="cases" class="cases">
@@ -23,9 +25,9 @@ const {casesData} = config
     <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
       <div  class="cases-cards" >
       {
-        casesData?.map((card) => (
+        cases?.map((card) => (
           <CardCase 
-            {...card}
+            case={card}
           />
         ))
       }
