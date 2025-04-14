@@ -2,22 +2,23 @@
 import Tag from '@components/Tag.astro'
 import type { ICaseCard } from '@data/cases'
 
-const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
+const {heading, description, tags, thumbUrl } = Astro.props as ICaseCard
 ---
 
-<article class="card-case" tabindex="-1">
+<article style="--image-rotation: 0deg;" class="card-case" tabindex="-1">
   <h3 class="card-case__heading">{heading}</h3>
   <p class="card-case__description">{description}</p>
-  <img class="card-case__thumb" src={thumbUrl} alt="" width="186" height="143"/>
+  <img class="card-case__thumb" src={thumbUrl} alt="" width="192" height="144"/>
   <div class="card-case__tags">
     {
-      jobList?.map((tag) => (<Tag>{tag}</Tag>))
+      tags?.map((tag) => (<Tag>{tag}</Tag>))
     }
   </div>
 </article>
 
 <style is:global>
   .card-case {
+    --color-case-bg: var(--bg-color, hsla(0, 0%, 100%, 0.548));
     --color-border: var(--swatch-neutral-200);
     --stroke: 2px;
     /* --r: clamp(1.0625rem, 0.386rem + 3.3824vw, 2.5rem); */
@@ -46,7 +47,7 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
     scroll-snap-align: center;
     isolation: isolate;
 
-    background-color: inherit;
+    background-color: var(--color-case-bg);
     transition: background-color 500ms ease;
   }
 
@@ -60,8 +61,9 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
   .card-case__heading {
     --f-s: clamp(0.875rem, 0.4044rem + 2.3529vw, 1.875rem);
 
-    grid-column: 1 / 4;
+    grid-column: 1 / -1;
     font-size: var(--f-s);
+    text-wrap: pretty;
   }
 
   .card-case__description {
@@ -74,21 +76,21 @@ const {heading, description, jobList, thumbUrl } = Astro.props as ICaseCard
   }
 
   .card-case__thumb {
-    --rotate: -11deg;
+    --rotate: calc(-1 * var(--image-rotation, 0deg));
 
     grid-column: 2 / 4;
     grid-row: 2 / 4;
     place-self: center;
     width: clamp(11.625rem, 7.2132rem + 22.0588vw, 21rem);
-    aspect-ratio: 5 / 4;
-    background-image: linear-gradient(90deg, violet, pink);
+    aspect-ratio: 1.333;
+    /* background-image: linear-gradient(90deg, violet, pink); */
     rotate: var(--rotate);
     transform: translateX(30%);
     z-index: -1;
   }
 
   .card-case:nth-child(2n) .card-case__thumb {
-    --rotate: 11deg;
+    --rotate: var(--image-rotation, 0deg);
   }
 
   .card-case__tags {
