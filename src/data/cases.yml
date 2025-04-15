@@ -5,6 +5,7 @@
   // thumbUrl: "/images/cases/01.png"
   tags: ["Ведення сторінки", "Дизайн", "Таргет"]
   link: "https://www.instagram.com/blagomayfund/"
+  hint: "instagram Благодiйний Фонд «Благомай»"
 
 - id: case02
   title: "ТАРГЕТ+СТВОРЕННЯ ДОПИСІВ СОЦ МЕРЕЖ “СОС ДИТЯЧІ МІСТЕЧКА УКРАЇНА”"
@@ -12,6 +13,7 @@
   thumbUrl: "../assets/cases/02.png"
   tags: ["Таргет", "Створення дописів", "Дизайн"]
   link: "https://www.instagram.com/sos_cv_ukraine/"
+  hint: "instagram СОС Дитячі Містечка Україна"
 
 - id: case03
   title: "ПРОВЕДЕННЯ СЕРІЇ ONLINE ВЕБІНАРІВ"
@@ -19,6 +21,7 @@
   thumbUrl: "../assets/cases/03.png"
   tags: ["Організація", "Дизайн", "Тех. супровід"]
   link: "https://www.youtube.com/playlist?list=PLCY4teqJXrLcbd2_fqkZTrlah8vm83Y2f"
+  hint: "youtube плейліст проведених вебінарів"
 
 - id: case04
   title: "ПРОМОЦІЯ СЕРІЇ ONLINE ВЕБІНАРІВ"
@@ -26,6 +29,7 @@
   thumbUrl: "../assets/cases/04.png"
   tags: ["Email маркетинг", "Таргет", "Дизайн"]
   link: ""
+  hint: ""
 
 - id: case05
   title: "ВЕДЕННЯ РОЗДІЛУ ПРОЄКТУ НА САЙТІ “СОС ДИТЯЧІ МІСТЕЧКА УКРАЇНА”"
@@ -33,3 +37,4 @@
   thumbUrl: "../assets/cases/05.png"
   tags: ["Підбір контенту", "Копірайтинг", "Адміністрування"]
   link: "https://sos-ukraine.org/grantovi-proyekty/pravo-na-sim-yu-usunennya-systemnyh-progalyn-pidtrymka-reform-systemy-zahystu-ditej-v-albaniyi-bilorusi-virmeniyi-pivnichnij-makedoniyi-ta-ukrayini/"
+  hint: "розділ сайту СОС Дитячі Містечка України"
