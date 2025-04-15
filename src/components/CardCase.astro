@@ -7,7 +7,7 @@ interface Props {
   case: CollectionEntry<'cases'>
 }
 
-const {title, description, tags, thumbUrl } = Astro.props.case.data
+const {title, description, tags, thumbUrl, link, hint } = Astro.props.case.data
 ---
 
 <article style="--image-rotation: -25deg;" class="card-case" tabindex="-1" title={title}>
@@ -21,100 +21,137 @@ const {title, description, tags, thumbUrl } = Astro.props.case.data
         densities={[1.5, 2, 3]}
         format='avif' 
         quality={"low"} />
-  <div class="card-case__tags">{ tags?.map((tag) => (<Tag>{tag}</Tag>)) }</div>
+  <div class="card-case__tags">{tags?.map((tag) => (<Tag>{tag}</Tag>)) }
+  {   link ?
+        <a href={ link } class="card-case__link"
+        title={ hint ? hint : title }
+        target="_blank" rel="noopener noreferrer external">тиць</a>
+        : null
+  }
+  </div>
 </article>
 
 <style is:global>
-  .card-case {
-    --color-case-bg: hsla(259, 53%, 18%, 0.4);
-    --color-border: var(--swatch-neutral-200);
-    --stroke: 1px;
-    --r: clamp(0.75rem, 0.4643rem + 1.4286vw, 1.75rem);
-    --p-b: clamp(0.5rem, 0.2143rem + 1.4286vw, 1.5rem);
-    --p-i: var(--p-b);
-    --w: clamp(13.75rem, 7.5806rem + 23.2258vw, 25rem);
+.card-case {
+  --color-case-bg: hsla(259, 53%, 18%, 0.4);
+  --color-border: var(--swatch-neutral-200);
+  --stroke: 1px;
+  --r: clamp(0.75rem, 0.4643rem + 1.4286vw, 1.75rem);
+  --p-b: clamp(0.5rem, 0.2143rem + 1.4286vw, 1.5rem);
+  --p-i: var(--p-b);
+  --w: clamp(13.75rem, 7.5806rem + 23.2258vw, 25rem);
 
-    grid-row: 1/5;
+  grid-row: 1/5;
 
-    display: grid;
-    grid-template-rows: subgrid;
-    row-gap: 1.75rem;
-    
-    width: var(--w);
-    /* aspect-ratio: 4/5; */
-    padding-block: var(--p-b);
-    padding-inline: var(--p-i);
-    border: 
-            var(--stroke) 
-            solid 
-            var(--color-border);
-    border-radius: var(--r);
-    
-    overflow: hidden;
-    scroll-snap-align: center;
-    isolation: isolate;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 1.75rem;
+  
+  width: var(--w);
+  /* aspect-ratio: 4/5; */
+  padding-block: var(--p-b);
+  padding-inline: var(--p-i);
+  border: 
+          var(--stroke) 
+          solid 
+          var(--color-border);
+  border-radius: var(--r);
+  background-color: var(--color-case-bg);
+  
+  transition: background-color 500ms ease;
+  overflow: hidden;
+  scroll-snap-align: center;
+  isolation: isolate;
+}
 
-    background-color: var(--color-case-bg);
-    transition: background-color 500ms ease;
-  }
+.card-case:hover,
+.card-case:focus,
+.card-case:focus-within,
+.card-case:focus-visible {
+  background-color: var(--color-accent);
+}
 
-  .card-case:hover,
-  .card-case:focus,
-  .card-case:focus-within,
-  .card-case:focus-visible {
-    background-color: var(--color-accent);
-  }
+.card-case__heading {
+  --f-s: clamp(0.75rem, 0.3387rem + 1.5484vw, 1.5rem);
 
-  .card-case__heading {
-    --f-s: clamp(0.75rem, 0.3387rem + 1.5484vw, 1.5rem);
+  grid-column: 1 / 3;
+  grid-row: 1;
+  font-size: var(--f-s);
+  text-wrap: pretty;
+}
 
-    grid-column: 1 / 3;
-    grid-row: 1;
+.card-case__description {
+  --f-s: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
+    grid-row: 2/4;
+    grid-column: 1/3 ;
+
+    max-inline-size: 24ch;
+
     font-size: var(--f-s);
     text-wrap: pretty;
-  }
+}
 
-  .card-case__description {
-    --f-s: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
-      grid-row: 2/4;
-      grid-column: 1/3 ;
+.card-case__thumb {
+  --rotate: calc(-1 * var(--image-rotation, 0deg));
 
-      max-inline-size: 24ch;
+  grid-column: 1 / 3;
+  grid-row: 1 / 5;
+  align-self: center;
+  justify-self: end;
+  width: clamp(11.625rem, 7.2132rem + 22.0588vw, 21rem);
+  aspect-ratio: 1.333;
+  mask-image: linear-gradient(90deg, transparent, white 60%, white 60%, transparent);
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  transform: 
+              translateX(30%) 
+              rotateZ(var(--rotate));
+  transform-origin: center ;
+  z-index: -1;
+  
+}
 
-      font-size: var(--f-s);
-      text-wrap: pretty;
-  }
+.card-case:nth-child(2n) .card-case__thumb {
+  --rotate: var(--image-rotation, 0deg);
+}
 
-  .card-case__thumb {
-    --rotate: calc(-1 * var(--image-rotation, 0deg));
-
-    grid-column: 1 / 3;
-    grid-row: 1 / 5;
-    align-self: center;
-    justify-self: end;
-    width: clamp(11.625rem, 7.2132rem + 22.0588vw, 21rem);
-    aspect-ratio: 1.333;
-    mask-image: linear-gradient(90deg, transparent, white 60%, white 60%, transparent);
-    mask-size: 100%;
-    mask-repeat: no-repeat;
-    transform: 
-                translateX(30%) 
-                rotateZ(var(--rotate));
-    transform-origin: center ;
-    z-index: -1;
-    
-  }
-
-  .card-case:nth-child(2n) .card-case__thumb {
-    --rotate: var(--image-rotation, 0deg);
-  }
-
-  .card-case__tags {
+.card-case__tags {
   grid-column: 1 / 3;
   grid-row: 4 / 5;
-  place-items: start;
+  align-self: end;
+
   display: flex;
   flex-wrap: wrap;
   gap: clamp(0.25rem, 0.0444rem + 0.7742vw, 0.625rem);
+}
+
+.card-case__link {
+  --f-s: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
+  --color: #b3b3b3;
+  --stroke: 1px;
+    margin-inline-start: auto;
+
+    display: inline-block;
+    padding-block: clamp(0.25rem, 0.0735rem + 0.8824vw, 0.625rem);
+    padding-inline: clamp(0.5625rem, 0.2096rem + 1.7647vw, 1.3125rem);
+    color: var(--color);
+    font-size: var(--f-s);
+    border: var(--stroke) solid var(--color);
+    background-color: hsla(259, 63%, 28%, 0.6);
+    border-radius: 3rem;
+    text-decoration: underline 1px;
+    line-height: 1.2;
+    text-underline-offset: 0.15em;
+    transition: 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.card-case__link:is(:hover, :focus) {
+  color: rgba(255, 255, 255, 0.945);
+  border-color: rgba(255, 255, 255, 0.945);
+}
+
+.card-case__link:focus-visible {
+  outline: 1px solid white;
+  outline-offset: .175em;
 }
 </style>
