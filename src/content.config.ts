@@ -14,7 +14,7 @@ const cases = defineCollection({
     }),
 });
 
-const team = defineCollection({
+const mates = defineCollection({
   loader: file("src/data/team.yml"),
   schema: ({ image }) =>
     z.object({
@@ -23,12 +23,9 @@ const team = defineCollection({
       image: image(),
       extra: z.object({
         info: z.string().min(2).max(100),
-        exp: z.string().min(5).max(100).optional(),
+        exp: z.string().max(100).optional(),
       }),
     }),
 });
 
-export const collections = {
-  cases,
-  team,
-};
+export const collections = { cases, mates };

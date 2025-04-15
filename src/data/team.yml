@@ -8,19 +8,11 @@
 
 - id: teammate02
   fullname: "Белла"
-  position: "Co-founder, Project-manager"
+  position: "Co-founder, Project Manager"
   image: "../assets/team/bella.png"
   extra:
     info: Перетворює бачення в проєкти, а ідеї — в реальність.
-    exp: 7+ років досвіду, працювала з ATLAS WEEKEND, M1 MUSIC AWARDS, (Чорноморські ігри.)
-
-- id: teammate03
-  fullname: "Сніжана"
-  position: "UI/UX, Graphic Designer"
-  image: "../assets/team/snizhana.png"
-  extra:
-    info: Поєднує креативний дизайн і зручність використання.
-    exp: 4+ років досвіду, запустила свій курс по WEB дизайну
+    exp: 7+ років досвіду, ATLAS WEEKEND, M1 MUSIC AWARDS, Чорноморські ігри.
 
 - id: teammate04
   fullname: "Вікторія"
@@ -28,7 +20,7 @@
   image: "../assets/team/vika.png"
   extra:
     info: Перетворює слова на довіру, історії — на впізнаваність, а комунікації — на міцні зв’язки.
-    exp: Працювала з українським телеканалом, соц. проєктами та відомим ювелірним брендом.
+    # exp: Працювала з українським телеканалом, соц. проєктами та відомим ювелірним брендом.
 
 - id: teammate05
   fullname: "Владислав"
@@ -37,6 +29,14 @@
   extra:
     info: За його об’єктивом — більшість українських зірок та наймасштабніші шоу України.
     exp: ""
+
+- id: teammate03
+  fullname: "Сніжана"
+  position: "UI/UX, Graphic Designer"
+  image: "../assets/team/snizhana.png"
+  extra:
+    info: Поєднує креативний дизайн і зручність використання.
+    exp: 4+ років досвіду, WEB дизайн, поліграфія.
 
 - id: teammate06
   fullname: "Ксенія"
