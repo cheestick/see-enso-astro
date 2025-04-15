@@ -1,10 +1,7 @@
 ---
 import TeamList from './TeamList.astro';
-import config from '@data/config';
-
-const { team } = config
-
 ---
+
 <section id="team" class="team">
   <div class="team__container container">
     <h2 class="section__heading team__heading">
@@ -12,7 +9,7 @@ const { team } = config
       <span class="line second">будує сильна <span class="accent">команда</span></span>
     </h2>
     
-    <TeamList list={team}/>
+    <TeamList />
   </div>
 </section>
 
