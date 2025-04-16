@@ -26,8 +26,10 @@ const alt = `${fullname}, ${position}`
   <figcaption class="card__caption">
     <h3 class="card__name">{fullname}</h3>
     <p class="card__position">{position}</p>
-    { extra?.info && <p class="card__extra info">{extra.info}</p>}
-    { extra?.exp && <p class="card__extra exp">{extra.exp}</p> }
+    <div class="card__extra">
+      { extra?.info && <p class="info">{extra.info}</p>}
+      { extra?.exp && <p class="exp">{extra.exp}</p> }
+    </div>
   </figcaption>
 </figure>
 
@@ -130,8 +132,12 @@ const alt = `${fullname}, ${position}`
 
 .card__extra {
   margin-block-start: .5em;
-  text-wrap: balance;
+  text-wrap: pretty;
   opacity: .5;
+}
+
+.card__extra > * + * {
+  margin-block-start: .5em;
 }
 
 @media screen and (width > 48em) {
