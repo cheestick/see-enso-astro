@@ -26,8 +26,10 @@ const alt = `${fullname}, ${position}`
   <figcaption class="card__caption">
     <h3 class="card__name">{fullname}</h3>
     <p class="card__position">{position}</p>
-    { extra?.info && <p class="card__extra info">{extra.info}</p>}
-    { extra?.exp && <p class="card__extra exp">{extra.exp}</p> }
+    <div class="card__extra">
+      { extra?.info && <p class="info">{extra.info}</p>}
+      { extra?.exp && <p class="exp">{extra.exp}</p> }
+    </div>
   </figcaption>
 </figure>
 
@@ -45,20 +47,20 @@ const alt = `${fullname}, ${position}`
 }
 
 .team__card { 
-    grid-row: span 5;
+    grid-row: span 4;
     display: grid;
     grid-template-rows: subgrid;
     isolation: isolate;
 }
 
 .card__picture { grid-row: span 1; }
-.card__caption { grid-row: span 4; }
+.card__caption { grid-row: span 3; }
 
 
 .card__picture {
   display: grid;
   grid-template-areas: 'avatar';
-  width: 90%;
+  max-inline-size: 90%;
   margin-inline: auto;
 
   @media (width < 24.5em) {
@@ -105,7 +107,7 @@ const alt = `${fullname}, ${position}`
     margin-block-start: 1em;
 
     @media (width < 24.5em) {
-      padding-inline: 1.125em;
+      margin-inline-start: 1.75em;
     }
 }
 .card__name {
@@ -130,18 +132,22 @@ const alt = `${fullname}, ${position}`
 
 .card__extra {
   margin-block-start: .5em;
-  text-wrap: balance;
+  text-wrap: pretty;
   opacity: .5;
 }
 
-@media screen and (width > 48em) {
-.card__name {
-  --f-size: var(--typo-size-600);
+.card__extra > * + * {
+  margin-block-start: .5em;
 }
 
-.card__position {
-  --f-size: var(--typo-size-400);
-}
+@media screen and (width > 48em) {
+  .card__name {
+    --f-size: var(--typo-size-600);
+  }
+
+  .card__position {
+    --f-size: var(--typo-size-400);
+  }
 }
 
 @keyframes hidSpinning {
