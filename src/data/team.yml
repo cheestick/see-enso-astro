@@ -1,6 +1,6 @@
 - id: teammate01
   fullname: "Роман"
-  position: "Co-founder, CEO"
+  position: "Co-Founder, CEO"
   image: "../assets/team/roma.png"
   extra:
     info: Формує стратегію, надихає команду та реалізує ключові цілі бізнесу.
@@ -8,13 +8,13 @@
 
 - id: teammate02
   fullname: "Белла"
-  position: "Co-founder, Project Manager"
+  position: "Co-Founder, Project Manager"
   image: "../assets/team/bella.png"
   extra:
     info: Перетворює бачення в проєкти, а ідеї — в реальність.
     exp: 7+ років досвіду, ATLAS WEEKEND, M1 MUSIC AWARDS, Чорноморські ігри.
 
-- id: teammate04
+- id: teammate03
   fullname: "Вікторія"
   position: "Communications Manager"
   image: "../assets/team/vika.png"
@@ -22,7 +22,7 @@
     info: Перетворює слова на довіру, історії — на впізнаваність, а комунікації — на міцні зв’язки.
     # exp: Працювала з українським телеканалом, соц. проєктами та відомим ювелірним брендом.
 
-- id: teammate05
+- id: teammate04
   fullname: "Владислав"
   position: "Director of Photography"
   image: "../assets/team/vlad.png"
@@ -30,7 +30,7 @@
     info: За його об’єктивом — більшість українських зірок та наймасштабніші шоу України.
     exp: ""
 
-- id: teammate03
+- id: teammate05
   fullname: "Сніжана"
   position: "UI/UX, Graphic Designer"
   image: "../assets/team/snizhana.png"
