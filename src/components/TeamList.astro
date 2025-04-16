@@ -16,10 +16,12 @@ const mates = await getCollection('mates')
 <style is:global>
 .team__list {
   --mbs: 0.75rem;
+  --item-min-inline-size: clamp(180px, 20vw, 300px);
+  --item-responsive-inline-size: minmax(var(--item-min-inline-size), 1fr);
     margin-block-start: var(--mbs, 0);
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 300px), 1fr));
+    grid-template-columns: repeat(auto-fit, var(--item-responsive-inline-size));
     column-gap: 1em;
 }
 
@@ -29,9 +31,19 @@ const mates = await getCollection('mates')
   grid-template-rows: subgrid;
   margin-block-start: 2em;
   transition: all 550ms ease-in-out;
+
+}
+@media (width >= 49.875rem) {
+  .team__item:nth-last-of-type(-n + 2):not(:last-child) {
+    grid-column-start: 2;
+  }
+
+  .team__item:last-child {
+    grid-column-start: 3;
+  }
 }
 
-    .team__list:has(:focus-visible) .team__item:not(:focus-visible),
+  .team__list:has(:focus-visible) .team__item:not(:focus-visible),
   .team__list:has(:hover) .team__item:not(:hover) {
     filter: brightness(.4);
   }
