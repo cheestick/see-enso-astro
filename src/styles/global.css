@@ -1,6 +1,7 @@
 html {
   scrollbar-color: var(--swatch-purple-650) rgba(0 0 0 / 0);
   scrollbar-width: thin;
+  color-scheme: dark;
 }
 
 body {
