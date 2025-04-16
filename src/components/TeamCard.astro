@@ -58,7 +58,7 @@ const alt = `${fullname}, ${position}`
 .card__picture {
   display: grid;
   grid-template-areas: 'avatar';
-  width: 90%;
+  max-inline-size: 90%;
   margin-inline: auto;
 
   @media (width < 24.5em) {
@@ -105,7 +105,7 @@ const alt = `${fullname}, ${position}`
     margin-block-start: 1em;
 
     @media (width < 24.5em) {
-      padding-inline: 1.125em;
+      margin-inline-start: 1.75em;
     }
 }
 .card__name {
