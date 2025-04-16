@@ -14,6 +14,18 @@ const cases = defineCollection({
     }),
 });
 
-export const collections = {
-  cases,
-};
+const mates = defineCollection({
+  loader: file("src/data/team.yml"),
+  schema: ({ image }) =>
+    z.object({
+      fullname: z.string().min(2).max(30),
+      position: z.string().min(2).max(30),
+      image: image(),
+      extra: z.object({
+        info: z.string().min(2).max(100),
+        exp: z.string().max(100).optional(),
+      }),
+    }),
+});
+
+export const collections = { cases, mates };

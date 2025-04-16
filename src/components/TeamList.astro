@@ -1,63 +1,61 @@
 ---
-import type { ITeamCard } from '@data/team';
+import { getCollection } from 'astro:content';
 import TeamCard from './TeamCard.astro';
 
-interface Props {
-  list: ITeamCard[]
-}
-
-const { list } = Astro.props
+const mates = await getCollection('mates')
 ---
 
 <ul class="team__list">
-  {list.map(({fullname, position, imageFilename}, index) => (
+  {mates.map((mate, index) => (
     <li class="team__item">
-      <TeamCard {fullname} {position} {imageFilename} startAngle={`${index*90}deg`}/>
+      <TeamCard mate={mate} startAngle={`${index*90}deg`}/>
     </li>
   ))}
 </ul>
 
- <style is:global>
-  .team__list {
-    --mbs: 2.75rem;
+<style is:global>
+.team__list {
+  --mbs: 0.75rem;
+    margin-block-start: var(--mbs, 0);
 
-    display: flex;
-    flex-basis: 0;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    gap: 1rem;
-    margin-block-start: var(--mbs);
-  }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 300px), 1fr));
+    column-gap: 1em;
+}
 
-  .team__item {
-    transition: all 550ms ease-in-out;
-  }
-  .team__list:has(:focus-visible) .team__item:not(:focus-visible),
-  .team__list:has(:hover) .team__item:not(:hover) {
-    filter: brightness(.4);
-  }
+.team__item {
+  grid-row: span 5;
+  display: grid;
+  grid-template-rows: subgrid;
+  margin-block-start: 2em;
+  transition: all 550ms ease-in-out;
+}
+.team__list:has(:focus-visible) .team__item:not(:focus-visible),
+.team__list:has(:hover) .team__item:not(:hover) {
+  filter: brightness(.4);
+}
 
-  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture,
-  .team__list:has(:hover) .team__item:not(:hover) .card__picture {
-    filter: grayscale(1);
-  }
+.team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture,
+.team__list:has(:hover) .team__item:not(:hover) .card__picture {
+  filter: grayscale(1);
+}
 
-  /* .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::before ,
-  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::after ,
-  .team__list:has(:hover)  .card__picture::before,
-  .team__list:has(:hover)  .card__picture::after {
-    animation-duration: 15s;
-  } */
-  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::before ,
-  .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::after ,
-  .team__list:has(:hover) .team__item:not(:hover) .card__picture::before,
-  .team__list:has(:hover) .team__item:not(:hover) .card__picture::after {
-    animation-play-state: paused;
-  }
+/* .team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::before ,
+.team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::after ,
+.team__list:has(:hover)  .card__picture::before,
+.team__list:has(:hover)  .card__picture::after {
+  animation-duration: 15s;
+} */
+.team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::before ,
+.team__list:has(:focus-visible) .team__item:not(:focus-visible) .card__picture::after ,
+.team__list:has(:hover) .team__item:not(:hover) .card__picture::before,
+.team__list:has(:hover) .team__item:not(:hover) .card__picture::after {
+  animation-play-state: paused;
+}
 
 @media screen and (width > 48rem) {
-  .team__list {
-    --mbs: 5.75rem;
-  }
+.team__list {
+  --mbs: 3.75rem;
 }
- </style>
+}
+</style>
