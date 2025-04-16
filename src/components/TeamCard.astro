@@ -26,8 +26,8 @@ const alt = `${fullname}, ${position}`
   <figcaption class="card__caption">
     <h3 class="card__name">{fullname}</h3>
     <p class="card__position">{position}</p>
-    { extra?.info && <p class="card__extra">{extra.info}</p>}
-    { extra?.exp && <p class="card__extra">{extra.exp}</p> }
+    { extra?.info && <p class="card__extra info">{extra.info}</p>}
+    { extra?.exp && <p class="card__extra exp">{extra.exp}</p> }
   </figcaption>
 </figure>
 
@@ -44,10 +44,26 @@ const alt = `${fullname}, ${position}`
   initial-value: 0deg;
 }
 
+.team__card { 
+    grid-row: span 5;
+    display: grid;
+    grid-template-rows: subgrid;
+    isolation: isolate;
+}
+
+.card__picture { grid-row: span 1; }
+.card__caption { grid-row: span 4; }
+
+
 .card__picture {
   display: grid;
   grid-template-areas: 'avatar';
-  width: fit-content;
+  width: 90%;
+  margin-inline: auto;
+
+  @media (width < 24.5em) {
+    max-inline-size: 50%;
+  }
 }
 
 .card__picture::before,
@@ -62,7 +78,6 @@ const alt = `${fullname}, ${position}`
     scale(var(--s-factor, 1)) 
     rotateZ(var(--r-factor, 0deg));
   animation: hidSpinning 100s infinite linear alternate;
-  /* animation-timeline: view(); */
 }
 
 .card__picture::before {
@@ -77,26 +92,28 @@ const alt = `${fullname}, ${position}`
     background-image: url('/images/team/hid-outer-opt.svg');
 }
 
-.card__picture:hover .picture__image {
-  /* transform: scale(1.1); */
-}
-
 .picture__image {
-  grid-area: avatar;
-  width: clamp(140px, 20vw , 300px);
-  aspect-ratio: 1;
-  border-radius: 100%;
-  transition: all 350ms ease;
+    grid-area: avatar;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    transition: all 350ms ease;
 }
 
 .card__caption {
-  margin-block-start: 1rem;
+    display: grid;
+    grid-template-rows: subgrid;
+    margin-block-start: 1em;
+
+    @media (width < 24.5em) {
+      padding-inline: 1.125em;
+    }
 }
 .card__name {
   --f-size: var(--typo-size-300);
   --f-weight: 400;
     font-size: var(--f-size, 1rem);
     font-weight: var(--f-weight);
+    text-wrap: balance;
 }
 
 .card__position, 
@@ -107,22 +124,14 @@ const alt = `${fullname}, ${position}`
     color: var(--text-color);
     font-size: var(--f-size);
     line-height: var(--f-line);
-    max-inline-size: 20ch;
     text-wrap: balance;
-    margin-block-start: .35em;
+    margin-block-start: .25em;
 }
 
 .card__extra {
-  /* max-inline-size: 25ch; */
-  /* max-inline-size: clamp(8.75rem, 3.2661rem + 20.6452vw, 18.75rem); */
-  /* max-inline-size: clamp(8.125rem, 3.6761rem + 16.7488vw, 18.75rem); */
-  max-inline-size: clamp(9.375rem, 5.4495rem + 14.7783vw, 18.75rem);
-  text-wrap: pretty;
+  margin-block-start: .5em;
+  text-wrap: balance;
   opacity: .5;
-
-  @media (width <= 20rem) {
-    max-inline-size: 35ch;
-  }
 }
 
 @media screen and (width > 48em) {

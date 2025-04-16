@@ -15,17 +15,19 @@ const mates = await getCollection('mates')
 
 <style is:global>
 .team__list {
-  --mbs: 2.75rem;
+  --mbs: 0.75rem;
+    margin-block-start: var(--mbs, 0);
 
-  display: flex;
-  flex-basis: 0;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 2em 1em;
-  margin-block-start: var(--mbs);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 300px), 1fr));
+    column-gap: 1em;
 }
 
 .team__item {
+  grid-row: span 5;
+  display: grid;
+  grid-template-rows: subgrid;
+  margin-block-start: 2em;
   transition: all 550ms ease-in-out;
 }
 .team__list:has(:focus-visible) .team__item:not(:focus-visible),
@@ -53,7 +55,7 @@ const mates = await getCollection('mates')
 
 @media screen and (width > 48rem) {
 .team__list {
-  --mbs: 5.75rem;
+  --mbs: 3.75rem;
 }
 }
 </style>

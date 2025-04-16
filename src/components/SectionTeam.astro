@@ -15,32 +15,20 @@ import TeamList from './TeamList.astro';
 
 <style is:global>
   .team {
-    /* height: 100vh; */
-    /* height: 100dvh; */
     overflow: hidden;
   }
 
-  
   .team__container {
     margin-block-start: var(--section-interval);
-    display: flex;
-    flex-direction: column;
     height: 100%;
-    justify-content: start;
   }
 
   .team__heading { 
     place-content: center;
-    /* grid-template-areas: 
-      'line-one'
-      'line-two'; */
-  }
-  .line.first {
-    /* grid-area: line-one; */
   }
 
+
   .line.second {
-    /* grid-area: line-two; */
     margin-inline-start: min(12vw, 7ch);
   }
 </style>
