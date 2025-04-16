@@ -15,7 +15,7 @@ const mates = await getCollection('mates')
 
 <style is:global>
 .team__list {
-  --mbs: 0.75rem;
+  --mbs: 0;
   --item-min-inline-size: clamp(180px, 20vw, 300px);
   --item-responsive-inline-size: minmax(var(--item-min-inline-size), 1fr);
     margin-block-start: var(--mbs, 0);
@@ -29,7 +29,7 @@ const mates = await getCollection('mates')
   grid-row: span 4;
   display: grid;
   grid-template-rows: subgrid;
-  margin-block-start: 2em;
+  margin-block-start: clamp(2.75rem, 2.0405rem + 2.6711vw, 3.75rem);
   transition: all 550ms ease-in-out;
 
 }
@@ -68,7 +68,7 @@ const mates = await getCollection('mates')
 
 @media screen and (width > 48rem) {
   .team__list {
-    --mbs: 3.75rem;
+    --mbs: 2rem;
   }
 }
 </style>
