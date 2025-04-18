@@ -2,11 +2,11 @@
 
 ---
 
-<form class="form feedback-form" autocomplete="off">
+<form name="contact-us" class="form feedback-form" method="POST" autocomplete="off">
     <input 
         class="field"
         type="text"
-        name="fullname"
+        name="Fullname"
         placeholder="Ім'я"
         minlength="1"
         maxlength="30"
@@ -14,7 +14,8 @@
     <input 
         class="field"
         type="tel"
-        name="phone"
+        inputmode="numeric"
+        name="Phone"
         placeholder="Номер телефону"
         minlength="5"
         maxlength="20"
@@ -22,14 +23,15 @@
     <input
         class="field"
         type="email"
-        name="email"
+        name="Email"
+        inputmode="email"
         placeholder="Електронна пошта"
         minlength="5"
         maxlength="50"
         required/>
     <textarea
         class="field"
-        name="message"
+        name="Message"
         rows="5"
         placeholder="Ваше запитання"
         minlength="10"
@@ -40,7 +42,19 @@
 </form>
 
 <script>
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyNjsJnOzYJQZEySi2dbIlCAEMHtxJ_VsxCfxOP2O_wHUGKmpMQFE9-E6nrg2vEQCcbtQ/exec'
 
+const contactForm: HTMLFormElement = document.forms["contact-us"]
+console.log(document.forms);
+
+
+contactForm?.addEventListener('submit', e => {
+  e.preventDefault()
+  fetch(scriptURL, { method: 'POST', body: new FormData(contactForm)})
+    .then(response => alert("Thank you! Form is submitted" ))
+    .then(() => { contactForm.reset() })
+    .catch(error => console.error('Error!', error.message))
+})
 </script>
 
 <style>
