@@ -5,16 +5,17 @@ import '@styles/vars.css'
 import '@styles/global.css'
 import '@styles/utility.css'
 import Footer from '@components/Footer.astro'
+import Meta from '@components/head/Meta.astro'
 
 const {title} = Astro.props
 ---
 
 <html lang="uk">
 	<head>
-		<meta charset="utf-8" />
+    <Meta />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
+    <link rel="manifest" href="/site.webmanifest" />
 		<title>{title}</title>
 	</head>
 	<body>
