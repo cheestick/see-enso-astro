@@ -3,8 +3,8 @@
   thumbnail: ../assets/services/smm.png
   variation:
     - v: FB Inst TikTok LinkedIn
-      price:
-      duration:
+      price: ""
+      duration: ""
     - v: Розробка SMM-стратегії
       price: від 780$
       duration: від 10 днів
