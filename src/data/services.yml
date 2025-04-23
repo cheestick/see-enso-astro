@@ -1,9 +1,9 @@
 - id: service-smm
   title: SMM
-  previewUrl: /images/services/smm.png
+  thumbnail: ../assets/services/smm.png
   variation:
     - v: FB Inst TikTok LinkedIn
-      price: 0
+      price:
       duration:
     - v: Розробка SMM-стратегії
       price: від 780$
@@ -20,7 +20,7 @@
 
 - id: service-target
   title: ТАРГЕТ ТА PPC
-  previewUrl: /images/services/advertising.png
+  thumbnail: ../assets/services/advertising.png
   variation:
     - v: Таргетована реклама
       price: від 200$
@@ -40,7 +40,7 @@
 
 - id: service-design
   title: ГРАФІЧНИЙ ДИЗАЙН
-  previewUrl: /images/services/design.png
+  thumbnail: ../assets/services/design.png
   variation:
     - v: Логотип
       price: від 150$
@@ -63,7 +63,7 @@
 
 - id: service-web
   title: РОЗРОБКА САЙТІВ
-  previewUrl: /images/services/websites.png
+  thumbnail: ../assets/services/websites.png
   variation:
     - v: Лендинг
       price: від 700$
@@ -86,7 +86,7 @@
 
 - id: service-preproduction
   title: ПРЕПРОДАКШН
-  previewUrl: /images/services/preproduction.png
+  thumbnail: ../assets/services/preproduction.png
   variation:
     - v: Розробка ідеї концепції
       price: від 130$
@@ -103,7 +103,7 @@
 
 - id: service-production
   title: ПРОДАКШН
-  previewUrl: /images/services/production.png
+  thumbnail: ../assets/services/production.png
   variation:
     - v: Відео для бізнесу
       price: від 750$
@@ -126,7 +126,7 @@
 
 - id: service-postproduction
   title: ПОСТПРОДАКШН
-  previewUrl: /images/services/postproduction.png
+  thumbnail: ../assets/services/postproduction.png
   variation:
     - v: Анімація та 3D рендери
       price: від 100$
@@ -149,7 +149,7 @@
 
 - id: service-photo
   title: ФОТОЗЙОМКИ
-  previewUrl: /images/services/photo.png
+  thumbnail: ../assets/services/photo.png
   variation:
     - v: Студійні фото
       price: від 300$
@@ -169,7 +169,7 @@
 
 - id: service-pr
   title: PR та комунікація
-  previewUrl: /images/services/pr.png
+  thumbnail: ../assets/services/pr.png
   variation:
     - v: Комунікаційні стратегії
       price: від 250$
