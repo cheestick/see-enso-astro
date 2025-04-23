@@ -1,44 +1,43 @@
 ---
-/* @jsxImportSource astro */
-import type { ISEService } from '@data/services';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  service: ISEService;
+  service: CollectionEntry<'services'>;
   idx: number;
 }
 
 const {service, idx} = Astro.props
-const tabDetailsIdx = String(idx + 1).padStart(2,"0")
-const {duration, price, previewUrl, variation} = service
+const {thumbnail, variation} = service.data
 const detailsCount = variation.length
+const tabDetailsIdx = String(idx + 1).padStart(2,"0")
 const firstElmentDelay = 80
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
     <div class="details__info-group">
         <ol class="details__list">
-            { variation?.map(({v, extra}, idx) => (
+            { variation?.map(({v, price, duration}, idx) => (
                   <li class="list__item" style={`--animation-delay: ${firstElmentDelay*idx}ms`}>
-                      <span class="main">{v}</span>{/* {extra && <span class="extra">{extra}</span>} */}
+                      <span class="main" data-servic-price={price || ""} data-service-duration={duration || ""}>{v}</span>
                   </li>
               ))
             }
         </ol>
 
         <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
-            <span>від {price}$</span>
+            <span data-variant-price></span>
         </div>
 
         <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
-            <span>{duration} днів</span>
+            <span data-variant-duration></span>
         </div>
     </div>
 
     <picture class="service__thumb">
         <img 
             class="thumb__image" 
-            src={previewUrl}
-            alt="photography"/>
+            src={thumbnail.src}
+            alt=""/>
     </picture>
 </div>
 
@@ -121,6 +120,7 @@ const firstElmentDelay = 80
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-inline-size: 8ch;
     aspect-ratio: 1;
     padding-inline: 1.25em;
     background-color: var(--swatch-neutral-900);
