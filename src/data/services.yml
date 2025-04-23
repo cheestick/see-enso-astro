@@ -1,0 +1,188 @@
+- id: service-smm
+  title: SMM
+  previewUrl: /images/services/smm.png
+  variation:
+    - v: FB Inst TikTok LinkedIn
+      price: 0
+      duration:
+    - v: Розробка SMM-стратегії
+      price: від 780$
+      duration: від 10 днів
+    - v: Створення контенту
+      price: від 200$
+      duration: від 1 дня
+    - v: Ведення соцмереж
+      price: від 800$
+      duration: від 22 днів
+    - v: Або все це “під ключ”
+      price: від 1000$
+      duration: від 22 днів
+
+- id: service-target
+  title: ТАРГЕТ ТА PPC
+  previewUrl: /images/services/advertising.png
+  variation:
+    - v: Таргетована реклама
+      price: від 200$
+      duration: від 10 днів
+    - v: Контекстна реклама
+      price: від 400$
+      duration: від 10 днів
+    - v: Розробка креативів
+      price: від 15$
+      duration: від 2 днів
+    - v: Запуск та оптимізація
+      price: від 450$
+      duration: від 22 днів
+    - v: Аналітика РК
+      price: від 100$
+      duration: від 3 днів
+
+- id: service-design
+  title: ГРАФІЧНИЙ ДИЗАЙН
+  previewUrl: /images/services/design.png
+  variation:
+    - v: Логотип
+      price: від 150$
+      duration: від 5 днів
+    - v: Фірмовий стиль брендбук
+      price: від 350$
+      duration: від 10 днів
+    - v: Дизайн-система для Instagram
+      price: від 260$
+      duration: від 5 днів
+    - v: Брендинг дизайн продукту
+      price: від 75$
+      duration: від 3 днів
+    - v: Банери пости презентації
+      price: від 75$
+      duration: від 2 днів
+    - v: Друкована продукція
+      price: від 50$
+      duration: від 3 днів
+
+- id: service-web
+  title: РОЗРОБКА САЙТІВ
+  previewUrl: /images/services/websites.png
+  variation:
+    - v: Лендинг
+      price: від 700$
+      duration: від 15 днів
+    - v: UX/UA Дизайн
+      price: від 400$
+      duration: від 10 днів
+    - v: Корпоративні сайти
+      price: від 1700$
+      duration: від 44 днів
+    - v: Адаптивна верстка
+      price: від 1000$
+      duration: від 22 днів
+    - v: Адміністрування
+      price: від 500$
+      duration: від 22 днів
+    - v: Тех підтримка
+      price: від 600$
+      duration: від 2 днів
+
+- id: service-preproduction
+  title: ПРЕПРОДАКШН
+  previewUrl: /images/services/preproduction.png
+  variation:
+    - v: Розробка ідеї концепції
+      price: від 130$
+      duration: від 2 днів
+    - v: Сценарії для відео
+      price: від 200$
+      duration: від 3 днів
+    - v: Пошук акторів локацій
+      price: від 100$
+      duration: від 4 днів
+    - v: Організація знімального процесу
+      price: від 150$
+      duration: від 2 днів
+
+- id: service-production
+  title: ПРОДАКШН
+  previewUrl: /images/services/production.png
+  variation:
+    - v: Відео для бізнесу
+      price: від 750$
+      duration: від 1 дня
+    - v: Кліпи реклама промо
+      price: від 1500$
+      duration: від 2 днів
+    - v: Контент для соцмереж
+      price: від 500$
+      duration: від 1 дня
+    - v: Звітні відео (подія/захід)
+      price: від 500$
+      duration: від 1 дня
+    - v: Трансляції (прямі ефіри)
+      price: від 800$
+      duration: від 1 дня
+    - v: Подкасти “під ключ”
+      price: від 1000$
+      duration: від 1 дня
+
+- id: service-postproduction
+  title: ПОСТПРОДАКШН
+  previewUrl: /images/services/postproduction.png
+  variation:
+    - v: Анімація та 3D рендери
+      price: від 100$
+      duration: за 1сек.
+    - v: Монтаж відео. Від TikTok до кіно
+      price: від 50$
+      duration: за 1хв.
+    - v: Переклад. EN DE PL
+      price: від 20$
+      duration: за 1к.симв.
+    - v: Кольорокорекція
+      price: від 55$
+      duration: за 1хв.
+    - v: Робота зі звуком
+      price: від 45$
+      duration: за 1хв.
+    - v: Аудіодубляж
+      price: від 25$
+      duration: за 1сек.
+
+- id: service-photo
+  title: ФОТОЗЙОМКИ
+  previewUrl: /images/services/photo.png
+  variation:
+    - v: Студійні фото
+      price: від 300$
+      duration: від 2 днів
+    - v: Предметна зйомка
+      price: від 300$
+      duration: від 2 днів
+    - v: Промо- та рекламні фото
+      price: від 500$
+      duration: від 3 днів
+    - v: Репортажна зйомка
+      price: від 300$
+      duration: від 1 дня
+    - v: Бізнес портрет
+      price: від 350$
+      duration: від 3 днів
+
+- id: service-pr
+  title: PR та комунікація
+  previewUrl: /images/services/pr.png
+  variation:
+    - v: Комунікаційні стратегії
+      price: від 250$
+      duration: від 10 днів
+    - v: Робота зі ЗМІ
+      price: від 150$
+      duration: від 5 днів
+    - v: PR брендів та заходів
+      price: від 600$
+      duration: від 14 днів
+    - v: Супровід проєктів
+      price: від 900$
+      duration: від 22 днів
+    - v: Все під ключ
+      price: від 1500$
+      duration: від 22 днів
