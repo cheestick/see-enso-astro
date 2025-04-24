@@ -15,22 +15,27 @@ const firstElmentDelay = 80
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
-    <div class="details__info-group">
+    <div class="details__info-group" data-service-group={tabDetailsIdx}>
         <ol class="details__list">
             { variation?.map(({v, price, duration}, idx) => (
-                  <li class="list__item" style={`--animation-delay: ${firstElmentDelay*idx}ms`}>
-                      <span class="main" data-servic-price={price || ""} data-service-duration={duration || ""}>{v}</span>
+                  <li class="list__item"
+                      style={`--animation-delay: ${firstElmentDelay*idx}ms`}
+                      data-service-variant
+                      data-service-price={price || ""}
+                      data-service-duration={duration || ""}>
+                    {v}
+                      {/* <span class="main">{v}</span> */}
                   </li>
               ))
             }
         </ol>
 
         <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
-            <span data-variant-price></span>
+          <span data-variant-price></span>
         </div>
 
         <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
-            <span data-variant-duration></span>
+          <span data-variant-duration></span>
         </div>
     </div>
 
@@ -45,6 +50,28 @@ const firstElmentDelay = 80
             pictureAttributes={{class: "service__thumb"}}
             />
 </div>
+
+<script>
+  const serviceDetailsElements = document.querySelectorAll('[data-service-group]')
+
+  function onServiceDetailsHover({target, currentTarget}: Event) {
+    if (!(target as HTMLElement)?.hasAttribute('data-service-variant')) return;
+    let hoveredElement = target as HTMLElement
+    (currentTarget as HTMLElement).querySelector('[data-variant-price]')!.innerText = hoveredElement.dataset.servicePrice;
+    (currentTarget as HTMLElement).querySelector('[data-variant-duration]')!.innerText = hoveredElement.dataset.serviceDuration;
+  }
+
+  function onServiceDetailsLeave({currentTarget}: Event) {
+    (currentTarget as HTMLElement).querySelector('[data-variant-price]')!.innerText = "";
+    (currentTarget as HTMLElement).querySelector('[data-variant-duration]')!.innerText = "";
+  }
+
+  serviceDetailsElements.forEach(el => {
+    el.addEventListener('pointerover', onServiceDetailsHover)
+    el.addEventListener('mouseleave', onServiceDetailsLeave)
+  })
+  
+</script>
 
 <style is:global>
   .service__details {
@@ -131,12 +158,15 @@ const firstElmentDelay = 80
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-inline-size: 8ch;
+    min-inline-size: 11ch;
+    /* max-inline-size: 12ch; */
     aspect-ratio: 1;
     padding-inline: 1.25em;
     background-color: var(--swatch-neutral-900);
     border-radius: 100%;
     box-shadow: var(--shadow-small);
+    text-wrap: balance;
+    text-align: center;
   }
 
   .service__price {
