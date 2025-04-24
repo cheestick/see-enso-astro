@@ -45,18 +45,6 @@ const services = await getCollection('services')
   </div>
 </section>
 
-<script>
-  const serviceTabListElement = document.querySelector<HTMLDivElement>('div[data-service-tab-list]')
-  const servicesRadioElementList = serviceTabListElement?.querySelectorAll<HTMLInputElement>('input[name="se-services"]')
-  servicesRadioElementList?.forEach(tabElement => {
-    tabElement.addEventListener('change', (e) => {
-      const serviceTabContentElement = document.querySelector<HTMLDivElement>('div[data-service-tab-content]')
-      // console.log(serviceTabContentElement);
-    })
-  })
-  
-</script>
-
 <style is:global>
   .services {
     overflow-x: clip;
