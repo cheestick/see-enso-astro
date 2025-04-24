@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const {service, idx} = Astro.props
-const {thumbnail, variation} = service.data
+const {thumbnail, variation, title} = service.data
 const detailsCount = variation.length
 const tabDetailsIdx = String(idx + 1).padStart(2,"0")
 const firstElmentDelay = 80
@@ -33,12 +34,16 @@ const firstElmentDelay = 80
         </div>
     </div>
 
-    <picture class="service__thumb">
-        <img 
-            class="thumb__image" 
-            src={thumbnail.src}
-            alt=""/>
-    </picture>
+    <Picture
+            class="thumb__image"
+            src={thumbnail} alt={title}
+            width={500} height={500}
+            formats={["avif", "webp"]}
+            fallbackFormat='png'
+            densities={[0.5, 0.75, 1, 1.5, 1.8, 2, 3]}
+            quality={25}
+            pictureAttributes={{class: "service__thumb"}}
+            />
 </div>
 
 <style is:global>
@@ -95,6 +100,7 @@ const firstElmentDelay = 80
       place-content: start;
       column-gap: var(--gap-decimal-marker);
       z-index: 15;
+      transition: color 250ms ease;
   }
 
   .details__list .list__item::before {
@@ -102,6 +108,11 @@ const firstElmentDelay = 80
     counter-increment: service-items;
     content: counter(service-items, decimal-leading-zero) ".";
     display: inline-block;
+  }
+
+  .details__list .list__item:hover {
+    cursor: default;
+    color: rgba(174, 106, 238, 0.747);
   }
 
   .list__item > .main {
