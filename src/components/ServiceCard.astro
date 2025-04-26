@@ -12,6 +12,11 @@ const {thumbnail, variation, title} = service.data
 const detailsCount = variation.length
 const tabDetailsIdx = String(idx + 1).padStart(2,"0")
 const firstElmentDelay = 80
+const defaultValues = {
+  currency: String.fromCodePoint(0x20B4),
+  duration: 'час',
+}
+
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
@@ -21,21 +26,20 @@ const firstElmentDelay = 80
                   <li class="list__item"
                       style={`--animation-delay: ${firstElmentDelay*idx}ms`}
                       data-service-variant
-                      data-service-price={price || ""}
-                      data-service-duration={duration || ""}>
+                      data-service-price={price || defaultValues.currency}
+                      data-service-duration={duration || defaultValues.duration}>
                     {v}
-                      {/* <span class="main">{v}</span> */}
                   </li>
               ))
             }
         </ol>
 
         <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
-          <span data-variant-price></span>
+          <span data-variant-price>{defaultValues.currency}</span>
         </div>
 
         <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
-          <span data-variant-duration></span>
+          <span data-variant-duration>{defaultValues.duration}</span>
         </div>
     </div>
 
@@ -52,25 +56,82 @@ const firstElmentDelay = 80
 </div>
 
 <script>
-  const serviceDetailsElements = document.querySelectorAll('[data-service-group]')
-
-  function onServiceDetailsHover({target, currentTarget}: Event) {
-    if (!(target as HTMLElement)?.hasAttribute('data-service-variant')) return;
-    let hoveredElement = target as HTMLElement
-    (currentTarget as HTMLElement).querySelector('[data-variant-price]')!.innerText = hoveredElement.dataset.servicePrice;
-    (currentTarget as HTMLElement).querySelector('[data-variant-duration]')!.innerText = hoveredElement.dataset.serviceDuration;
+  const serviceSelectors = {
+    priceEl: '[data-variant-price]',
+    durationEl: '[data-variant-duration]',
+    variantEl: '[data-service-variant="active"]',
   }
-
-  function onServiceDetailsLeave({currentTarget}: Event) {
-    (currentTarget as HTMLElement).querySelector('[data-variant-price]')!.innerText = "";
-    (currentTarget as HTMLElement).querySelector('[data-variant-duration]')!.innerText = "";
+  const SERVICE_DEFAULT = {
+    price: String.fromCodePoint(0x20B4),
+    duration: 'час',
+  }
+  const serviceDetailsElements = document.querySelectorAll<HTMLDivElement>('[data-service-group]');
+  let serviceGroupShown = serviceDetailsElements.item(0);
+  let activeServiceVariant = findElement<HTMLLIElement>(serviceGroupShown, serviceSelectors.variantEl);
+  let priceOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.priceEl);
+  let durationOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.durationEl);
+  
+  if (activeServiceVariant) { 
+    priceOutputElement &&
+      updateServiceInfo(priceOutputElement, activeServiceVariant.dataset.servicePrice, SERVICE_DEFAULT.price);
+    durationOutputElement && 
+      updateServiceInfo(durationOutputElement, activeServiceVariant.dataset.serviceDuration, SERVICE_DEFAULT.duration);
   }
 
   serviceDetailsElements.forEach(el => {
     el.addEventListener('pointerover', onServiceDetailsHover)
-    el.addEventListener('mouseleave', onServiceDetailsLeave)
   })
   
+  function onServiceDetailsHover(e: Event) {
+    if (!(e.target as HTMLElement)?.hasAttribute('data-service-variant')) return;
+    
+    let currentServiceGroup = e.currentTarget as HTMLDivElement
+    let hoveredElement = e.target as HTMLLIElement;
+
+    if (wasServiceGroupChanged(currentServiceGroup, serviceGroupShown)) {
+      resetServiceInfo();
+      serviceGroupShown = currentServiceGroup
+      priceOutputElement = findElement(serviceGroupShown, serviceSelectors.priceEl);
+      durationOutputElement = findElement(serviceGroupShown, serviceSelectors.durationEl);
+    }
+
+    if (activeServiceVariant !== hoveredElement) {
+      activeServiceVariant && setServiceVariant(activeServiceVariant, '');
+      setServiceVariant(hoveredElement, 'active');
+      activeServiceVariant = hoveredElement;
+    }
+
+    priceOutputElement = findElement(currentServiceGroup, serviceSelectors.priceEl);
+    durationOutputElement = findElement(currentServiceGroup, serviceSelectors.durationEl);
+    
+    priceOutputElement && updateServiceInfo(priceOutputElement, hoveredElement.dataset.servicePrice, SERVICE_DEFAULT.price)
+    durationOutputElement && updateServiceInfo(durationOutputElement, hoveredElement.dataset.serviceDuration, SERVICE_DEFAULT.duration);
+  }
+
+  function wasServiceGroupChanged<T extends HTMLElement>(currentGroup: T, shownGroup: T):boolean {
+    return currentGroup.dataset.serviceGroup !== shownGroup.dataset.serviceGroup
+  }
+
+  function findElement<U extends Element>(parent: Element, selector: string) {
+    return parent.querySelector<U>(selector)
+  }
+
+  function updateServiceInfo<U extends HTMLElement>(outputEl: U, value: string = "", fallbackValue: string = "") {
+    outputEl.innerText = value || fallbackValue;
+  }
+
+  function resetServiceInfo() {
+    priceOutputElement && updateServiceInfo(priceOutputElement, SERVICE_DEFAULT.price);
+    durationOutputElement && updateServiceInfo(durationOutputElement, SERVICE_DEFAULT.duration);
+  }
+
+  function setServiceVariant<E extends HTMLElement>(element: E, value: 'active' | '' = "") {
+    element.dataset.serviceVariant = value;
+  }
+
+  function isServiceGroupHidden<G extends HTMLElement>(group: G) {
+    return group.style.display == 'none';
+  }
 </script>
 
 <style is:global>
@@ -137,7 +198,7 @@ const firstElmentDelay = 80
     display: inline-block;
   }
 
-  .details__list .list__item:hover {
+  .details__list [data-service-variant='active'] {
     cursor: default;
     color: rgba(174, 106, 238, 0.747);
   }
