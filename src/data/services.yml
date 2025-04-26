@@ -1,0 +1,188 @@
+- id: service-smm
+  title: SMM
+  thumbnail: ../assets/services/smm.png
+  variation:
+    - v: FB Inst TikTok LinkedIn
+      price: ""
+      duration: ""
+    - v: Розробка SMM-стратегії
+      price: "від\n780$"
+      duration: "від\n10 днів"
+    - v: Створення контенту
+      price: "від\n200$"
+      duration: "від\n1 дня"
+    - v: Ведення соцмереж
+      price: "від\n800$"
+      duration: "від\n22 днів"
+    - v: Або все це “під ключ”
+      price: "від\n1000$"
+      duration: "від\n22 днів"
+
+- id: service-target
+  title: ТАРГЕТ ТА PPC
+  thumbnail: ../assets/services/advertising.png
+  variation:
+    - v: Таргетована реклама
+      price: "від\n200$"
+      duration: "від\n10 днів"
+    - v: Контекстна реклама
+      price: "від\n400$"
+      duration: "від\n10 днів"
+    - v: Розробка креативів
+      price: "від\n15$"
+      duration: "від\n2 днів"
+    - v: Запуск та оптимізація
+      price: "від\n450$"
+      duration: "від\n22 днів"
+    - v: Аналітика РК
+      price: "від\n100$"
+      duration: "від\n3 днів"
+
+- id: service-design
+  title: ГРАФІЧНИЙ ДИЗАЙН
+  thumbnail: ../assets/services/design.png
+  variation:
+    - v: Логотип
+      price: "від\n150$"
+      duration: "від\n5 днів"
+    - v: Фірмовий стиль брендбук
+      price: "від\n350$"
+      duration: "від\n10 днів"
+    - v: Дизайн-система для Instagram
+      price: "від\n260$"
+      duration: "від\n5 днів"
+    - v: Брендинг дизайн продукту
+      price: "від\n75$"
+      duration: "від\n3 днів"
+    - v: Банери пости презентації
+      price: "від\n75$"
+      duration: "від\n2 днів"
+    - v: Друкована продукція
+      price: "від\n50$"
+      duration: "від\n3 днів"
+
+- id: service-web
+  title: РОЗРОБКА САЙТІВ
+  thumbnail: ../assets/services/websites.png
+  variation:
+    - v: Лендинг
+      price: "від\n700$"
+      duration: "від\n15 днів"
+    - v: UX/UA Дизайн
+      price: "від\n400$"
+      duration: "від\n10 днів"
+    - v: Корпоративні сайти
+      price: "від\n1700$"
+      duration: "від\n44 днів"
+    - v: Адаптивна верстка
+      price: "від\n1000$"
+      duration: "від\n22 днів"
+    - v: Адміністрування
+      price: "від\n500$"
+      duration: "від\n22 днів"
+    - v: Тех підтримка
+      price: "від\n600$"
+      duration: "від\n2 днів"
+
+- id: service-preproduction
+  title: ПРЕПРОДАКШН
+  thumbnail: ../assets/services/preproduction.png
+  variation:
+    - v: Розробка ідеї концепції
+      price: "від\n130$"
+      duration: "від\n2 днів"
+    - v: Сценарії для відео
+      price: "від\n200$"
+      duration: "від\n3 днів"
+    - v: Пошук акторів локацій
+      price: "від\n100$"
+      duration: "від\n4 днів"
+    - v: Організація знімального процесу
+      price: "від\n150$"
+      duration: "від\n2 днів"
+
+- id: service-production
+  title: ПРОДАКШН
+  thumbnail: ../assets/services/production.png
+  variation:
+    - v: Відео для бізнесу
+      price: "від\n750$"
+      duration: "від\n1 дня"
+    - v: Кліпи реклама промо
+      price: "від\n1500$"
+      duration: "від\n2 днів"
+    - v: Контент для соцмереж
+      price: "від\n500$"
+      duration: "від\n1 дня"
+    - v: Звітні відео (подія/захід)
+      price: "від\n500$"
+      duration: "від\n1 дня"
+    - v: Трансляції (прямі ефіри)
+      price: "від\n800$"
+      duration: "від\n1 дня"
+    - v: Подкасти “під ключ”
+      price: "від\n1000$"
+      duration: "від\n1 дня"
+
+- id: service-postproduction
+  title: ПОСТПРОДАКШН
+  thumbnail: ../assets/services/postproduction.png
+  variation:
+    - v: Анімація та 3D рендери
+      price: "від\n100$"
+      duration: "за\n1сек."
+    - v: Монтаж відео. від TikTok до кіно
+      price: "від\n50$"
+      duration: "за\n1хв."
+    - v: Переклад. EN DE PL
+      price: "від\n20$"
+      duration: "за\n1к.симв"
+    - v: Кольорокорекція
+      price: "від\n55$"
+      duration: "за\n1хв."
+    - v: Робота зі звуком
+      price: "від\n45$"
+      duration: "за\n1хв."
+    - v: Аудіодубляж
+      price: "від\n25$"
+      duration: "за\n1сек."
+
+- id: service-photo
+  title: ФОТОЗЙОМКИ
+  thumbnail: ../assets/services/photo.png
+  variation:
+    - v: Студійні фото
+      price: "від\n300$"
+      duration: "від\n2 днів"
+    - v: Предметна зйомка
+      price: "від\n300$"
+      duration: "від\n2 днів"
+    - v: Промо- та рекламні фото
+      price: "від\n500$"
+      duration: "від\n3 днів"
+    - v: Репортажна зйомка
+      price: "від\n300$"
+      duration: "від\n1 дня"
+    - v: Бізнес портрет
+      price: "від\n350$"
+      duration: "від\n3 днів"
+
+- id: service-pr
+  title: PR та комунікація
+  thumbnail: ../assets/services/pr.png
+  variation:
+    - v: Комунікаційні стратегії
+      price: "від\n250$"
+      duration: "від\n10 днів"
+    - v: Робота зі ЗМІ
+      price: "від\n150$"
+      duration: "від\n5 днів"
+    - v: PR брендів та заходів
+      price: "від\n600$"
+      duration: "від\n14 днів"
+    - v: Супровід проєктів
+      price: "від\n900$"
+      duration: "від\n22 днів"
+    - v: Все під ключ
+      price: "від\n1500$"
+      duration: "від\n22 днів"
