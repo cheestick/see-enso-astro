@@ -28,4 +28,20 @@ const mates = defineCollection({
     }),
 });
 
-export const collections = { cases, mates };
+const services = defineCollection({
+  loader: file("src/data/services.yml"),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      thumbnail: image(),
+      variation: z.array(
+        z.object({
+          v: z.string(),
+          price: z.string().optional(),
+          duration: z.string().optional(),
+        })
+      ),
+    }),
+});
+
+export const collections = { cases, mates, services };

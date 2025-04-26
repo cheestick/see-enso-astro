@@ -1,46 +1,138 @@
 ---
-/* @jsxImportSource astro */
-import type { ISEService } from '@data/services';
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  service: ISEService;
+  service: CollectionEntry<'services'>;
   idx: number;
 }
 
 const {service, idx} = Astro.props
-const tabDetailsIdx = String(idx + 1).padStart(2,"0")
-const {duration, price, previewUrl, variation} = service
+const {thumbnail, variation, title} = service.data
 const detailsCount = variation.length
+const tabDetailsIdx = String(idx + 1).padStart(2,"0")
 const firstElmentDelay = 80
+const defaultValues = {
+  currency: String.fromCodePoint(0x20B4),
+  duration: 'час',
+}
+
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
-    <div class="details__info-group">
+    <div class="details__info-group" data-service-group={tabDetailsIdx}>
         <ol class="details__list">
-            { variation?.map(({v, extra}, idx) => (
-                  <li class="list__item" style={`--animation-delay: ${firstElmentDelay*idx}ms`}>
-                      <span class="main">{v}</span>{/* {extra && <span class="extra">{extra}</span>} */}
+            { variation?.map(({v, price, duration}, idx) => (
+                  <li class="list__item"
+                      style={`--animation-delay: ${firstElmentDelay*idx}ms`}
+                      data-service-variant
+                      data-service-price={price || defaultValues.currency}
+                      data-service-duration={duration || defaultValues.duration}>
+                    {v}
                   </li>
               ))
             }
         </ol>
 
         <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
-            <span>від {price}$</span>
+          <span data-variant-price>{defaultValues.currency}</span>
         </div>
 
         <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
-            <span>{duration} днів</span>
+          <span data-variant-duration>{defaultValues.duration}</span>
         </div>
     </div>
 
-    <picture class="service__thumb">
-        <img 
-            class="thumb__image" 
-            src={previewUrl}
-            alt="photography"/>
-    </picture>
+    <Picture
+            class="thumb__image"
+            src={thumbnail} alt={title}
+            width={500} height={500}
+            formats={["avif", "webp"]}
+            fallbackFormat='png'
+            densities={[0.5, 0.75, 1, 1.5, 1.8, 2, 3]}
+            quality={25}
+            pictureAttributes={{class: "service__thumb"}}
+            />
 </div>
+
+<script>
+  const serviceSelectors = {
+    priceEl: '[data-variant-price]',
+    durationEl: '[data-variant-duration]',
+    variantEl: '[data-service-variant="active"]',
+  }
+  const SERVICE_DEFAULT = {
+    price: String.fromCodePoint(0x20B4),
+    duration: 'час',
+  }
+  const serviceDetailsElements = document.querySelectorAll<HTMLDivElement>('[data-service-group]');
+  let serviceGroupShown = serviceDetailsElements.item(0);
+  let activeServiceVariant = findElement<HTMLLIElement>(serviceGroupShown, serviceSelectors.variantEl);
+  let priceOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.priceEl);
+  let durationOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.durationEl);
+  
+  if (activeServiceVariant) { 
+    priceOutputElement &&
+      updateServiceInfo(priceOutputElement, activeServiceVariant.dataset.servicePrice, SERVICE_DEFAULT.price);
+    durationOutputElement && 
+      updateServiceInfo(durationOutputElement, activeServiceVariant.dataset.serviceDuration, SERVICE_DEFAULT.duration);
+  }
+
+  serviceDetailsElements.forEach(el => {
+    el.addEventListener('pointerover', onServiceDetailsHover)
+  })
+  
+  function onServiceDetailsHover(e: Event) {
+    if (!(e.target as HTMLElement)?.hasAttribute('data-service-variant')) return;
+    
+    let currentServiceGroup = e.currentTarget as HTMLDivElement
+    let hoveredElement = e.target as HTMLLIElement;
+
+    if (wasServiceGroupChanged(currentServiceGroup, serviceGroupShown)) {
+      resetServiceInfo();
+      serviceGroupShown = currentServiceGroup
+      priceOutputElement = findElement(serviceGroupShown, serviceSelectors.priceEl);
+      durationOutputElement = findElement(serviceGroupShown, serviceSelectors.durationEl);
+    }
+
+    if (activeServiceVariant !== hoveredElement) {
+      activeServiceVariant && setServiceVariant(activeServiceVariant, '');
+      setServiceVariant(hoveredElement, 'active');
+      activeServiceVariant = hoveredElement;
+    }
+
+    priceOutputElement = findElement(currentServiceGroup, serviceSelectors.priceEl);
+    durationOutputElement = findElement(currentServiceGroup, serviceSelectors.durationEl);
+    
+    priceOutputElement && updateServiceInfo(priceOutputElement, hoveredElement.dataset.servicePrice, SERVICE_DEFAULT.price)
+    durationOutputElement && updateServiceInfo(durationOutputElement, hoveredElement.dataset.serviceDuration, SERVICE_DEFAULT.duration);
+  }
+
+  function wasServiceGroupChanged<T extends HTMLElement>(currentGroup: T, shownGroup: T):boolean {
+    return currentGroup.dataset.serviceGroup !== shownGroup.dataset.serviceGroup
+  }
+
+  function findElement<U extends Element>(parent: Element, selector: string) {
+    return parent.querySelector<U>(selector)
+  }
+
+  function updateServiceInfo<U extends HTMLElement>(outputEl: U, value: string = "", fallbackValue: string = "") {
+    outputEl.innerText = value || fallbackValue;
+  }
+
+  function resetServiceInfo() {
+    priceOutputElement && updateServiceInfo(priceOutputElement, SERVICE_DEFAULT.price);
+    durationOutputElement && updateServiceInfo(durationOutputElement, SERVICE_DEFAULT.duration);
+  }
+
+  function setServiceVariant<E extends HTMLElement>(element: E, value: 'active' | '' = "") {
+    element.dataset.serviceVariant = value;
+  }
+
+  function isServiceGroupHidden<G extends HTMLElement>(group: G) {
+    return group.style.display == 'none';
+  }
+</script>
 
 <style is:global>
   .service__details {
@@ -96,6 +188,7 @@ const firstElmentDelay = 80
       place-content: start;
       column-gap: var(--gap-decimal-marker);
       z-index: 15;
+      transition: color 250ms ease;
   }
 
   .details__list .list__item::before {
@@ -103,6 +196,11 @@ const firstElmentDelay = 80
     counter-increment: service-items;
     content: counter(service-items, decimal-leading-zero) ".";
     display: inline-block;
+  }
+
+  .details__list [data-service-variant='active'] {
+    cursor: default;
+    color: rgba(174, 106, 238, 0.747);
   }
 
   .list__item > .main {
@@ -121,11 +219,15 @@ const firstElmentDelay = 80
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-inline-size: 11ch;
+    /* max-inline-size: 12ch; */
     aspect-ratio: 1;
     padding-inline: 1.25em;
     background-color: var(--swatch-neutral-900);
     border-radius: 100%;
     box-shadow: var(--shadow-small);
+    text-wrap: balance;
+    text-align: center;
   }
 
   .service__price {
