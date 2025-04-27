@@ -13,10 +13,9 @@ const detailsCount = variation.length
 const tabDetailsIdx = String(idx + 1).padStart(2,"0")
 const firstElmentDelay = 80
 const defaultValues = {
-  currency: String.fromCodePoint(0x20B4),
-  duration: 'час',
-}
-
+                        currency: String.fromCodePoint(0x20B4),
+                        duration: 'час',
+                      };
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
@@ -27,7 +26,7 @@ const defaultValues = {
           { variation?.map(({v, price, duration}, idx) => (
                 <li class="list__item"
                     style={`--animation-delay: ${firstElmentDelay*idx}ms`}
-                    data-service-variant
+                    data-service-variant={idx == 0 && "active"}
                     data-service-price={price || defaultValues.currency}
                     data-service-duration={duration || defaultValues.duration}>
                   {v}
@@ -90,7 +89,6 @@ const defaultValues = {
     
     aspect-ratio: 1;
     min-width: 26em;
-    /* width: fit-content; */
     padding-inline-start: 4rem;
     border-radius: 100%;
     border: 2px solid var(--swatch-purple-500);
@@ -143,7 +141,6 @@ const defaultValues = {
     align-items: center;
     justify-content: center;
     min-inline-size: 11ch;
-    /* max-inline-size: 12ch; */
     aspect-ratio: 1;
     padding-inline: 1.25em;
     background-color: var(--swatch-neutral-900);
@@ -180,7 +177,6 @@ const defaultValues = {
       margin-block-start: 5%;
       margin-inline-start: -15%;
       background-color: var(--bg-color);
-      /* border: 2px solid var(--swatch-purple-500); */
       border-radius: 100%;
       overflow: hidden;
 
