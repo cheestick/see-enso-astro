@@ -43,6 +43,95 @@ const services = await getCollection('services')
   </div>
 </section>
 
+<script>
+  const serviceSelectors = {
+    priceEl: '[data-variant-price]',
+    durationEl: '[data-variant-duration]',
+    variantEl: '[data-service-variant="active"]',
+  }
+  const SERVICE_DEFAULT = {
+    price: String.fromCodePoint(0x20B4),
+    duration: 'час',
+  }
+
+  const serviceTabNodes =[...document.querySelectorAll<HTMLInputElement>('se-services')];
+    const serviceDetailsElements = document.querySelectorAll<HTMLDivElement>('[data-service-group]');
+  let activeServiceTab = serviceTabNodes.find(tab => tab.checked)!;
+  let serviceGroupShown = serviceDetailsElements.item(0);
+  let activeServiceVariant = findElement<HTMLLIElement>(serviceGroupShown, serviceSelectors.variantEl);
+  let priceOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.priceEl);
+  let durationOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.durationEl);
+  
+  if (activeServiceVariant) { 
+    priceOutputElement &&
+      updateServiceInfo(  priceOutputElement,
+                          activeServiceVariant.dataset.servicePrice,
+                          SERVICE_DEFAULT.price );
+    durationOutputElement && 
+      updateServiceInfo(  durationOutputElement,
+                          activeServiceVariant.dataset.serviceDuration,
+                          SERVICE_DEFAULT.duration  );
+  }
+
+  serviceTabNodes.forEach(tab => { tab.addEventListener('change', changeTabHandler) });
+  serviceDetailsElements.forEach(el => { el.addEventListener('pointerover', onServiceDetailsHover) });
+
+  function changeTabHandler<E extends Event>(e: E) {
+    activeServiceTab = e.target as HTMLInputElement;
+  }
+
+function onServiceDetailsHover(e: Event) {
+    if (!(e.target as HTMLElement)?.hasAttribute('data-service-variant')) return;
+    
+    let currentServiceGroup = e.currentTarget as HTMLDivElement
+    let hoveredElement = e.target as HTMLLIElement;
+
+    if (wasServiceGroupChanged(currentServiceGroup, serviceGroupShown)) {
+      resetServiceInfo();
+      serviceGroupShown = currentServiceGroup
+      priceOutputElement = findElement(serviceGroupShown, serviceSelectors.priceEl);
+      durationOutputElement = findElement(serviceGroupShown, serviceSelectors.durationEl);
+    }
+
+    if (activeServiceVariant !== hoveredElement) {
+      activeServiceVariant && setServiceVariant(activeServiceVariant, '');
+      setServiceVariant(hoveredElement, 'active');
+      activeServiceVariant = hoveredElement;
+    }
+
+    priceOutputElement = findElement(currentServiceGroup, serviceSelectors.priceEl);
+    durationOutputElement = findElement(currentServiceGroup, serviceSelectors.durationEl);
+    
+    priceOutputElement && updateServiceInfo(priceOutputElement, hoveredElement.dataset.servicePrice, SERVICE_DEFAULT.price)
+    durationOutputElement && updateServiceInfo(durationOutputElement, hoveredElement.dataset.serviceDuration, SERVICE_DEFAULT.duration);
+  }
+
+  function wasServiceGroupChanged<T extends HTMLElement>(currentGroup: T, shownGroup: T):boolean {
+    return currentGroup.dataset.serviceGroup !== shownGroup.dataset.serviceGroup
+  }
+
+  function findElement<U extends Element>(parent: Element, selector: string) {
+    return parent.querySelector<U>(selector)
+  }
+
+  function updateServiceInfo<U extends HTMLElement>(outputEl: U, value: string = "", fallbackValue: string = "") {
+    outputEl.innerText = value || fallbackValue;
+  }
+
+  function resetServiceInfo() {
+    priceOutputElement && updateServiceInfo(priceOutputElement, SERVICE_DEFAULT.price);
+    durationOutputElement && updateServiceInfo(durationOutputElement, SERVICE_DEFAULT.duration);
+  }
+
+  function setServiceVariant<E extends HTMLElement>(element: E, value: 'active' | '' = "") {
+    element.dataset.serviceVariant = value;
+  }
+
+  function isServiceGroupHidden<G extends HTMLElement>(group: G) {
+    return group.style.display == 'none';
+  }
+</script>
+
 <style is:global>
   .services {
     overflow-x: clip;
