@@ -14,7 +14,7 @@ const services = await getCollection('services')
     <div class="tabs services__tabs">
       <div class="tabs__nav" data-service-tab-list>
         {
-          services?.map(({data}, idx) => {
+          services?.map(({data, id}, idx) => {
             let subServiceCount = data.variation.length.toString().padStart(2, "0")
             let tabIndex = String(idx + 1).padStart(2, '0')
             return ( 
@@ -22,12 +22,10 @@ const services = await getCollection('services')
                 <input 
                   type="radio" 
                   name="se-services" 
+                  value={id}
                   data-tab={tabIndex} 
                   checked={idx === 0}/>
-                <span class="tab-caption">
-                  {data.title}:
-                  <span class="tab-caption__extra">{subServiceCount}</span>
-                </span>
+                <span class="tab-caption">{data.title}:<span class="tab-caption__extra">{subServiceCount}</span></span>
               </label>
             )
           })
