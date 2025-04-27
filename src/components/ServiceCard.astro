@@ -20,27 +20,29 @@ const defaultValues = {
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
-    <div class="details__info-group" data-service-group={tabDetailsIdx}>
-        <ol class="details__list">
-            { variation?.map(({v, price, duration}, idx) => (
-                  <li class="list__item"
-                      style={`--animation-delay: ${firstElmentDelay*idx}ms`}
-                      data-service-variant
-                      data-service-price={price || defaultValues.currency}
-                      data-service-duration={duration || defaultValues.duration}>
-                    {v}
-                  </li>
-              ))
-            }
-        </ol>
+    <div  class="details__info-group" 
+          data-service-group={tabDetailsIdx}
+          data-service-group-for={service.id}>
+      <ol class="details__list">
+          { variation?.map(({v, price, duration}, idx) => (
+                <li class="list__item"
+                    style={`--animation-delay: ${firstElmentDelay*idx}ms`}
+                    data-service-variant
+                    data-service-price={price || defaultValues.currency}
+                    data-service-duration={duration || defaultValues.duration}>
+                  {v}
+                </li>
+            ))
+          }
+      </ol>
 
-        <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
-          <span data-variant-price>{defaultValues.currency}</span>
-        </div>
+      <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
+        <span data-variant-price>{defaultValues.currency}</span>
+      </div>
 
-        <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
-          <span data-variant-duration>{defaultValues.duration}</span>
-        </div>
+      <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
+        <span data-variant-duration>{defaultValues.duration}</span>
+      </div>
     </div>
 
     <Picture
