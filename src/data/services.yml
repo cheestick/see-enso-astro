@@ -2,9 +2,6 @@
   title: SMM
   thumbnail: ../assets/services/smm.png
   variation:
-    - v: FB Inst TikTok LinkedIn
-      price: ""
-      duration: ""
     - v: Розробка SMM-стратегії
       price: "від\n780$"
       duration: "від\n10 днів"
@@ -14,6 +11,9 @@
     - v: Ведення соцмереж
       price: "від\n800$"
       duration: "від\n22 днів"
+    - v: FB Inst TikTok LinkedIn
+      price: ""
+      duration: ""
     - v: Або все це “під ключ”
       price: "від\n1000$"
       duration: "від\n22 днів"
