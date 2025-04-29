@@ -2,112 +2,214 @@
 
 ---
 
-<form class="form feedback-form" autocomplete="off">
-    <input 
-        class="field"
-        type="text"
-        name="fullname"
-        placeholder="Ім'я"
-        minlength="1"
-        maxlength="30"
-        required/>
-    <input 
-        class="field"
-        type="tel"
-        name="phone"
-        placeholder="Номер телефону"
-        minlength="5"
-        maxlength="20"
-        required/>
-    <input
-        class="field"
-        type="email"
-        name="email"
-        placeholder="Електронна пошта"
-        minlength="5"
-        maxlength="50"
-        required/>
-    <textarea
-        class="field"
-        name="message"
-        rows="5"
-        placeholder="Ваше запитання"
-        minlength="10"
-        maxlength="500"
-        required></textarea>
-    
-    <button class="button-submit" type="submit">відправити</button>
+<form name="contact-us" class="form feedback-form" autocomplete="off">
+    <div class="position-coat">
+      <label for="fullname" data-error-label></label>
+      <input id="fullname"
+          class="field"
+          type="text"
+          name="Fullname"
+          placeholder="Ім'я"
+          minlength="1"
+          maxlength="30"
+          required/>
+    </div>
+    <div class="position-coat">
+      <label for="phone" data-error-label></label>
+      <input id="phone"
+          class="field"
+          type="tel"
+          inputmode="numeric"
+          name="Phone"
+          placeholder="Номер телефону"
+          minlength="5"
+          maxlength="20"
+          required/>
+    </div>
+    <div class="position-coat">
+      <label for="email" data-error-label></label>
+      <input id="email"
+          class="field"
+          type="email"
+          name="Email"
+          inputmode="email"
+          placeholder="Електронна пошта"
+          minlength="5"
+          maxlength="50"
+          required/>
+    </div>
+    <div class="position-coat">
+      <label for="message" data-error-label></label>
+      <textarea id="message"
+          class="field"
+          name="Message"
+          rows="5"
+          placeholder="Ваше запитання"
+          minlength="5"
+          maxlength="500"
+          required></textarea>
+    </div>
+    <button class="button-submit" type="submit" data-feedback-submit>відправити</button>
 </form>
 
 <script>
+import { actions, isInputError } from 'astro:actions'
+
+const contactForm = document.querySelector<HTMLFormElement>('form[name="contact-us"]')
+const submitButton = contactForm?.querySelector<HTMLButtonElement>('button[data-feedback-submit]')!;
+const errorLabelList: HTMLLabelElement[] = []
+
+contactForm?.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  if (errorLabelList.length > 0) errorLabelList.forEach(label => label.classList.remove('shown'))
+  const { error } = await actions.sendContactFormData(new FormData(contactForm))
+  if (!error) {
+    submitButton.classList.add('delivered')
+    contactForm.reset();
+    setTimeout(() => submitButton.classList.remove('delivered'), 1800)
+    return;
+  }
+  if (isInputError(error)) {
+    errorLabelList.length = 0
+    for (const key in error.fields) {
+      const errorLabel = contactForm.querySelector<HTMLLabelElement>(`label[for="${key.toLowerCase()}"]`)!
+        // @ts-ignore
+      errorLabel.textContent = error.fields[key].join(', ')
+      errorLabelList.push(errorLabel)
+    }
+    errorLabelList.forEach(label => label.classList.add('shown'))
+  }
+})
 
 </script>
 
 <style>
-    .feedback-form {
-        --fluid-12-18: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
-        --fluid-20-30: clamp(1.25rem, 0.7092rem + 1.8215vw, 1.875rem);
+.feedback-form {
+    --fluid-12-18: clamp(0.75rem, 0.5795rem + 0.8523vw, 1.125rem);
+    --fluid-20-30: clamp(1.25rem, 0.7092rem + 1.8215vw, 1.875rem);
 
-        display: grid;
-        gap: 17px;
-        font-size: var(--fluid-12-18);
-        width: 100%;
-        margin-block-start: var(--fluid-20-30);
-        position: relative;
-        isolation: isolate;
-        z-index: 50;
-    }
+    display: grid;
+    gap: 17px;
+    font-size: var(--fluid-12-18);
+    width: 100%;
+    margin-block-start: var(--fluid-20-30);
+    position: relative;
+    isolation: isolate;
+    z-index: 50;
+}
 
-    .feedback-form .field {
-        padding-block: 14px;
-        padding-inline: 21px;
-        background-color: rgba(0,0,0, 0.65);
-        backdrop-filter: blur(40px);
-        border: 2px solid var(--swatch-neutral-300);
-        border-radius: 50px;
-        color: var(--swatch-neutral-300);
-    }
+.feedback-form .position-coat {
+  position: relative;
+}
 
-    .feedback-form textarea.field {
-        border-radius: 20px;
-        resize: none;
-        scrollbar-width: none;
-    }
+.feedback-form label {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  display: block;
+  padding: .125em 0.75em;
+  color: rgb(161, 54, 54);
+  background-color: rgba(223, 197, 197, 0.94);
+  border-radius: 1em;
+  font-size: 0.9em;
+  z-index: 1000;
+  opacity: 0;
+  visibility: 0;
+  transition: 400ms ease-in-out;
+  interpolate-size: allow-keywords;
+}
 
-    .feedback-form .field:focus-within,
-    .feedback-form .button-submit:focus-within {
-        outline: 2px solid var(--swatch-neutral-200);
-        outline-offset: 2px;
-    }
+.feedback-form label.shown {
+  display: block;
+  opacity: 1;
+  visibility: 1;
+}
 
-    .feedback-form input::placeholder,
-    .feedback-form textarea::placeholder {
-        /* color: inherit; */
-    }
+.feedback-form .field {
+    width: 100%;
+    padding-block: 14px;
+    padding-inline: 21px;
+    background-color: rgba(0,0,0, 0.65);
+    backdrop-filter: blur(40px);
+    border: 2px solid var(--swatch-neutral-300);
+    border-radius: 50px;
+    color: var(--swatch-neutral-300);
+}
 
-    .feedback-form .button-submit {
-        --fluid-12-20: clamp(0.75rem, 0.5227rem + 1.1364vw, 1.25rem);
+.feedback-form textarea.field {
+    border-radius: 20px;
+    resize: none;
+    scrollbar-width: none;
+}
 
-        place-self: start;
-        padding-block: 13px;
-        padding-inline: 26px;
-        font-size: var(--fluid-12-20);
-        color: var(--swatch-neutral-900);
-        background-color: var(--swatch-neutral-200);
-        border-radius: 50px;
-        border: none;
-        cursor: pointer;
-        transition: all 250ms ease;
-    }
+.feedback-form .field:focus-within,
+.feedback-form .button-submit:focus-within {
+    outline: 2px solid var(--swatch-neutral-200);
+    outline-offset: 2px;
+}
 
-    .feedback-form .button-submit:is(:hover, :focus-within) {
-        /* opacity: 80%; */
-        background-color: rgb(from var(--swatch-neutral-200) r g b / .8);
-    }
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
+    /* color: inherit; */
+}
 
-    .feedback-form .button-submit:active {
-        /* opacity: 50%; */
-        background-color: rgb(from var(--swatch-neutral-200) r g b / .65);
+.feedback-form .button-submit {
+  --fluid-12-20: clamp(0.75rem, 0.5227rem + 1.1364vw, 1.25rem);
+    position: relative;
+    place-self: start;
+    padding-block: 13px;
+    padding-inline: 26px;
+    font-size: var(--fluid-12-20);
+    color: var(--swatch-neutral-900);
+    background-color: var(--swatch-neutral-200);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 250ms ease;
+    overflow: clip;
+    isolation: isolate;
+}
 
-    }
+.feedback-form .button-submit:is(:hover, :focus-within) {
+    background-color: rgb(from var(--swatch-neutral-200) r g b / .8);
+}
+
+.feedback-form .button-submit:active {
+    background-color: rgb(from var(--swatch-neutral-200) r g b / .65);
+}
+
+.feedback-form .button-submit:disabled {
+  opacity: 0.25;
+  pointer-events: none;
+  touch-action: none;
+}
+
+.feedback-form .button-submit::after {
+  content: "🚀";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-lightest);
+  border-radius: 2em;
+  transform: translateX(-100%);
+  display: grid;
+  place-content: center;
+  z-index: 10;
+  transition: transform 400ms ease-in-out;
+}
+
+.feedback-form .button-submit.delivered::after {
+  animation: delivered 1700ms ease-in-out backwards;
+}
+
+@keyframes delivered {
+  15%, 75% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 </style>
