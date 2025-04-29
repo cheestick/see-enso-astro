@@ -1,45 +1,59 @@
 ---
-/* @jsxImportSource astro */
-import type { ISEService } from '@data/services';
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  service: ISEService;
+  service: CollectionEntry<'services'>;
   idx: number;
 }
 
 const {service, idx} = Astro.props
-const tabDetailsIdx = String(idx + 1).padStart(2,"0")
-const {duration, price, previewUrl, variation} = service
+const {thumbnail, variation, title} = service.data
 const detailsCount = variation.length
+const tabDetailsIdx = String(idx + 1).padStart(2,"0")
 const firstElmentDelay = 80
+const defaultValues = {
+                        currency: String.fromCodePoint(0x20B4),
+                        duration: 'час',
+                      };
 ---
 
 <div class="service__details" data-tab-details={tabDetailsIdx}>
-    <div class="details__info-group">
-        <ol class="details__list">
-            { variation?.map(({v, extra}, idx) => (
-                  <li class="list__item" style={`--animation-delay: ${firstElmentDelay*idx}ms`}>
-                      <span class="main">{v}</span>{/* {extra && <span class="extra">{extra}</span>} */}
-                  </li>
-              ))
-            }
-        </ol>
+    <div  class="details__info-group" 
+          data-service-group={tabDetailsIdx}
+          data-service-group-for={service.id}>
+      <ol class="details__list">
+          { variation?.map(({v, price, duration}, idx) => (
+                <li class="list__item"
+                    style={`--animation-delay: ${firstElmentDelay*idx}ms`}
+                    data-service-variant={idx == 0 && "active"}
+                    data-service-price={price || defaultValues.currency}
+                    data-service-duration={duration || defaultValues.duration}>
+                  {v}
+                </li>
+            ))
+          }
+      </ol>
 
-        <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
-            <span>від {price}$</span>
-        </div>
+      <div class="service__price" style={`--animation-delay: ${firstElmentDelay * (detailsCount + 1)}ms`}>
+        <span data-variant-price>{defaultValues.currency}</span>
+      </div>
 
-        <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
-            <span>{duration} днів</span>
-        </div>
+      <div class="service__duration accent" style={`--animation-delay: ${firstElmentDelay * (detailsCount)}ms`}>
+        <span data-variant-duration>{defaultValues.duration}</span>
+      </div>
     </div>
 
-    <picture class="service__thumb">
-        <img 
-            class="thumb__image" 
-            src={previewUrl}
-            alt="photography"/>
-    </picture>
+    <Picture
+            class="thumb__image"
+            src={thumbnail} alt={title}
+            width={500} height={500}
+            formats={["avif", "webp"]}
+            fallbackFormat='png'
+            densities={[0.5, 0.75, 1, 1.5, 1.8, 2, 3]}
+            quality={25}
+            pictureAttributes={{class: "service__thumb"}}
+            />
 </div>
 
 <style is:global>
@@ -75,7 +89,6 @@ const firstElmentDelay = 80
     
     aspect-ratio: 1;
     min-width: 26em;
-    /* width: fit-content; */
     padding-inline-start: 4rem;
     border-radius: 100%;
     border: 2px solid var(--swatch-purple-500);
@@ -96,6 +109,7 @@ const firstElmentDelay = 80
       place-content: start;
       column-gap: var(--gap-decimal-marker);
       z-index: 15;
+      transition: color 250ms ease;
   }
 
   .details__list .list__item::before {
@@ -103,6 +117,11 @@ const firstElmentDelay = 80
     counter-increment: service-items;
     content: counter(service-items, decimal-leading-zero) ".";
     display: inline-block;
+  }
+
+  .details__list [data-service-variant='active'] {
+    cursor: default;
+    color: rgba(174, 106, 238, 0.747);
   }
 
   .list__item > .main {
@@ -121,11 +140,14 @@ const firstElmentDelay = 80
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-inline-size: 11ch;
     aspect-ratio: 1;
     padding-inline: 1.25em;
     background-color: var(--swatch-neutral-900);
     border-radius: 100%;
     box-shadow: var(--shadow-small);
+    text-wrap: balance;
+    text-align: center;
   }
 
   .service__price {
@@ -155,7 +177,6 @@ const firstElmentDelay = 80
       margin-block-start: 5%;
       margin-inline-start: -15%;
       background-color: var(--bg-color);
-      /* border: 2px solid var(--swatch-purple-500); */
       border-radius: 100%;
       overflow: hidden;
 

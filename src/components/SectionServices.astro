@@ -1,6 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
 import ServiceCard from './ServiceCard.astro';
-import { seServices } from '@data/services';
+
+const services = await getCollection('services')
 ---
 
 <section id="services" class="services">
@@ -10,29 +12,29 @@ import { seServices } from '@data/services';
       <span class="accent line2">послуг</span>
     </h2>
     <div class="tabs services__tabs">
-      <div class="tabs__nav">
+      <div class="tabs__nav" data-service-tab-list>
         {
-          seServices?.map(({title, variation}, idx) => {
+          services?.map(({data, id}, idx) => {
+            let subServiceCount = data.variation.length.toString().padStart(2, "0")
+            let tabIndex = String(idx + 1).padStart(2, '0')
             return ( 
               <label class="tab nav__control">
                 <input 
                   type="radio" 
                   name="se-services" 
-                  data-tab={String(idx + 1).padStart(2, '0')} 
+                  value={id}
+                  data-tab={tabIndex} 
                   checked={idx === 0}/>
-                <span class="tab-caption">
-                  {title}:
-                  <span class="tab-caption__extra">{variation.length.toString().padStart(2, "0")}</span>
-                </span>
+                <span class="tab-caption">{data.title}:<span class="tab-caption__extra">{subServiceCount}</span></span>
               </label>
             )
           })
         }
       </div>
 
-      <div class="tab__content">
+      <div class="tab__content" data-service-tab-content>
         {
-          seServices?.map((service, idx) =>{
+          services?.map((service, idx) =>{
             return <ServiceCard {service} {idx}/>
           })
         }
@@ -40,6 +42,78 @@ import { seServices } from '@data/services';
     </div>
   </div>
 </section>
+
+<script>
+  const serviceSelectors = {
+    priceEl: '[data-variant-price]',
+    durationEl: '[data-variant-duration]',
+    variantEl: '[data-service-variant="active"]',
+  }
+  const SERVICE_DEFAULT = {
+    price: String.fromCodePoint(0x20B4),
+    duration: 'час',
+  }
+
+  const serviceTabNodes =[...document.querySelectorAll<HTMLInputElement>('[data-tab]')];
+  const serviceDetailsElements = [...document.querySelectorAll<HTMLDivElement>('[data-service-group]')];
+  let activeServiceTab = serviceTabNodes.find(tab => tab.checked)!;
+  let serviceGroupShown = serviceDetailsElements[0];
+  let activeServiceVariant = findElement<HTMLLIElement>(serviceGroupShown, serviceSelectors.variantEl);
+  let priceOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.priceEl);
+  let durationOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.durationEl);
+  
+  activeServiceVariant && updateServiceFullOutput(activeServiceVariant);
+
+  serviceTabNodes.forEach(tab => { tab.addEventListener('change', onServiceTabChange) });
+  serviceDetailsElements.forEach(el => { el.addEventListener('pointerover', onServiceDetailsHover) });
+
+  function onServiceTabChange<E extends Event>(e: E) {
+    activeServiceTab = e.target as HTMLInputElement;
+    serviceGroupShown = serviceDetailsElements.find(group => group.dataset.serviceGroupFor == activeServiceTab.value)!
+    activeServiceVariant = findElement<HTMLLIElement>(serviceGroupShown, serviceSelectors.variantEl);
+    priceOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.priceEl);
+    durationOutputElement = findElement<HTMLSpanElement>(serviceGroupShown, serviceSelectors.durationEl);
+
+    activeServiceVariant && updateServiceFullOutput(activeServiceVariant);
+  }
+
+  function onServiceDetailsHover(e: Event) {
+    if (!(e.target as HTMLElement)?.hasAttribute('data-service-variant')) { return; };
+    let hoveredElement = e.target as HTMLLIElement;
+    if (activeServiceVariant !== hoveredElement) {
+      activeServiceVariant && setServiceVariant(activeServiceVariant, '');
+      setServiceVariant(hoveredElement, 'active');
+      activeServiceVariant = hoveredElement;
+    }
+    priceOutputElement && updateServicePriceOutput(priceOutputElement, hoveredElement);
+    durationOutputElement && updateServiceDurationOutput(durationOutputElement, hoveredElement);
+  }
+
+  function findElement<EL extends HTMLElement>(parent: HTMLElement, selector: string) {
+    return parent.querySelector<EL>(selector)
+  }
+
+  function updateServiceOutput<EL extends HTMLElement>(outputEl: EL, value: string = "", fallbackValue: string = "") {
+    outputEl.innerText = value || fallbackValue;
+  }
+
+  function updateServicePriceOutput<EL extends HTMLElement>(priceEl: EL, activeService: EL) {
+    updateServiceOutput(priceEl, activeService.dataset.servicePrice, SERVICE_DEFAULT.price);
+  }
+
+  function updateServiceDurationOutput<EL extends HTMLElement>(durationEl: EL, activeService: EL) {
+    updateServiceOutput(durationEl, activeService.dataset.serviceDuration, SERVICE_DEFAULT.duration);
+  }
+
+  function updateServiceFullOutput<EL extends HTMLElement>(service: EL) {
+    priceOutputElement && updateServicePriceOutput(priceOutputElement, service);
+    durationOutputElement && updateServiceDurationOutput(durationOutputElement, service);
+  }
+
+  function setServiceVariant<EL extends HTMLElement>(element: EL, value: 'active' | '' = "") {
+    element.dataset.serviceVariant = value;
+  }
+</script>
 
 <style is:global>
   .services {
@@ -162,8 +236,6 @@ import { seServices } from '@data/services';
     }
 
     .service__thumb > img {
-        /* opacity: 0.1; */
-        /* animation: fadeIn 700ms linear forwards; */
         animation-delay: var(--animation-delay, 0);
     } 
   }
