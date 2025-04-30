@@ -1,0 +1,29 @@
+---
+import CommercialCards from '@components/section-recent-commercials/CommercialCards.astro';
+---
+
+<section id="recent-commercials" class="recent-commercials">
+  <div class="container recent-commercials__container">
+    <h2 class="section__heading recent-commercials__heading"><span>подивитись <span class="accent">останні</span></span><span>зйомки</span></h2>
+    <div class="carousels">
+      <div class="carousel__controls">
+          <button class="button-previous"><span>Prev</span></button>
+          <button class="button-next"><span>Next</span></button>
+      </div>
+      <div class="carousel__wrapper">
+        <div class="carousel__track">
+          <CommercialCards server:defer >
+            <div slot="fallback">Loading...</div>
+          </CommercialCards>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.recent-commercials > .container {
+  margin-block-start: var(--section-interval);
+}
+
+</style>
