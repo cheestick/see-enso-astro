@@ -6,7 +6,7 @@ const playlistData = await response.json()
 
 {
   // @ts-ignore
-  playlistData.items.map(({snippet}) => (
+  playlistData?.items?.map(({snippet}) => (
   <img  src={snippet.thumbnails?.maxres?.url || snippet.thumbnails?.standard.url} 
         alt={snippet.title}
         width={snippet.thumbnails?.maxres?.width || snippet.thumbnails?.standard.width}
@@ -16,7 +16,7 @@ const playlistData = await response.json()
 
 <style>
   img {
-    width: 25em;
+    width: min(30em, 90%);
     aspect-ratio: 16/9;
     object-fit: cover;
     border: 2px solid var(--color-accent);
