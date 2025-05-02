@@ -5,12 +5,12 @@ import CommercialCards from '@components/section-recent-commercials/CommercialCa
 <section id="recent-commercials" class="recent-commercials">
   <div class="container recent-commercials__container">
     <h2 class="section__heading recent-commercials__heading"><span>подивитись <span class="accent">останні</span></span><span>зйомки</span></h2>
-    <div class="slider">
+    <div class="slider" data-slider="commercial">
       <div class="slider__control-panel">
           <button class="control-panel__button" data-button-backward aria-label="гортати назад"><img src="/images/arrow.svg" alt=""></button>
           <button class="control-panel__button" data-button-forward aria-label="гортати вперед"><img src="/images/arrow.svg" alt=""></button>
       </div>
-      <div class="slider__container" data-scrollable-horizontal>
+      <div class="slider__container" data-slider-track>
         <div class="slider__track">
           <CommercialCards server:defer >
             <div slot="fallback">Loading...</div>
@@ -20,6 +20,11 @@ import CommercialCards from '@components/section-recent-commercials/CommercialCa
     </div>
   </div>
 </section>
+
+<script>
+  import {initSlider} from '../../scripts/slider.ts'
+  initSlider('commercial', {wheelSensitivityMultiplier: 6, slideShift: 400})
+</script>
 
 <style is:global>
 .recent-commercials__container {
