@@ -1,0 +1,21 @@
+---
+import CommercialCard from '@components/section-recent-commercials/CommercialCard.astro';
+
+const playlistItemsUrl = import.meta.env.YOUTUBE_API_FULL_URL;
+const response = await fetch(playlistItemsUrl);
+const playlistData = await response.json()
+const MAX_CAPTION_LENGTH = 35
+---
+
+{
+  // @ts-ignore
+  playlistData?.items?.map(({snippet}) => {
+    let {title, thumbnails, resourceId} = snippet;
+    const thumb =  thumbnails.standard;
+    if (title.length > MAX_CAPTION_LENGTH) title = title.slice(0, MAX_CAPTION_LENGTH - 3) + '...';
+    return <CommercialCard 
+                            {title} src={thumb.url}
+                            width={thumb.width+'px'} height={thumb.height+'px'}
+                            videoId={resourceId.videoId} />
+  })
+}

@@ -1,5 +1,5 @@
 ---
-import CommercialCards from '@components/section-recent-commercials/CommercialCards.astro';
+import CommercialsList from '@components/section-recent-commercials/CommercialsList.astro';
 ---
 
 <section id="recent-commercials" class="recent-commercials">
@@ -12,9 +12,9 @@ import CommercialCards from '@components/section-recent-commercials/CommercialCa
       </div>
       <div class="slider__container" data-slider-track>
         <div class="slider__track">
-          <CommercialCards server:defer >
+          <CommercialsList server:defer >
             <div slot="fallback">Loading...</div>
-          </CommercialCards>
+          </CommercialsList>
         </div>
       </div>
     </div>
