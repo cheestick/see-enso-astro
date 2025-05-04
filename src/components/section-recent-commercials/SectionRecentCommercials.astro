@@ -1,0 +1,75 @@
+---
+import CommercialsList from '@components/section-recent-commercials/CommercialsList.astro';
+import CommercialCardSkeleton from './CommercialCardSkeleton.astro';
+---
+
+<section id="recent-commercials" class="recent-commercials">
+  <div class="container recent-commercials__container">
+    <h2 class="section__heading recent-commercials__heading"><span>подивитись <span class="accent">останні</span></span><span>зйомки</span></h2>
+    <div class="slider" data-slider="commercial">
+      <div class="slider__control-panel">
+          <button class="control-panel__button" data-button-backward aria-label="гортати назад"><img src="/images/arrow.svg" alt=""></button>
+          <button class="control-panel__button" data-button-forward aria-label="гортати вперед"><img src="/images/arrow.svg" alt=""></button>
+      </div>
+      <div class="slider__container" data-slider-track>
+        <div class="slider__track" data-commercials>
+          <CommercialsList server:defer >
+            <CommercialCardSkeleton slot='fallback' indication/>
+            <CommercialCardSkeleton slot='fallback' indication/>
+            <CommercialCardSkeleton slot='fallback' indication/>
+          </CommercialsList>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import {initSlider} from '../../scripts/slider.ts'
+  initSlider('commercial', {wheelSensitivityMultiplier: 6, slideShift: 400})
+
+  const commercialsEl = document.querySelector<HTMLDivElement>('[data-commercials]')
+  if (commercialsEl) {
+    commercialsEl.addEventListener('click', onVideoClick)
+  }
+
+
+  function onVideoClick({target}: Event) {
+    if (target && ("tagName" in target) && target.tagName === "BUTTON") {    
+        // @ts-ignore
+        const { videoId } = target.dataset
+        const videoEl = document.querySelector(`[data-video-id="${videoId}"]`)
+        if (videoEl) {
+          const title = videoEl.querySelector('figcaption')!.getAttribute('aria-label')
+          videoEl.innerHTML = `<iframe
+          width="640" height="480"
+          style="width: 100%; height: 100%;"
+          src="https://www.youtube.com/embed/${videoId}"
+          title="${title}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>`;
+        }
+      }
+    }
+</script>
+
+<style is:global>
+.recent-commercials__container {
+  margin-block-start: var(--section-interval);
+}
+
+.recent-commercials__heading {
+  display: grid;
+  width: 24ch;
+
+  & > span + span {
+    place-self: end;
+  }
+
+  @media (width > 26.5625rem) {
+    margin-inline: auto;
+  }
+}
+</style>
