@@ -19,11 +19,9 @@ if (!src.trim()) {
 
 <figure class="commercial__card" data-video-id={videoId}>
   <img class="commercial__image" {src} {width} alt={title}/>
-  <figcaption class="commercial__title" aria-label={title}>
-    <button 
+  <figcaption class="commercial__title" aria-label={title}><span class="deco-play"></span><button 
             type="button"
-            data-video-id={videoId}><span class="deco-play"></span></button>
-  </figcaption>
+            data-video-id={videoId}></button></figcaption>
 </figure>
 
 <script>
@@ -58,7 +56,7 @@ if (!src.trim()) {
     --c-backdrop: hsla(258, 80%, 12%, 0.75);
     grid-area: banner;
     display: grid;
-    place-items: center;
+    grid-template-areas: button;
     width: 18%;
     aspect-ratio: 1;
     background-color: var(--c-backdrop);
@@ -67,28 +65,34 @@ if (!src.trim()) {
     z-index: 1;
     overflow: clip;
     box-shadow: 0.5em 0.5em 1.5em var(--c-backdrop);
+    isolation: isolate;
 
     button {
-      display: block grid;
-      place-content: center;
+      grid-area: button;
+      grid-column: 1/-1;
       width: 100%;
       aspect-ratio: 1;
       background-color: transparent;
       border: none;
+      border-radius: 100%;
       cursor: pointer;
-
-      &:hover .deco-play {
-        mix-blend-mode: color-dodge;
-      }
+      z-index: 10;
     }
   }
 
   .deco-play {
     --color-play: var(--color-border);
+    grid-area: button;
+    place-self: center;
+    grid-column: 1/-1;
     width: 1.75rem;
     aspect-ratio: 1;
     background-color: var(--color-play);
     clip-path: polygon(25% 0, 25% 100%, 100% 50%);
     pointer-events: none;
+  }
+
+  .commercial__title:has(button:hover) .deco-play {
+    mix-blend-mode: color-dodge;
   }
 </style>
