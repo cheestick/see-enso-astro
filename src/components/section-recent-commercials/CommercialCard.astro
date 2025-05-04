@@ -1,4 +1,6 @@
 ---
+import config from '@data/config'
+
 interface Props {
   src: string
   width: string
@@ -7,18 +9,30 @@ interface Props {
   videoId: string
 }
 
-const {src = "https://www.youtube.com/@see-enso" , width = "640px", height = "360px", title = "Наш YouTube", videoId = ""} = Astro.props
+const youtube = config.seContactInfo.find(({caption}) => caption === "youtube")
+let {src, width = "640px", height = "360px", title = "Наш YouTube", videoId = ""} = Astro.props
 
+if (!src.trim()) {
+  src = youtube?.link || "";
+};
 ---
 
 <figure class="commercial__card" data-video-id={videoId}>
   <img class="commercial__image" {src} {width} alt={title}/>
-  <figcaption class="commercial__title" aria-label={title}><button><span class="deco-play"></span></button></figcaption>
+  <figcaption class="commercial__title" aria-label={title}>
+    <button 
+            type="button"
+            data-video-id={videoId}><span class="deco-play"></span></button>
+  </figcaption>
 </figure>
+
+<script>
+</script>
 
 <style is:global define:vars={{cardWidth: width, cardHeight: height}}>
   .commercial__card {
     display: grid;
+    place-items: center;
     grid-template-areas: "banner";
     min-width: min(32em, 90%);
     border: 2px solid var(--color-accent);
@@ -42,7 +56,8 @@ const {src = "https://www.youtube.com/@see-enso" , width = "640px", height = "36
   .commercial__title {
     --c-backdrop: hsla(258, 80%, 12%, 0.75);
     grid-area: banner;
-    place-self: center;
+    display: grid;
+    place-items: center;
     width: 18%;
     aspect-ratio: 1;
     background-color: var(--c-backdrop);
@@ -68,8 +83,8 @@ const {src = "https://www.youtube.com/@see-enso" , width = "640px", height = "36
   }
 
   .deco-play {
-    --color-play: rgb(223, 222, 224);
-    width: 30px;
+    --color-play: var(--color-border);
+    width: 1.75rem;
     aspect-ratio: 1;
     background-color: var(--color-play);
     clip-path: polygon(25% 0, 25% 100%, 100% 50%);
