@@ -26,7 +26,7 @@ import CommercialCardSkeleton from './CommercialCardSkeleton.astro';
 
 <script>
   import {initSlider} from '../../scripts/slider.ts'
-  initSlider('commercial', {wheelSensitivityMultiplier: 6, slideShift: 400})
+  initSlider('commercial', { autoVHConvertion: false, wheelSensitivityMultiplier: 6, slideShift: 400})
 
   const commercialsEl = document.querySelector<HTMLDivElement>('[data-commercials]')
   if (commercialsEl) {

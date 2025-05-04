@@ -1,4 +1,5 @@
 interface ISliderOptions {
+  autoVHConvertion?: boolean;
   slideShift?: number;
   wheelSensitivityMultiplier?: number;
 }
@@ -10,7 +11,11 @@ export function initSlider(name: string, options?: ISliderOptions) {
 
   if (!sliderComponent) return;
 
-  const { slideShift = 250, wheelSensitivityMultiplier = 5 } = options || {};
+  const {
+    autoVHConvertion = true,
+    slideShift = 250,
+    wheelSensitivityMultiplier = 5,
+  } = options || {};
   const sliderTrack = sliderComponent.querySelector("[data-slider-track]");
   const buttonBackward = sliderComponent.querySelector(
     "[data-button-backward]"
@@ -18,8 +23,10 @@ export function initSlider(name: string, options?: ISliderOptions) {
   const buttonForward = sliderComponent.querySelector("[data-button-forward]");
 
   if (sliderTrack) {
-    // @ts-ignore
-    sliderTrack.addEventListener("wheel", trackWheelHandler(sliderTrack));
+    if (autoVHConvertion) {
+      // @ts-ignore
+      sliderTrack.addEventListener("wheel", trackWheelHandler(sliderTrack));
+    }
     if (buttonBackward && buttonForward) {
       buttonBackward.addEventListener(
         "click",
