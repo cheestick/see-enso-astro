@@ -35,6 +35,7 @@ if (!src.trim()) {
     place-items: center;
     grid-template-areas: "banner";
     min-width: min(32em, 90%);
+    aspect-ratio: 16/9;
     border: 2px solid var(--color-accent);
     border-radius: 1.125em;
     overflow: clip;
@@ -88,5 +89,6 @@ if (!src.trim()) {
     aspect-ratio: 1;
     background-color: var(--color-play);
     clip-path: polygon(25% 0, 25% 100%, 100% 50%);
+    pointer-events: none;
   }
 </style>
