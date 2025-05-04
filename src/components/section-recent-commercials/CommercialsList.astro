@@ -2,8 +2,6 @@
 import CommercialCard from '@components/section-recent-commercials/CommercialCard.astro';
 import CommercialCardSkeleton from './CommercialCardSkeleton.astro';
 
-await new Promise (r => setTimeout(r, 15000))
-
 const MAX_CAPTION_LENGTH = 80
 const playlistItemsUrl = import.meta.env.YOUTUBE_API_FULL_URL;
 let playlistData = null;
