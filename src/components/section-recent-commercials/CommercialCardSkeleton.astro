@@ -1,0 +1,66 @@
+---
+import skeletonImage from "@assets/skeleton/commercial.png"
+import { Picture } from 'astro:assets'
+const fallbackUrl = 'https://www.youtube.com/playlist?list=PLH2AveYOyCcjFB_WDj8AJS0r5rtu4F4Ps'
+---
+
+<figure class="skeleton__card commercial">
+  <Picture  class="skeleton__image commercial"
+            src={skeletonImage}
+            width={skeletonImage.width}
+            height={skeletonImage.height}
+            alt={''}
+            formats={['avif', 'webp']}
+            fallbackFormat='jpg'
+            quality={30}
+            pictureAttributes={{class: "skeleton__image-wrapper commercial"}} />
+  <figcaption class="skeleton__title commercial"><a class="skeleton__link commercial" href={fallbackUrl} target="_blank" rel="noopener noreferrer">Вперед до зйомок</a></figcaption>
+</figure>
+
+<style is:global>
+  .skeleton__card.commercial {
+    display: grid;
+    grid-template-areas: card;
+    place-content: center;
+    place-items: center;
+    min-width: min(32em, 90%);
+    border-radius: 1em;
+    border: 2px solid var(--color-accent);
+    overflow: clip;
+
+    > * {
+      grid-area: card;
+    }
+  }
+
+  .skeleton__image.commercial {
+    --c-edges: rgba(0, 0, 0, 0.35);
+    --c-center: rgba(255, 255, 255, 1);
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    mask-image: linear-gradient(65deg, var(--c-edges), var(--c-center) 40%, var(--c-center) 60%, var(--c-edges));
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    filter: contrast(1.1);
+  }
+
+  .skeleton__title.commercial {
+    --c-backdrop: hsla(258, 80%, 12%, 0.75);
+    display: grid;
+    background-color: var(--c-backdrop);
+    border-radius: 2em;
+    backdrop-filter: blur(10px);
+    box-shadow: 0.5em 0.5em 1.5em var(--c-backdrop);
+    overflow: clip;
+  }
+
+  .skeleton__link.commercial {
+    text-decoration: underline;
+    padding: 1em 1.5em;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+</style>
