@@ -2,10 +2,17 @@
 import skeletonImage from "@assets/skeleton/commercial.png"
 import { Picture } from 'astro:assets'
 const fallbackUrl = 'https://www.youtube.com/playlist?list=PLH2AveYOyCcjFB_WDj8AJS0r5rtu4F4Ps'
+
+interface Props {
+  indication?: boolean
+  index?: number
+}
+const {indication = false, index = '0'} = Astro.props
 ---
 
-<figure class="skeleton__card commercial">
+<figure class="skeleton__card commercial" style={`--index: ${index};`}>
   <Picture  class="skeleton__image commercial"
+            class:list={{["skeleton__loading-indication"]: indication}}
             src={skeletonImage}
             width={skeletonImage.width}
             height={skeletonImage.height}
@@ -61,6 +68,22 @@ const fallbackUrl = 'https://www.youtube.com/playlist?list=PLH2AveYOyCcjFB_WDj8A
 
     &:hover {
       opacity: 0.85;
+    }
+  }
+
+  .skeleton__loading-indication {
+    --delay-step: 200ms;
+    --delay: calc(var(--delay-step) * var(--index, 0));
+    animation: loadingIndication 1.5s alternate-reverse infinite ease-in;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes loadingIndication {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 0.5;
     }
   }
 </style>
