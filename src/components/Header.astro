@@ -26,15 +26,15 @@ import SiteOptions from './SiteOptions.astro';
   }
 
   .header::before {
-    /* --color-backdrop: rgba(25, 35, 39, 0.208); */
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-backdrop);
+    background-color: var(--color-backdrop, rgba(6, 5, 11, 0.3));
     backdrop-filter: var(--backdrop-blur, 10px);
+    -webkit-backdrop-filter:var(--backdrop-blur, 10px);
     z-index: -1;
   }
   .header__container {
