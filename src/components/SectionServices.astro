@@ -5,9 +5,9 @@ import ServiceCard from './ServiceCard.astro';
 const services = await getCollection('services')
 ---
 
-<section id="services" class="services">
+<section class="services">
   <div class="container services__container">
-    <h2 class="section__heading services__heading">
+    <h2 id="services" class="section__heading services__heading">
       <span>перелік наших</span>
       <span class="accent line2">послуг</span>
     </h2>
@@ -118,10 +118,7 @@ const services = await getCollection('services')
 <style is:global>
   .services {
     overflow-x: clip;
-  }
-
-  .services__container {
-    margin-block-start: var(--section-interval);
+    padding-block-start: var(--section-interval);
   }
 
   .services__heading > .line2 {

@@ -1,4 +1,5 @@
 html {
+  scroll-padding-block-start: var(--scroll-offset-start);
   scrollbar-color: var(--swatch-purple-650) rgba(0 0 0 / 0);
   scrollbar-width: thin;
   color-scheme: dark;
@@ -48,10 +49,6 @@ button {
   --side: clamp(7px, 1.5vw, 20px);
   width: min(90rem, calc(100% - 2 * var(--side)));
   margin-inline: auto;
-}
-
-body > * {
-  scroll-margin-block-start: var(--scroll-offset-start);
 }
 
 body:has(nav.show-navigation) {
