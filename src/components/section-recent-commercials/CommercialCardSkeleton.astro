@@ -34,6 +34,7 @@ const {indication = false, index = '0'} = Astro.props
     border-radius: 1em;
     border: 2px solid var(--color-accent);
     overflow: clip;
+    
 
     > * {
       grid-area: card;
@@ -54,10 +55,12 @@ const {indication = false, index = '0'} = Astro.props
 
   .skeleton__title.commercial {
     --c-backdrop: hsla(258, 80%, 12%, 0.75);
+    --blur-amount: 10px;
     display: grid;
     background-color: var(--c-backdrop);
     border-radius: 2em;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--blur-amount, 15px));
+    -webkit-backdrop-filter: blur(var(--blur-amount, 15px));
     box-shadow: 0.5em 0.5em 1.5em var(--c-backdrop);
     overflow: clip;
   }
