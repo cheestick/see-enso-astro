@@ -5,9 +5,9 @@ import CardCase from './CardCase.astro';
 const cases = await getCollection('cases')
 ---
 
-<section id="cases" class="cases">
+<section class="cases">
   <div class="container">
-    <h2 class="section__heading cases__heading">
+    <h2 id="cases" class="section__heading cases__heading">
       <span class="line line1">кейси,</span>
       <span class="line line2">що <span class="accent">відображають</span></span>
       <span class="line line3">нашу агенцію</span>
@@ -54,12 +54,9 @@ casesForwardButton?.addEventListener('click', (e) => {
 
 <style is:global>
 .cases {
-  margin-block-start: clamp(6.875rem, 4.8162rem + 10.2941vw, 11.25rem);
+  padding-block-start: var(--section-interval);
 }
 
-.cases .container {
-  margin-block-start: var(--section-interval);
-}
 .section__heading.cases__heading {
   width: fit-content;
 

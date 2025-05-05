@@ -2,9 +2,9 @@
 import TeamList from './TeamList.astro';
 ---
 
-<section id="team" class="team">
+<section class="team">
   <div class="team__container container">
-    <h2 class="section__heading team__heading">
+    <h2 id="team" class="section__heading team__heading">
       <span class="line first">сильну <span class="accent">агенцію</span></span>
       <span class="line second">будує сильна <span class="accent">команда</span></span>
     </h2>
@@ -16,10 +16,10 @@ import TeamList from './TeamList.astro';
 <style is:global>
   .team {
     overflow: hidden;
+    padding-block-start: var(--section-interval);
   }
 
   .team__container {
-    margin-block-start: var(--section-interval);
     height: 100%;
   }
 
