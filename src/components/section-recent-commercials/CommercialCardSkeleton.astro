@@ -10,7 +10,7 @@ interface Props {
 const {indication = false, index = '0'} = Astro.props
 ---
 
-<figure class="skeleton__card commercial" style={`--index: ${index};`}>
+<figure class="skeleton__card commercial" style={`--index: ${index};`} animation-slider="card">
   <Picture  class="skeleton__image commercial"
             class:list={{["skeleton__loading-indication"]: indication}}
             src={skeletonImage}

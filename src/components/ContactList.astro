@@ -4,14 +4,14 @@ import config from '@data/config'
 const {seContactInfo} = config
 ---
 
-<ul class="contact__list">
+<ul class="contact__list" animation-contacts="list">
     {
         seContactInfo?.map(({link, icon, caption}) => {
             const inNewTab = !(link?.includes('tel:') || link?.includes('mailto:'))
             const [title, domain] = caption.split('@')
             if (!link) {
                 return (
-                    <li class="list__item">
+                    <li class="list__item" animation-contacts="info">
                         <span class="contact__link">
                             <img class="contact__icon" src={icon} alt={`Лінк на ${caption} компанії`} width="70" height="70"/>
                             <span class="contact__caption">
@@ -22,7 +22,7 @@ const {seContactInfo} = config
             } 
 
             return (
-                <li class="list__item">
+                <li class="list__item" animation-contacts="info">
                     <a 
                         class="contact__link"
                         href={link}

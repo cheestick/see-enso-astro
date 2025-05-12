@@ -24,3 +24,289 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         <SectionTicker/>
     </main>
 </MainLayout>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const aboutTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about [animation-title]",
+            scrub: 1,
+            start: "bottom 95%",
+            end: "bottom 50%",
+        }
+    });
+
+    aboutTimeline.from('.about [animation-title="odd-line"]', {
+        opacity: 0,
+        x: -150,
+        duration: 1,
+    })
+    .from('.about [animation-title="even-line"]', {
+        opacity: 0,
+        x: 150,
+        duration: 1,
+    }, "<70%")
+    .from('.about [animation-title="accent"]', {
+        opacity: 0,
+        duration: 1,
+    }, "<50%")
+    .from('.about [animation-content="greetings"]', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2
+    })
+    .from('.about [animation-content="block1"]', {
+        opacity: 0,
+        x: 100,
+        duration: 1.2,
+        stagger: {
+            amount: 1.2,
+        }
+    })
+    .from('.about [animation-deco]', {
+        opacity: 0,
+        x: -100,
+        stagger: 0.4,
+        scrollTrigger: {
+            trigger: '.about [animation-deco]',
+            scrub: 1,
+            start: "top 80%",
+            end: "top 50%",
+        }
+    })
+    .from('.about [animation-content="block2"]', {
+        opacity: 0,
+        x: -100,
+        duration: 1.2,
+        stagger: 0.4,
+        scrollTrigger: {
+            trigger: '.about [animation-content="block2"]',
+            scrub: 1,
+            end: 'top 60%'
+        }
+    })
+    
+    const servicesTimeline = gsap.timeline({ defaults: {autoAlpha: 1,},
+        scrollTrigger: {
+            trigger: '.services [animation-title]',
+            scrub: 2,
+            start: "top 80%",
+            end: "top 50%",
+        }
+    })
+
+    servicesTimeline.from('.services [animation-title="line"]', {
+        opacity: 0,
+        x: -100,
+        duration: 1.2,
+    })
+    .from('.services [animation-title="accent"]', {
+        opacity: 0,
+        x: 50,
+        duration: 1,
+    }, "-=70%")
+    .from('.services [animation-service="content"]', {
+        opacity: 0,
+        y: 100,
+        stagger: 0.2,
+        duration: 2,
+    }, ">")
+
+    gsap.set('.services [animation-service-button]', {autoAlpha: 1})
+    gsap.from('.services [animation-service-button]', {
+        opacity: 0,
+        stagger: 0.3,
+        duration: 1,
+        scrollTrigger: {
+            trigger: '[data-service-tab-list]',
+            scrub: 1,
+            start: "top 95%",
+            end: "bottom 90%",
+        }
+    })
+    
+
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '.cases [animation-title]',
+            scrub: 2,
+            start: "top 80%",
+            end: "top 50%",
+        }
+    })
+    .from('.cases [animation-title="odd"]',
+        {
+            opacity: 0,
+            x: -50,
+            duration: 2,
+            stagger: 1
+        }
+    )
+    .from('.cases [animation-title="even"]', {
+        opacity: 0,
+        x: 50,
+        duration: 2,
+    }, "<10%")
+    .from('.cases [animation-title="accent"]',
+        {
+            opacity: 0,
+            duration: 2,
+        },
+        "<50%"
+    )
+
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '.cases [animation-scroll]',
+            scrub: 1,
+            start: "top 85%",
+            end: "top 50%",
+        }
+    })
+    .from('.cases [animation-scroll="nav"]', {
+        opacity: 0,
+        x: 50,
+        duration: 1.5,
+    }, "+=2")
+    .from('.cases [animation-card]', {
+        opacity: 0,
+        y: 150,
+        duration: 5,
+        stagger: 0.5,
+    })
+
+    gsap.timeline({ defaults: {duration: 2},
+        scrollTrigger: {
+            trigger: '.team [animation-title]',
+            scrub: 2,
+            start: "top 85%",
+            end: "top 50%",
+        }
+    })
+    .from('.team [animation-title="odd"]', {
+        opacity: 0,
+        x: -50,
+    })
+    .from('.team [animation-title="accent"]', {
+        opacity: 0,
+        stagger: 2
+    }, "-=30%")
+    .from('.team [animation-title="even"]', {
+        opacity: 0,
+        x: 50,
+    }, "<10%")
+    .from('.team ul', {
+        opacity: 0,
+        y: 30,
+    })
+
+    gsap.timeline({defaults: {duration: 2}, 
+        scrollTrigger:{
+            trigger: ".recent-commercials [animation-title]",
+            scrub: 1,
+            start: "top 90%",
+            end: "bottom 70%"
+        }}).from('.recent-commercials [animation-title="odd"]', {
+        opacity: 0,
+        x: -100,
+    })
+    .from ('.recent-commercials [animation-title="accent"]', {
+        opacity: 0,
+    }, "-=70%")
+    .from('.recent-commercials [animation-title="even"]', {
+        opacity: 0,
+        x: 100,
+    })
+
+    gsap.timeline({defaults: { duration: 3 }, 
+    scrollTrigger: {
+        trigger: '.recent-commercials [animation-slider]',
+        scrub: 2,
+        start: "top 75%",
+        end: "top center",
+    }})
+    .from('.recent-commercials [animation-slider="controls"]', {
+        opacity: 0,
+        x: 50,
+    })
+    .from('.recent-commercials [animation-slider="track"]', {
+        opacity: 0,
+        y: 50,
+        stagger: 0.5,
+    })
+
+    gsap.timeline({defaults: {duration: 2},
+    scrollTrigger: {
+        trigger: ".ticker",
+        scrub: 1,
+        start: "top 60%",
+        end: "bottom center",
+    }})
+    .from('[animation-ticker]', {
+        opacity: 0
+    })
+
+    gsap.timeline({defaults: {duration: 2},
+    scrollTrigger: {
+        trigger: '.footer [animation-form]',
+        scrub: 2,
+        start: "top 70%",
+        end: "center center",
+    }})
+    .from('.footer [animation-form="line"]', {
+        opacity: 0,
+        x: -50,
+    })
+    .from('.footer [animation-form="accent"]', {
+        opacity: 0,
+    }, "<20%")
+    .from('.footer [animation-form="feedback"]', {
+        opacity: 0,
+        y: 20,
+    }, "-=30%")
+    .from('.footer [animation-form="form"]', {
+        opacity: 0,
+        y: 50,
+    }, "-=30%")
+
+    gsap.timeline({defaults: {duration: 2},
+    scrollTrigger: {
+        trigger: '.footer [animation-contacts]',
+        scrub: 2,
+        start: "top 70%",
+        end: "center center",
+    }})
+    .from('.footer [animation-contacts="title"]', {
+        opacity: 0,
+        x: 50,
+    })
+    .from('.footer [animation-contacts="accent"]', {
+        opacity: 0,
+    }, "<70%")
+    .from('.footer [animation-contacts="info"]', {
+        opacity: 0,
+        x: 20,
+        stagger: 0.4,
+    }, "-=30%")
+    .from('.footer [animation-contacts="aux"]', {
+        opacity: 0,
+        x: 30,
+    })
+
+    gsap.timeline({defaults: {duration: 4},
+    scrollTrigger: {
+        trigger: '.footer [animation-policy]',
+        scrub: 2,
+        start: "top bottom",
+        end: "bottom 90%",
+    }})
+    .from('.footer [animation-policy] > p', {
+        opacity: 0,
+        y: 50,
+        stagger: 0.7,
+    })
+</script>
