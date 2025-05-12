@@ -4,14 +4,14 @@ import CommercialCardSkeleton from './CommercialCardSkeleton.astro';
 ---
 
 <section id="recent-commercials" class="recent-commercials">
-  <div class="container recent-commercials__container">
-    <h2 class="section__heading recent-commercials__heading"><span>подивитись <span class="accent">останні</span></span><span>зйомки</span></h2>
-    <div class="slider" data-slider="commercial">
-      <div class="slider__control-panel">
+  <div class="container recent-commercials__container" >
+    <h2 class="section__heading recent-commercials__heading" animation-title><span animation-title="odd">подивитись <span class="accent" animation-title="accent">останні</span></span><span animation-title="even">зйомки</span></h2>
+    <div class="slider" data-slider="commercial" animation-slider>
+      <div class="slider__control-panel" animation-slider="controls">
           <button class="control-panel__button" data-button-backward aria-label="гортати назад"><img src="/images/arrow.svg" alt=""></button>
           <button class="control-panel__button" data-button-forward aria-label="гортати вперед"><img src="/images/arrow.svg" alt=""></button>
       </div>
-      <div class="slider__container" data-slider-track>
+      <div class="slider__container" data-slider-track animation-slider="track">
         <div class="slider__track" data-commercials>
           <CommercialsList server:defer >
             <CommercialCardSkeleton slot='fallback' indication/>
@@ -65,6 +65,9 @@ import CommercialCardSkeleton from './CommercialCardSkeleton.astro';
 </script>
 
 <style is:global>
+.recent-commercials {
+  overflow-x: clip;
+}
 .recent-commercials__container {
   margin-block-start: var(--section-interval);
 }

@@ -204,4 +204,39 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         y: 30,
     })
 
+    gsap.timeline({defaults: {duration: 2}, 
+        scrollTrigger:{
+            trigger: ".recent-commercials [animation-title]",
+            scrub: 1,
+            start: "top 90%",
+            end: "bottom 70%"
+        }}).from('.recent-commercials [animation-title="odd"]', {
+        opacity: 0,
+        x: -100,
+    })
+    .from ('.recent-commercials [animation-title="accent"]', {
+        opacity: 0,
+    }, "-=70%")
+    .from('.recent-commercials [animation-title="even"]', {
+        opacity: 0,
+        x: 100,
+    })
+
+    gsap.timeline({defaults: { duration: 3 }, 
+    scrollTrigger: {
+        trigger: '.recent-commercials [animation-slider]',
+        scrub: 2,
+        start: "top 80%",
+        end: "top center",
+    }})
+    .from('.recent-commercials [animation-slider="controls"]', {
+        opacity: 0,
+        x: 100,
+    })
+    .from('.recent-commercials [animation-slider="track"]', {
+        opacity: 0,
+        y: 50,
+        stagger: 0.5,
+    })
+
 </script>
