@@ -18,7 +18,7 @@ const services = await getCollection('services')
             let subServiceCount = data.variation.length.toString().padStart(2, "0")
             let tabIndex = String(idx + 1).padStart(2, '0')
             return ( 
-              <label class="tab nav__control">
+              <label class="tab nav__control" animation-service-button>
                 <input 
                   type="radio" 
                   name="se-services" 
@@ -32,7 +32,7 @@ const services = await getCollection('services')
         }
       </div>
 
-      <div class="tab__content" data-service-tab-content animation-service="service">
+      <div class="tab__content" data-service-tab-content animation-service="content">
         {
           services?.map((service, idx) =>{
             return <ServiceCard {service} {idx}/>
