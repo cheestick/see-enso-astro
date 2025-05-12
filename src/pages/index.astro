@@ -24,3 +24,72 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         <SectionTicker/>
     </main>
 </MainLayout>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const aboutTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".about [animation-title]",
+            scrub: 1,
+            start: "bottom 95%",
+            end: "bottom 50%",
+        }
+    });
+
+    aboutTimeline.from('[animation-title="odd-line"]', {
+        opacity: 0,
+        x: -150,
+        duration: 1,
+    })
+    .from('[animation-title="even-line"]', {
+        opacity: 0,
+        x: 150,
+        duration: 1,
+    }, "<70%")
+    .from('[animation-title="accent"]', {
+        opacity: 0,
+        duration: 1,
+    }, "<50%")
+    .from('[animation-content="greetings"]', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2
+    })
+    .from('[animation-content="block1"]', {
+        opacity: 0,
+        x: 100,
+        duration: 1.2,
+        stagger: {
+            amount: 1.2,
+        }
+    })
+    .from('[animation-deco]', {
+        opacity: 0,
+        x: -100,
+        stagger: 0.4,
+        scrollTrigger: {
+            trigger: '.about [animation-deco]',
+            scrub: 1,
+            start: "top 80%",
+            end: "top 50%",
+        }
+    })
+    .from('[animation-content="block2"]', {
+        opacity: 0,
+        x: -100,
+        duration: 1.2,
+        stagger: 0.4,
+        scrollTrigger: {
+            trigger: '.about [animation-content="block2"]',
+            scrub: 1,
+            end: 'top 60%'
+        }
+    },)
+    
+
+    
+</script>
