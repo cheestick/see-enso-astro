@@ -6,22 +6,22 @@ import ContactList from './ContactList.astro';
 
 <footer class="footer">
     <div id="contacts" class="container footer__container">
-        <div class="feedback-group">
-            <h3 class="feedback-gpoup__heading">
-                <span>Бажаєте отримати</span>
-                <span>консультацію?</span>
+        <div class="feedback-group" animation-form>
+            <h3 class="feedback-gpoup__heading" animation-form="title">
+                <span animation-form="line">Бажаєте отримати</span>
+                <span animation-form="accent">консультацію?</span>
             </h3>
-            <p class="feedback__cta">Залиште свої дані і наш менеджер з вами зв’яжеться.</p>
+            <p class="feedback__cta" animation-form="feedback">Залиште свої дані і наш менеджер з вами зв’яжеться.</p>
             <FeedbackFrom />
         </div>
 
-        <div class="contact-group deco">
-            <h3 class="section__heading contact__heading">ми в <span class="accent">соцмережах</span></h3>
-            <p class="info">Діджитал агенція, що створює цілісний продукт</p>
+        <div class="contact-group deco" animation-contacts>
+            <h3 class="section__heading contact__heading" animation-contacts="title"><span>ми в <span class="accent" animation-contacts="accent">соцмережах</span></span></h3>
+            <p class="info" animation-contacts="aux">Діджитал агенція, що створює цілісний продукт</p>
             <ContactList />
         </div>
 
-        <div class="policy-group">
+        <div class="policy-group" animation-policy>
             <p>Політика Конфіденційності</p>
             <p>Договір Оферти</p>
         </div>

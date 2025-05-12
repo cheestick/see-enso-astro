@@ -8,7 +8,7 @@ const itemsCount = srcBrandList.length
 <section id="ticker" class="ticker">
   <div class="container ticker__container">
     <h2 class="section__heading visually-hidden"><span>нам</span> <span>довіряють</span></h2>
-    <div class="ticker__carousel">
+    <div class="ticker__carousel" animation-ticker>
       <div class="carousel__track" style={`--items-count: ${itemsCount}`}>
         {
           srcBrandList.map( src => <img class="carousel__image" {src} alt="" loading="lazy" width="300" height="169"/>)

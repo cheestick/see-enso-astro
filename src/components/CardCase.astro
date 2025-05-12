@@ -10,7 +10,7 @@ interface Props {
 const {title, description, tags, thumbUrl, link, hint } = Astro.props.case.data
 ---
 
-<article style="--image-rotation: -25deg;" class="card-case" tabindex="-1" title={title}>
+<article style="--image-rotation: -25deg;" class="card-case" tabindex="-1" title={title} animation-card>
   <h3 class="card-case__heading">{title}</h3>
   <p class="card-case__description">{description}</p>
   <Image 

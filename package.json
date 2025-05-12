@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/vercel": "^8.1.4",
     "astro": "^5.7.12",
+    "gsap": "^3.13.0",
     "typescript": "^5.6.2"
   },
   "devDependencies": {
