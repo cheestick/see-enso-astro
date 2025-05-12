@@ -7,12 +7,12 @@ const cases = await getCollection('cases')
 
 <section class="cases">
   <div class="container">
-    <h2 id="cases" class="section__heading cases__heading">
-      <span class="line line1">кейси,</span>
-      <span class="line line2">що <span class="accent">відображають</span></span>
-      <span class="line line3">нашу агенцію</span>
+    <h2 id="cases" class="section__heading cases__heading" animation-title>
+      <span class="line line1" animation-title="odd">кейси,</span>
+      <span class="line line2" animation-title="even">що <span class="accent" animation-title="accent">відображають</span></span>
+      <span class="line line3" animation-title="odd">нашу агенцію</span>
     </h2>
-    <div class="cases__scroller-nav">
+    <div class="cases__scroller-nav" animation-scroll="nav">
       <button class="scroller-nav__button" type="button" aria-label="гортати назад" data-button-backward>
         <img src="/images/arrow.svg" alt="">
       </button>
@@ -20,7 +20,7 @@ const cases = await getCollection('cases')
         <img src="/images/arrow.svg" alt="">
       </button>
     </div>
-    <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal>
+    <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal animation-scroll="cards">
       <div  class="cases-cards subgrid-parent" >
       {
         cases?.map((card) => (
