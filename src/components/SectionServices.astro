@@ -7,11 +7,11 @@ const services = await getCollection('services')
 
 <section class="services">
   <div class="container services__container">
-    <h2 id="services" class="section__heading services__heading">
-      <span>перелік наших</span>
-      <span class="accent line2">послуг</span>
+    <h2 id="services" class="section__heading services__heading" animation-title>
+      <span animation-title="line">перелік наших</span>
+      <span class="accent line2" animation-title="accent">послуг</span>
     </h2>
-    <div class="tabs services__tabs">
+    <div class="tabs services__tabs" animation-service="navigation">
       <div class="tabs__nav" data-service-tab-list>
         {
           services?.map(({data, id}, idx) => {
@@ -32,7 +32,7 @@ const services = await getCollection('services')
         }
       </div>
 
-      <div class="tab__content" data-service-tab-content>
+      <div class="tab__content" data-service-tab-content animation-service="service">
         {
           services?.map((service, idx) =>{
             return <ServiceCard {service} {idx}/>

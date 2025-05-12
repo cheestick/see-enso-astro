@@ -40,26 +40,26 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         }
     });
 
-    aboutTimeline.from('[animation-title="odd-line"]', {
+    aboutTimeline.from('.about [animation-title="odd-line"]', {
         opacity: 0,
         x: -150,
         duration: 1,
     })
-    .from('[animation-title="even-line"]', {
+    .from('.about [animation-title="even-line"]', {
         opacity: 0,
         x: 150,
         duration: 1,
     }, "<70%")
-    .from('[animation-title="accent"]', {
+    .from('.about [animation-title="accent"]', {
         opacity: 0,
         duration: 1,
     }, "<50%")
-    .from('[animation-content="greetings"]', {
+    .from('.about [animation-content="greetings"]', {
         opacity: 0,
         y: 50,
         duration: 1.2
     })
-    .from('[animation-content="block1"]', {
+    .from('.about [animation-content="block1"]', {
         opacity: 0,
         x: 100,
         duration: 1.2,
@@ -67,7 +67,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             amount: 1.2,
         }
     })
-    .from('[animation-deco]', {
+    .from('.about [animation-deco]', {
         opacity: 0,
         x: -100,
         stagger: 0.4,
@@ -78,7 +78,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             end: "top 50%",
         }
     })
-    .from('[animation-content="block2"]', {
+    .from('.about [animation-content="block2"]', {
         opacity: 0,
         x: -100,
         duration: 1.2,
@@ -88,8 +88,32 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             scrub: 1,
             end: 'top 60%'
         }
-    },)
+    })
     
+    const servicesTimeline = gsap.timeline({ defaults: {autoAlpha: 1,},
+        scrollTrigger: {
+            trigger: '.services [animation-title]',
+            scrub: 2,
+            start: "top 80%",
+            end: "top 50%",
+        }
+    })
 
+    servicesTimeline.from('.services [animation-title="line"]', {
+        opacity: 0,
+        x: -100,
+        duration: 1.2,
+    })
+    .from('.services [animation-title="accent"]', {
+        opacity: 0,
+        x: 50,
+        duration: 1,
+    }, "-=70%")
+    .from('.services [animation-service]', {
+        opacity: 0,
+        y: 100,
+        stagger: 0.2,
+        duration: 2,
+    }, ">")
     
 </script>
