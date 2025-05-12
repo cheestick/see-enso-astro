@@ -250,4 +250,63 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         opacity: 0
     })
 
+    gsap.timeline({defaults: {duration: 2},
+    scrollTrigger: {
+        trigger: '.footer [animation-form]',
+        scrub: 2,
+        start: "top 70%",
+        end: "center center",
+    }})
+    .from('.footer [animation-form="line"]', {
+        opacity: 0,
+        x: -50,
+    })
+    .from('.footer [animation-form="accent"]', {
+        opacity: 0,
+    }, "<20%")
+    .from('.footer [animation-form="feedback"]', {
+        opacity: 0,
+        y: 20,
+    }, "-=30%")
+    .from('.footer [animation-form="form"]', {
+        opacity: 0,
+        y: 50,
+    }, "-=30%")
+
+    gsap.timeline({defaults: {duration: 2},
+    scrollTrigger: {
+        trigger: '.footer [animation-contacts]',
+        scrub: 2,
+        start: "top 70%",
+        end: "center center",
+    }})
+    .from('.footer [animation-contacts="title"]', {
+        opacity: 0,
+        x: 50,
+    })
+    .from('.footer [animation-contacts="accent"]', {
+        opacity: 0,
+    }, "<70%")
+    .from('.footer [animation-contacts="info"]', {
+        opacity: 0,
+        x: 20,
+        stagger: 0.4,
+    }, "-=30%")
+    .from('.footer [animation-contacts="aux"]', {
+        opacity: 0,
+        x: 30,
+    })
+
+    gsap.timeline({defaults: {duration: 4},
+    scrollTrigger: {
+        trigger: '.footer [animation-policy]',
+        scrub: 2,
+        start: "top bottom",
+        end: "bottom 90%",
+    }})
+    .from('.footer [animation-policy] > p', {
+        opacity: 0,
+        y: 50,
+        stagger: 0.7,
+    })
 </script>
