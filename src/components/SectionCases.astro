@@ -57,7 +57,6 @@ initSlider('cases')
 .cases {
   padding-block-start: var(--section-interval);
   overflow-x: clip;
-  overflow-y: clip;
 }
 
 .section__heading.cases__heading {
@@ -70,6 +69,10 @@ initSlider('cases')
 
 .cases__heading span:has(.accent) {
   margin-inline-start: 6ch;
+}
+
+.cases .slider__container {
+  overflow-y: clip;
 }
 
 .subgrid-parent {
