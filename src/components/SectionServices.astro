@@ -240,8 +240,12 @@ const services = await getCollection('services')
     .service__price > span,
     .service__duration > span {
         opacity: 0;
-        animation: fadeIn 1s linear forwards;
-        animation-delay: var(--animation-delay, 0)
+        animation-name: fadeIn;
+        animation-iteration-count: 1;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        animation-delay: var(--animation-delay, 0);
     }
 
     .service__thumb > img {
@@ -274,10 +278,31 @@ const services = await getCollection('services')
     }
 }
 
+.a-fade-in {
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-delay: var(--animation-delay, 0);
+}
+
 @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
     to {
         opacity: 1;
     }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes slideIn {
