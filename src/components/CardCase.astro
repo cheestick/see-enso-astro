@@ -1,7 +1,7 @@
 ---
-import {Image} from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import Tag from '@components/Tag.astro'
+import { Picture } from 'astro:assets';
 
 interface Props {
   case: CollectionEntry<'cases'>
@@ -13,14 +13,15 @@ const {title, description, tags, thumbUrl, link, hint } = Astro.props.case.data
 <article style="--image-rotation: -25deg;" class="card-case" tabindex="-1" title={title} animation-card>
   <h3 class="card-case__heading">{title}</h3>
   <p class="card-case__description">{description}</p>
-  <Image 
-        class="card-case__thumb"
+  <Picture 
         src={thumbUrl}
         alt=""
         width={336} height={252}
         densities={[1.5, 2, 3]}
-        format='avif' 
-        quality={"low"} />
+        formats={['avif', 'webp']}
+        fallbackFormat='jpg'
+        quality={"low"}
+        pictureAttributes={{class: "card-case__thumb"}} />
   <div class="card-case__tags">{tags?.map((tag) => (<Tag>{tag}</Tag>)) }
   {   link ?
         <a href={ link } class="card-case__link"

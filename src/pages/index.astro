@@ -31,41 +31,33 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const aboutTimeline = gsap.timeline({
+    gsap.timeline({ defaults: { duration: 1.5 },
         scrollTrigger: {
             trigger: ".about [animation-title]",
-            scrub: 1,
-            start: "bottom 95%",
-            end: "bottom 50%",
+            scrub: 2,
+            start: "top 85%",
+            end: "bottom center",
         }
-    });
-
-    aboutTimeline.from('.about [animation-title="odd-line"]', {
+    })
+    .from('.about [animation-title="odd-line"]', {
         opacity: 0,
         x: -150,
-        duration: 1,
     })
     .from('.about [animation-title="even-line"]', {
         opacity: 0,
         x: 150,
-        duration: 1,
     }, "<70%")
     .from('.about [animation-title="accent"]', {
         opacity: 0,
-        duration: 1,
     }, "<50%")
     .from('.about [animation-content="greetings"]', {
         opacity: 0,
         y: 50,
-        duration: 1.2
     })
     .from('.about [animation-content="block1"]', {
         opacity: 0,
         x: 100,
-        duration: 1.2,
-        stagger: {
-            amount: 1.2,
-        }
+        stagger: 0.4,
     })
     .from('.about [animation-deco]', {
         opacity: 0,
@@ -81,16 +73,15 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
     .from('.about [animation-content="block2"]', {
         opacity: 0,
         x: -100,
-        duration: 1.2,
         stagger: 0.4,
         scrollTrigger: {
             trigger: '.about [animation-content="block2"]',
-            scrub: 1,
+            scrub: 2,
             end: 'top 60%'
         }
     })
     
-    const servicesTimeline = gsap.timeline({ defaults: {autoAlpha: 1,},
+    gsap.timeline({ defaults: {autoAlpha: 1, duration: 1.5},
         scrollTrigger: {
             trigger: '.services [animation-title]',
             scrub: 2,
@@ -98,16 +89,13 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             end: "top 50%",
         }
     })
-
-    servicesTimeline.from('.services [animation-title="line"]', {
+    .from('.services [animation-title="line"]', {
         opacity: 0,
         x: -100,
-        duration: 1.2,
     })
     .from('.services [animation-title="accent"]', {
         opacity: 0,
         x: 50,
-        duration: 1,
     }, "-=70%")
     .from('.services [animation-service="content"]', {
         opacity: 0,
@@ -125,58 +113,54 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             trigger: '[data-service-tab-list]',
             scrub: 1,
             start: "top 95%",
-            end: "bottom 90%",
+            end: "center 95%",
         }
     })
     
 
     gsap.timeline({
+        defaults: {
+            duration: 2,
+        },
         scrollTrigger: {
             trigger: '.cases [animation-title]',
             scrub: 2,
-            start: "top 80%",
-            end: "top 50%",
+            start: "top bottom",
+            end: "top center",
         }
     })
-    .from('.cases [animation-title="odd"]',
-        {
+    .from('.cases [animation-title="odd"]', {
             opacity: 0,
             x: -50,
-            duration: 2,
-            stagger: 1
+            stagger: 1.5
         }
     )
     .from('.cases [animation-title="even"]', {
         opacity: 0,
         x: 50,
-        duration: 2,
     }, "<10%")
-    .from('.cases [animation-title="accent"]',
-        {
+    .from('.cases [animation-title="accent"]', {
             opacity: 0,
-            duration: 2,
-        },
-        "<50%"
-    )
+        }, "<50%")
 
     gsap.timeline({
         scrollTrigger: {
-            trigger: '.cases [animation-scroll]',
-            scrub: 1,
-            start: "top 85%",
-            end: "top 50%",
+            trigger: '.cases [animation-slider]',
+            scrub: 2,
+            start: "top 90%",
+            end: "top 70%",
         }
     })
-    .from('.cases [animation-scroll="nav"]', {
+    .from('.cases [animation-slider="controls"]', {
         opacity: 0,
         x: 50,
         duration: 1.5,
     }, "+=2")
     .from('.cases [animation-card]', {
         opacity: 0,
-        y: 150,
-        duration: 5,
-        stagger: 0.5,
+        y: 50,
+        duration: 2,
+        stagger: { amount: 4 }
     })
 
     gsap.timeline({ defaults: {duration: 2},
@@ -250,12 +234,12 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         opacity: 0
     })
 
-    gsap.timeline({defaults: {duration: 2},
+    gsap.timeline({defaults: {duration: 0.4},
     scrollTrigger: {
         trigger: '.footer [animation-form]',
         scrub: 2,
         start: "top 70%",
-        end: "center center",
+        end: "center 80%",
     }})
     .from('.footer [animation-form="line"]', {
         opacity: 0,
@@ -297,16 +281,20 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         x: 30,
     })
 
-    gsap.timeline({defaults: {duration: 4},
+    gsap.timeline({ defaults: { duration: 1},
     scrollTrigger: {
         trigger: '.footer [animation-policy]',
-        scrub: 2,
         start: "top bottom",
-        end: "bottom 90%",
+        end: "bottom bottom",
+        toggleActions: "play none none reverse",
     }})
     .from('.footer [animation-policy] > p', {
         opacity: 0,
         y: 50,
-        stagger: 0.7,
-    })
+        stagger: 0.4,
+    }, 1.5)
+    .from('.footer .copyright', {
+        opacity: 0,
+        x: 50,
+    }, "-=50%")
 </script>
