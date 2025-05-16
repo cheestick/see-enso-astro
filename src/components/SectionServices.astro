@@ -216,6 +216,18 @@ const services = await getCollection('services')
       flex-wrap: nowrap;
       width: max-content;
 
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+
+      picture img {
+        opacity: 1;
+        transform: translateX(0);
+        transition: 
+          opacity 330ms ease-in,
+          transform 500ms ease-out;
+      }
+
     .list__item {
         opacity: 0;
         transform: translateX(-10ch);
@@ -238,7 +250,21 @@ const services = await getCollection('services')
   }
 
   .tab__content {
+      display: grid;
+      grid-template-areas: tab-view;
       margin-inline-start: -4rem;
+
+      & > * {
+        grid-area: tab-view;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      picture img{
+        opacity: 0;
+        transform: translateX(2rem);
+      }
   }
 
 @media screen and (width > 26.75rem) {
