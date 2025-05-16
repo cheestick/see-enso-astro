@@ -7,55 +7,57 @@ const cases = await getCollection('cases')
 
 <section class="cases">
   <div class="container">
-    <h2 id="cases" class="section__heading cases__heading" animation-title>
-      <span class="line line1" animation-title="odd">кейси,</span>
-      <span class="line line2" animation-title="even">що <span class="accent" animation-title="accent">відображають</span></span>
-      <span class="line line3" animation-title="odd">нашу агенцію</span>
+    <h2 id="cases"
+        class="section__heading cases__heading"
+        animation-title>
+      <span class="line line1"
+            animation-title="odd">кейси,</span>
+      <span class="line line2"
+            animation-title="even">що <span class="accent"
+                                            animation-title="accent">відображають</span></span>
+      <span class="line line3"
+            animation-title="odd">нашу агенцію</span>
     </h2>
-    <div class="cases__scroller-nav" animation-scroll="nav">
-      <button class="scroller-nav__button" type="button" aria-label="гортати назад" data-button-backward>
-        <img src="/images/arrow.svg" alt="">
-      </button>
-      <button class="scroller-nav__button" type="button" aria-label="гортати вперед" data-button-forward>
-        <img src="/images/arrow.svg" alt="">
-      </button>
-    </div>
-    <div id="scrollableCases" class="section-cases__scroller" data-scrollable-horizontal animation-scroll="cards">
-      <div  class="cases-cards subgrid-parent" >
-      {
-        cases?.map((card) => (
-          <CardCase 
-            case={card}
-          />
-        ))
-      }
+    <div  class="slider"
+          data-slider="cases"
+          animation-slider>
+      <div  class="slider__control-panel"
+            animation-slider="controls" >
+        <button class="control-panel__button"
+                type="button"
+                data-button-backward
+                aria-label="гортати назад"><img src="/images/arrow.svg" alt=""></button>
+        <button class="control-panel__button"
+                data-button-forward
+                type="button"
+                aria-label="гортати вперед"><img src="/images/arrow.svg" alt=""></button>
+      </div>
+      <div  id="scrollableCases"
+            class="slider__container"
+            data-slider-track
+            animation-slider="track">
+        <div  class="slider__track subgrid-parent" >
+          {
+            cases?.map((card) => (
+              <CardCase case={card} />
+            ))
+          }
+          </div>
       </div>
     </div>
   </div>
 </section>
 
 <script >
-let caseScroller = document.querySelector('div[data-scrollable-horizontal]') as HTMLDivElement
-let casesBackwardButton = document.querySelector('[data-button-backward]') as HTMLButtonElement
-let casesForwardButton = document.querySelector('[data-button-forward]') as HTMLButtonElement
-
-caseScroller?.addEventListener('wheel', (e) => {
-    e.preventDefault()
-    caseScroller.scrollLeft += 5*e.deltaY + e.deltaX
-  });
-
-casesBackwardButton?.addEventListener('click', (e) => {
-  caseScroller.scrollLeft -= 250
-})
-casesForwardButton?.addEventListener('click', (e) => {
-  caseScroller.scrollLeft += 250
-})
+import { initSlider } from 'src/scripts/slider';
+initSlider('cases')
 </script>
 
 <style is:global>
 .cases {
   padding-block-start: var(--section-interval);
   overflow-x: clip;
+  overflow-y: clip;
 }
 
 .section__heading.cases__heading {
@@ -70,73 +72,10 @@ casesForwardButton?.addEventListener('click', (e) => {
   margin-inline-start: 6ch;
 }
 
-.cases__scroller-nav {
-  --gap: 4rem;
-  display: flex;
-  justify-content: center;
-  gap: var(--gap);
-  margin-block-start: 1.875rem;
-  overflow: clip;
-
-  @media (width > 26.5625rem) {
-    --gap: 1.25rem;
-    justify-content: end;
-    margin-inline-end: 10%;
-  }
-}
-
-.scroller-nav__button {
-  --py: clamp(0.625rem, 0.4194rem + 0.7742vw, 1rem);
-  --px: clamp(0.875rem, 0.75rem + 0.625vw, 1.3125rem);
-  --br: 15rem;
-  --c-bg: var(--swatch-neutral-700);
-
-  display: inline-flex;
-  align-items: center;
-  padding-block: var(--py);
-  padding-inline: var(--px);
-  border: none;
-  border-radius: var(--br);
-  background-color: var(--c-bg);
-}
-
-.scroller-nav__button:hover,
-.scroller-nav__button:focus-within {
-  --c-bg: var(--swatch-neutral-400);
-}
-
-[data-button-forward] img {
-  rotate: 180deg;
-} 
-[data-button-backward] img {
-  rotate: 0deg;
-} 
-
-.section-cases__scroller {
-  margin-block-start: 1.25rem;
-  overflow-x: auto;
-  overflow-y: auto;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; 
-  scroll-behavior: smooth;
-  mask-image: linear-gradient(90deg, transparent, white 3%, white 97%, transparent);
-  mask-size: 100%;
-  mask-repeat: no-repeat;
-
-  @media screen and (width > 60rem) {
-    scroll-snap-type: none ;
-  }
-}
-
 .subgrid-parent {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: auto auto 1fr auto;
     column-gap: 0.75rem;
-}
-
-.cases-cards {
-  scroll-snap-stop: always;
 }
 </style>
