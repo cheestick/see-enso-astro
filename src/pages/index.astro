@@ -32,24 +32,66 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
 
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
+    document.fonts.ready.then(() => {
+      SplitText.create(
+        '[animation-hero-title] .top-line',
+        {
+          type: "chars",
+          onSplit(self) {
+            return  gsap.from(self.chars, {
+              duration: 1.7,
+              y: -100,
+              skewX: 35,
+              skewY: 65,
+              autoAlpha: 0,
+              stagger: 0.04,
+              ease: 'elastic.out',
+              onComplete: () => self.revert()
+            })
+          }
+        })
+
+      SplitText.create('[animation-hero-title] .bottom-line', {
+        type: "words",
+          onSplit(self) {
+            return  gsap.from(self.words, {
+              duration: 1.2,
+              y: 100,
+              autoAlpha: 0,
+              stagger: 0.2,
+              ease: 'elastic.out',
+              delay: 0.5,
+              onComplete: () => self.revert()
+            })
+          }
+      })
+    })
+
+    gsap.set('.header', {yPercent: -100})
+
     gsap.timeline({defaults: {duration: 0.7},
     scrollTrigger: {
       trigger: '.hero',
-      scrub: 0.5,
+      scrub: 0.75,
       pin: '.hero__animation-wrapper',
-      end: "+=100%"
+      end: "+=125%"
     }})
     .to('.hero__deco-planet', {
-      "--clip-radius": "15%",
+      "--clip-radius": "5%",
     })
-    .from('.hero__hid g', {
+    .from('.planetary-glowing', {
       opacity: 0,
-      scale: 0.5,
-      stagger: 0.05,
-    }, "<")
-    .to('.hero__hid g', {
-      rotateZ: 360,
-    })
+      duration: 2,
+    }, "-=15%")
+    .from('.hero__hid', {
+      opacity: 0,
+      scale: 1.2,
+      stagger: 0.1,
+    }, "-=25%")
+    .to('.hero__hid', {
+      rotationZ: 'random(-360, 360)',
+      stagger: 0.1,
+    }, "-=40%")
 
     gsap.timeline({ defaults: { duration: 1.5 },
         scrollTrigger: {
@@ -59,6 +101,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             end: "bottom center",
         }
     })
+    .to('.header', {yPercent: 0})
     .from('.about [animation-title="odd-line"]', {
         opacity: 0,
         x: -150,

@@ -1,13 +1,28 @@
 ---
-import HidGroup from './hid-group.svg'
+import { Picture } from 'astro:assets'
+import HidOne from './hid-01.svg'
+import HidTwo from './hid-02.svg'
+import HidThree from './hid-03.svg'
+import HidFour from './hid-04.svg'
+import HidFive from './hid-05.svg'
+import planetaryGlowing from './planetary-glowing.png'
 ---
 
 <section class="hero">
   <h1 class="visually-hidden">See Enso - Digital Agency</h1>
   <div class="hero__animation-wrapper">
-
-    <!-- <HeroLayoutSVG class="hero__layout-svg" /> -->
-    <HidGroup class='hero__hid'/>
+    <Picture
+              src={planetaryGlowing}
+              width={1920} height={1080}
+              formats={["avif", "webp"]}
+              fallbackFormat='png'
+              pictureAttributes={{class: 'hero__pic planetary-glowing'}}
+              alt=''/>
+    <HidOne class='hero__hid' />
+    <HidTwo class='hero__hid' />
+    <HidThree class='hero__hid' />
+    <HidFour class='hero__hid' />
+    <HidFive class='hero__hid' />
     <div class="hero__deco-planet" aria-hidden></div>
     <div class="hero__title" aria-hidden animation-hero-title><span class="top-line" aria-hidden>See Enso</span><span class="bottom-line" aria-hidden>digital agency</span></div>
   </div>
@@ -16,8 +31,8 @@ import HidGroup from './hid-group.svg'
 <style is:global>
   body {
     background-image: url("/images/hero/stars.png");
-    background-attachment: fixed;
   }
+
   .hero {
     overflow-x: clip;
   }
@@ -32,22 +47,38 @@ import HidGroup from './hid-group.svg'
     isolation: isolate;
   }
 
-  .hero__layout-svg {
+  .hero__pic {
     grid-area: hero;
+    width: min(100%, 1200px)
+    /* z-index: 10; */
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .hero__hid {
     grid-area: hero;
-    width: 50%;
+    width: min(90%, 800px);
     aspect-ratio: 1;
-    /* transform-origin: center; */
     color: var(--text-color);
-
-    g {
-      transform-origin: 50% 50%;
-    }
+    transform-origin: 50% 50%;
   }
 
+
+  .hero__deco-planet {
+    --clip-radius: 100%;
+    grid-area: hero;
+    content: '';
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    clip-path: circle(var(--clip-radius) at 50% 50%);
+  }
 
   .hero__title {
     grid-area: hero;
@@ -60,24 +91,17 @@ import HidGroup from './hid-group.svg'
     z-index: 99;
   }
 
-  .hero__deco-planet {
-    --clip-radius: 100%;
-    grid-area: hero;
-    content: '';
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--bg-color);
-    clip-path: circle(var(--clip-radius) at 50% 50%);
-    /* transition: clip-path 500ms ease-in; */
-  }
-
   .hero__title .top-line {
     font-family: 'Arupala Grotesk Variable', 'Open Sans', sans-serif;
     font-weight: 300;
     font-size: 3.375rem;
     letter-spacing: 0.25rem;
     line-height: 1.15;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+
+    @media (width < 23.5rem) {
+      font-size: 2.75rem;
+    }
   }
 
   .hero__title .bottom-line {
@@ -85,6 +109,7 @@ import HidGroup from './hid-group.svg'
     font-weight: 300;
     font-size: 0.875rem;
     letter-spacing: 0.25rem;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   }
 
   .hero__picture {
