@@ -1,7 +1,7 @@
 ---
 import MainLayout from '@layouts/MainLayout.astro';
 import Header from '@components/Header.astro';
-import SectionHero from '@components/SectionHero.astro';
+import SectionHero from '@components/hero/SectionHero.astro';
 import SectionAbout from '@components/SectionAbout.astro';
 import SectionServices from '@components/SectionServices.astro';
 import SectionCases from '@components/SectionCases.astro';
@@ -13,11 +13,11 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
 ---
 
 <MainLayout title="See Enso - Digital Agency">
-    <Header /> 
+    <Header />
     <main>
         <SectionHero/>
         <SectionAbout/>
-        <SectionServices />	
+        <SectionServices />
         <SectionCases/>
         <SectionTeam/>
         <SectionRecentCommercials />
@@ -26,10 +26,30 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
 </MainLayout>
 
 <script>
-    import { gsap } from 'gsap';
-    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { SplitText } from 'gsap/SplitText';
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    gsap.timeline({defaults: {duration: 0.7},
+    scrollTrigger: {
+      trigger: '.hero',
+      scrub: 0.5,
+      pin: '.hero__animation-wrapper',
+      end: "+=100%"
+    }})
+    .to('.hero__deco-planet', {
+      "--clip-radius": "15%",
+    })
+    .from('.hero__hid g', {
+      opacity: 0,
+      scale: 0.5,
+      stagger: 0.05,
+    }, "<")
+    .to('.hero__hid g', {
+      rotateZ: 360,
+    })
 
     gsap.timeline({ defaults: { duration: 1.5 },
         scrollTrigger: {
@@ -80,7 +100,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             end: 'top 60%'
         }
     })
-    
+
     gsap.timeline({ defaults: {autoAlpha: 1, duration: 1.5},
         scrollTrigger: {
             trigger: '.services [animation-title]',
@@ -116,7 +136,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             end: "center 95%",
         }
     })
-    
+
 
     gsap.timeline({
         defaults: {
@@ -188,7 +208,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         y: 30,
     })
 
-    gsap.timeline({defaults: {duration: 2}, 
+    gsap.timeline({defaults: {duration: 2},
         scrollTrigger:{
             trigger: ".recent-commercials [animation-title]",
             scrub: 1,
@@ -206,7 +226,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
         x: 100,
     })
 
-    gsap.timeline({defaults: { duration: 3 }, 
+    gsap.timeline({defaults: { duration: 3 },
     scrollTrigger: {
         trigger: '.recent-commercials [animation-slider]',
         scrub: 2,
