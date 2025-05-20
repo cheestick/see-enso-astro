@@ -5,6 +5,7 @@ import HidTwo from './hid-02.svg'
 import HidThree from './hid-03.svg'
 import HidFour from './hid-04.svg'
 import HidFive from './hid-05.svg'
+import Chevrones from './chevrones.svg'
 import planetaryGlowing from './planetary-glowing.png'
 ---
 
@@ -13,18 +14,24 @@ import planetaryGlowing from './planetary-glowing.png'
   <div class="hero__animation-wrapper">
     <Picture
               src={planetaryGlowing}
-              width={1920} height={1080}
+              width={600} height={600}
               formats={["avif", "webp"]}
               fallbackFormat='png'
-              pictureAttributes={{class: 'hero__pic planetary-glowing'}}
+              densities={[1.5, 2]}
+              pictureAttributes={{class: 'hero__pic planetary-glowing animation-init'}}
               alt=''/>
-    <HidOne class='hero__hid' />
-    <HidTwo class='hero__hid' />
-    <HidThree class='hero__hid' />
-    <HidFour class='hero__hid' />
-    <HidFive class='hero__hid' />
+    <HidOne class='hero__hid animation-init' />
+    <HidTwo class='hero__hid animation-init' />
+    <HidThree class='hero__hid animation-init' />
+    <HidFour class='hero__hid animation-init' />
+    <HidFive class='hero__hid animation-init' />
     <div class="hero__deco-planet" aria-hidden></div>
-    <div class="hero__title" aria-hidden animation-hero-title><span class="top-line" aria-hidden>See Enso</span><span class="bottom-line" aria-hidden>digital agency</span></div>
+    <div class="hero__title animation-init" aria-hidden animation-hero-title><span class="top-line" aria-hidden>See Enso</span><span class="bottom-line" aria-hidden>digital agency</span></div>
+    <div class="hero__deco chevrones">
+      <Chevrones class="chevrone" />
+      <Chevrones class="chevrone" />
+      <Chevrones class="chevrone" />
+    </div>
   </div>
 </section>
 
@@ -35,9 +42,11 @@ import planetaryGlowing from './planetary-glowing.png'
 
   .hero {
     overflow-x: clip;
+    min-height: 185vh;
   }
 
   .hero__animation-wrapper {
+    position: relative;
     display: grid;
     width: 100%;
     height: 100vh;
@@ -49,8 +58,9 @@ import planetaryGlowing from './planetary-glowing.png'
 
   .hero__pic {
     grid-area: hero;
-    width: min(100%, 1200px)
+    width: min(80%, 600px);
     /* z-index: 10; */
+    will-change: transform opacity;
 
     img {
       display: block;
@@ -65,7 +75,13 @@ import planetaryGlowing from './planetary-glowing.png'
     width: min(90%, 800px);
     aspect-ratio: 1;
     color: var(--text-color);
+    opacity: 0.7;
     transform-origin: 50% 50%;
+    will-change: transform opacity;
+
+    media (width > 48rem) {
+      opacity: 1;
+    }
   }
 
 
@@ -80,15 +96,37 @@ import planetaryGlowing from './planetary-glowing.png'
     clip-path: circle(var(--clip-radius) at 50% 50%);
   }
 
+  .chevrones {
+    position: absolute;
+    display: grid;
+    grid-template-areas: chevrone;
+    place-items: center;
+    bottom: 10rem;
+    width: 3rem;
+    opacity: 0;
+    visibility: hidden;
+
+    .chevrone {
+      grid-area: chevrone;
+    }
+  }
+
   .hero__title {
     grid-area: hero;
     display: grid;
     place-items: center;
     row-gap: 0.25rem;
     width: fit-content;
+    padding-inline: 1rem;
     color: var(--text-color);
     text-transform: uppercase;
-    z-index: 99;
+    z-index: 20;
+    user-select: none;
+  }
+
+  .animation-init {
+    opacity: 0;
+    visibility: hidden;
   }
 
   .hero__title .top-line {

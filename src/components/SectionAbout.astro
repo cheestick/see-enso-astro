@@ -28,18 +28,27 @@
     position: relative;
     isolation: isolate;
     overflow-x: clip;
-    mask-image: linear-gradient(transparent 1%, #000000 10%);
+    /* mask-image: linear-gradient(transparent 4%, #000000 7%); */
+    margin-block-start: -85vh;
+    background-image:
+              linear-gradient(
+              to bottom,
+              transparent 20%,
+              var(--bg-color) 25%,
+              var(--bg-color) 55%,
+              transparent 70%);
   }
 
   .deco-planet-haze {
-    --space-multiplier: 1;
+    --space-multiplier: 2;
     position: absolute;
     z-index: -1;
     top: 0;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     clip-path: polygon(0 -200%, 100% -200%, 100% 30%, 0 30%);
     margin-block-start: calc( var(--space-multiplier) * var(--section-interval));
+    will-change: opacity;
 
     @media (orientation: landscape) and (width <= 48rem) {
       --space-multiplier: 2;
@@ -61,14 +70,14 @@
   }
 
   .about > .container {
-    --space-multiplier: 2;
+    --space-multiplier: 2.85;
     padding-block-start: calc(var(--space-multiplier) * var(--section-interval));
 
     @media (orientation: landscape) and (width <= 48rem) {
-      --space-multiplier: 2.75;
+      --space-multiplier: 3;
     }
   }
-  
+
 
   .section__heading.about__heading {
     width: 20ch;
@@ -83,7 +92,11 @@
   }
 
   .about-grid {
-    margin-block-start: clamp(1.875rem, 0.4632rem + 7.0588vw, 4.875rem);
+    --space-compensation: 1.2rem;
+    --space-start: calc(clamp(1.875rem, 0.4632rem + 7.0588vw, 4.875rem) - var(--space-compensation));
+    margin-block-start: var(--space-start);
+    padding-block-start: var(--space-compensation);
+    /* background-color: var(--bg-color); */
   }
 
   .about__text {
