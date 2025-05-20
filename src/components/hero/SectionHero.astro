@@ -17,15 +17,15 @@ import planetaryGlowing from './planetary-glowing.png'
               formats={["avif", "webp"]}
               fallbackFormat='png'
               densities={[1.5, 2]}
-              pictureAttributes={{class: 'hero__pic planetary-glowing'}}
+              pictureAttributes={{class: 'hero__pic planetary-glowing animation-init'}}
               alt=''/>
-    <HidOne class='hero__hid' />
-    <HidTwo class='hero__hid' />
-    <HidThree class='hero__hid' />
-    <HidFour class='hero__hid' />
-    <HidFive class='hero__hid' />
+    <HidOne class='hero__hid animation-init' />
+    <HidTwo class='hero__hid animation-init' />
+    <HidThree class='hero__hid animation-init' />
+    <HidFour class='hero__hid animation-init' />
+    <HidFive class='hero__hid animation-init' />
     <div class="hero__deco-planet" aria-hidden></div>
-    <div class="hero__title" aria-hidden animation-hero-title><span class="top-line" aria-hidden>See Enso</span><span class="bottom-line" aria-hidden>digital agency</span></div>
+    <div class="hero__title animation-init" aria-hidden animation-hero-title><span class="top-line" aria-hidden>See Enso</span><span class="bottom-line" aria-hidden>digital agency</span></div>
   </div>
 </section>
 
@@ -36,6 +36,7 @@ import planetaryGlowing from './planetary-glowing.png'
 
   .hero {
     overflow-x: clip;
+    min-height: 185vh;
   }
 
   .hero__animation-wrapper {
@@ -52,6 +53,7 @@ import planetaryGlowing from './planetary-glowing.png'
     grid-area: hero;
     width: min(80%, 600px);
     /* z-index: 10; */
+    will-change: transform opacity;
 
     img {
       display: block;
@@ -68,6 +70,7 @@ import planetaryGlowing from './planetary-glowing.png'
     color: var(--text-color);
     opacity: 0.7;
     transform-origin: 50% 50%;
+    will-change: transform opacity;
 
     media (width > 48rem) {
       opacity: 1;
@@ -96,6 +99,11 @@ import planetaryGlowing from './planetary-glowing.png'
     color: var(--text-color);
     text-transform: uppercase;
     z-index: 20;
+  }
+
+  .animation-init {
+    opacity: 0;
+    visibility: hidden;
   }
 
   .hero__title .top-line {

@@ -33,8 +33,10 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
     gsap.set('.header', {yPercent: -100})
+    gsap.set('.animation-init', {autoAlpha: 1})
 
     document.fonts.ready.then(() => {
+      gsap.set('.hero__title', {autoAlpha: 1})
       SplitText.create(
         '[animation-hero-title] .top-line',
         {
@@ -69,8 +71,6 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
       })
     })
 
-
-
     gsap.timeline({defaults: {duration: 0.7},
     scrollTrigger: {
       trigger: '.hero',
@@ -79,7 +79,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
       end: "+=250%"
     }})
     .to('.hero__deco-planet', {
-      "--clip-radius": "5%",
+      "--clip-radius": "0%",
     })
     .from('.planetary-glowing', {
       opacity: 0,
@@ -91,14 +91,13 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
       stagger: 0.1,
     }, "-=75%")
     .to('.hero__hid', {
-      rotationZ: 'random(-360, 360)',
+      rotationZ: 'random(-540, 540)',
       stagger: 0.1,
       duration: 2,
     }, "<")
     .to([".hero__hid", ".planetary-glowing", ".hero__title"], {
       autoAlpha: 0,
       scale: 0.85,
-      // stagger: 0.2,
       duration: 0.3,
     }, "-=25%")
 
@@ -110,7 +109,7 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
             end: "bottom center",
         }
     })
-    .to('.header', {yPercent: 0})
+    .to('.header', {yPercent: 100})
     .from('.about [animation-title="odd-line"]', {
         opacity: 0,
         x: -150,
