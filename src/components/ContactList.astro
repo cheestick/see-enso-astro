@@ -19,11 +19,11 @@ const {seContactInfo} = config
                         </span>
                         </span>
                     </li>)
-            } 
+            }
 
             return (
                 <li class="list__item" animation-contacts="info">
-                    <a 
+                    <a
                         class="contact__link"
                         href={link}
                         target={inNewTab ? "_blank" : "_self"}
@@ -48,13 +48,11 @@ const {seContactInfo} = config
         flex-direction: column;
         gap: var(--fluid-10-12);
         width: max-content;
-        /* font-size: var(--fluid-16-18); */
         text-transform: uppercase;
         margin-block-start: var(--fluid-20-65);
     }
 
     .contact__list .contact__link{
-      /* --fluid-12-20: clamp(0.75rem, 0.3952rem + 1.3356vw, 1.25rem); */
       --fluid-10-20: clamp(0.625rem, 0.1816rem + 1.6694vw, 1.25rem);
         display: flex;
         align-items: center;
@@ -63,7 +61,6 @@ const {seContactInfo} = config
     }
 
     .contact__list .contact__icon {
-      /* --fluid-55-70: clamp(3.4375rem, 2.7723rem + 2.5042vw, 4.375rem); */
       --fluid-40-70: clamp(2.5rem, 1.1697rem + 5.0083vw, 4.375rem);
       width: var(--fluid-40-70);
       aspect-ratio: 1;
@@ -71,7 +68,7 @@ const {seContactInfo} = config
 
     .contact__list .contact__link .contact__caption {
         --fluid-14-18: clamp(0.875rem, 0.6976rem + 0.6678vw, 1.125rem);
-        font-size: var(--fluid-14-18); 
+        font-size: var(--fluid-14-18);
     }
     .caption__at {
       --fluid-10-14: clamp(0.625rem, 0.4476rem + 0.6678vw, 0.875rem);
