@@ -5,6 +5,7 @@ import HidTwo from './hid-02.svg'
 import HidThree from './hid-03.svg'
 import HidFour from './hid-04.svg'
 import HidFive from './hid-05.svg'
+import Chevrones from './chevrones.svg'
 import planetaryGlowing from './planetary-glowing.png'
 ---
 
@@ -26,6 +27,11 @@ import planetaryGlowing from './planetary-glowing.png'
     <HidFive class='hero__hid animation-init' />
     <div class="hero__deco-planet" aria-hidden></div>
     <div class="hero__title animation-init" aria-hidden animation-hero-title><span class="top-line" aria-hidden>See Enso</span><span class="bottom-line" aria-hidden>digital agency</span></div>
+    <div class="hero__deco chevrones">
+      <Chevrones class="chevrone" />
+      <Chevrones class="chevrone" />
+      <Chevrones class="chevrone" />
+    </div>
   </div>
 </section>
 
@@ -40,6 +46,7 @@ import planetaryGlowing from './planetary-glowing.png'
   }
 
   .hero__animation-wrapper {
+    position: relative;
     display: grid;
     width: 100%;
     height: 100vh;
@@ -89,6 +96,21 @@ import planetaryGlowing from './planetary-glowing.png'
     clip-path: circle(var(--clip-radius) at 50% 50%);
   }
 
+  .chevrones {
+    position: absolute;
+    display: grid;
+    grid-template-areas: chevrone;
+    place-items: center;
+    bottom: 10rem;
+    width: 3rem;
+    opacity: 0;
+    visibility: hidden;
+
+    .chevrone {
+      grid-area: chevrone;
+    }
+  }
+
   .hero__title {
     grid-area: hero;
     display: grid;
@@ -99,6 +121,7 @@ import planetaryGlowing from './planetary-glowing.png'
     color: var(--text-color);
     text-transform: uppercase;
     z-index: 20;
+    user-select: none;
   }
 
   .animation-init {
