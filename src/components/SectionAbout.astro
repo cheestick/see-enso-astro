@@ -28,7 +28,9 @@
     position: relative;
     isolation: isolate;
     overflow-x: clip;
-    mask-image: linear-gradient(transparent 1%, #000000 10%);
+    mask-image: linear-gradient(transparent 1%, #000000 7%);
+    margin-block-start: -70vh;
+    background-image: linear-gradient(to bottom, transparent 5%, var(--bg-color) 25%, transparent 50%);
   }
 
   .deco-planet-haze {
@@ -37,7 +39,7 @@
     z-index: -1;
     top: 0;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     clip-path: polygon(0 -200%, 100% -200%, 100% 30%, 0 30%);
     margin-block-start: calc( var(--space-multiplier) * var(--section-interval));
 
@@ -68,7 +70,7 @@
       --space-multiplier: 2.75;
     }
   }
-  
+
 
   .section__heading.about__heading {
     width: 20ch;

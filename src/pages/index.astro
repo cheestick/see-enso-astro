@@ -32,6 +32,8 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
 
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
+    gsap.set('.header', {yPercent: -100})
+
     document.fonts.ready.then(() => {
       SplitText.create(
         '[animation-hero-title] .top-line',
@@ -67,31 +69,38 @@ import SectionRecentCommercials from '@components/section-recent-commercials/Sec
       })
     })
 
-    gsap.set('.header', {yPercent: -100})
+
 
     gsap.timeline({defaults: {duration: 0.7},
     scrollTrigger: {
       trigger: '.hero',
-      scrub: 0.75,
+      scrub: 0.25,
       pin: '.hero__animation-wrapper',
-      end: "+=125%"
+      end: "+=250%"
     }})
     .to('.hero__deco-planet', {
       "--clip-radius": "5%",
     })
     .from('.planetary-glowing', {
       opacity: 0,
-      duration: 2,
+      duration: 1.4,
     }, "-=15%")
     .from('.hero__hid', {
       opacity: 0,
       scale: 1.2,
       stagger: 0.1,
-    }, "-=25%")
+    }, "-=75%")
     .to('.hero__hid', {
       rotationZ: 'random(-360, 360)',
       stagger: 0.1,
-    }, "-=40%")
+      duration: 2,
+    }, "<")
+    .to([".hero__hid", ".planetary-glowing", ".hero__title"], {
+      autoAlpha: 0,
+      scale: 0.85,
+      // stagger: 0.2,
+      duration: 0.3,
+    }, "-=25%")
 
     gsap.timeline({ defaults: { duration: 1.5 },
         scrollTrigger: {
