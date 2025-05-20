@@ -50,7 +50,7 @@ import planetaryGlowing from './planetary-glowing.png'
 
   .hero__pic {
     grid-area: hero;
-    width: min(100%, 1200px)
+    width: min(80%, 600px);
     /* z-index: 10; */
 
     img {
@@ -66,7 +66,12 @@ import planetaryGlowing from './planetary-glowing.png'
     width: min(90%, 800px);
     aspect-ratio: 1;
     color: var(--text-color);
+    opacity: 0.7;
     transform-origin: 50% 50%;
+
+    media (width > 48rem) {
+      opacity: 1;
+    }
   }
 
 
@@ -87,9 +92,10 @@ import planetaryGlowing from './planetary-glowing.png'
     place-items: center;
     row-gap: 0.25rem;
     width: fit-content;
+    padding-inline: 1rem;
     color: var(--text-color);
     text-transform: uppercase;
-    z-index: 99;
+    z-index: 20;
   }
 
   .hero__title .top-line {
