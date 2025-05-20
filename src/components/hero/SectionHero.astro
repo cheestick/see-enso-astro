@@ -13,9 +13,10 @@ import planetaryGlowing from './planetary-glowing.png'
   <div class="hero__animation-wrapper">
     <Picture
               src={planetaryGlowing}
-              width={1920} height={1080}
+              width={600} height={600}
               formats={["avif", "webp"]}
               fallbackFormat='png'
+              densities={[1.5, 2]}
               pictureAttributes={{class: 'hero__pic planetary-glowing'}}
               alt=''/>
     <HidOne class='hero__hid' />
