@@ -23,6 +23,7 @@ import SiteOptions from './SiteOptions.astro';
     isolation: isolate;
     overscroll-behavior: contain;
     touch-action: none;
+    transform: translateY(-100%);
   }
 
   .header::before {
@@ -47,7 +48,7 @@ import SiteOptions from './SiteOptions.astro';
     gap: var(--gap);
 
     width: min(90em, calc(100% - 2 * var(--side)));
-    
+
     margin-inline: auto;
 
     &.spacing {
