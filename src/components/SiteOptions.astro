@@ -4,13 +4,12 @@
 
 <div class="options">
   <a class="options__lang btn" href="#" aria-label="зміна мови" lang="en">EN</a>
-  <a class="cta btn" href="#contacts" data-telephone="+380999677776" aria-label="зв'язатись з нами"><span class="btn__icon"></span><span class="cta__text">Зв'язатись</span></a>
+  <a class="cta btn" href="#contacts" aria-label="зв'язатись з нами"><span class="btn__icon"></span><span class="cta__text">Зв'язатись</span></a>
 </div>
 
 <style is:global>
   .options {
     --gap: clamp(.875rem, 1.8vw, 1.25rem);
-    /* --gap: clamp(14px, 1.8vw, 20px); */
 
     display: flex;
     flex-wrap: wrap;
@@ -31,6 +30,11 @@
   .options .btn:focus-within {
     outline: 2px solid var(--swatch-neutral-200);
     outline-offset: 2px;
+  }
+
+  .options__lang {
+    display: none;
+    visibility: hidden;
   }
 
   .cta .btn__icon {
