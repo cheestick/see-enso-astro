@@ -22,7 +22,7 @@ export const seContactInfo: ISEContactInfo[] = [
   {
     icon: "/images/instagram.svg",
     caption: "instagram",
-    link: "https://www.instagram.com/see.enso",
+    link: "https://www.instagram.com/see_enso",
   },
   {
     icon: "/images/youtube.svg",
