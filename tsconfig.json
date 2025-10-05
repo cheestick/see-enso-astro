@@ -20,6 +20,9 @@
       ],
       "@data/*": [
         "src/data/*"
+      ],
+      "@scripts/*": [
+        "src/scripts/*"
       ]
     }
   }
