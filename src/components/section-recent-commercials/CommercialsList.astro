@@ -1,29 +1,45 @@
 ---
 import CommercialCard from '@components/section-recent-commercials/CommercialCard.astro';
 import CommercialCardSkeleton from './CommercialCardSkeleton.astro';
+import { getAllCommercials, getFavouriteCommercials, getSnippetThumbnail, isVideoAvailable, type TYoutubePlaylistItemSnippet } from '@scripts/commercials.utils';
+import { filterAvailableVideos } from '@scripts/commercials.utils';
+import { commercialsRecent } from '@data/youtube.api';
 
-const MAX_CAPTION_LENGTH = 80
-const playlistItemsUrl = import.meta.env.YOUTUBE_API_FULL_URL;
-let playlistData = null;
+const MAX_CAPTION_LENGTH = 80;
+const MIN_AVAILABLE_VIDEO_COUNT = 5;
+
+let playlistData: TYoutubePlaylistItemSnippet[] | null = null;
+
 try {
-  const response = await fetch(playlistItemsUrl);
-  playlistData = await response.json()
-} catch (error) {}
+  let response = await getFavouriteCommercials();
+  // @ts-ignore
+  let availableVideos = filterAvailableVideos(response?.items)
+  if (availableVideos && availableVideos?.length < MIN_AVAILABLE_VIDEO_COUNT) {
+    response = await getAllCommercials()
+    console.log(response)
+    availableVideos = filterAvailableVideos(response?.items)
+    if (availableVideos.length > commercialsRecent.maxResults) availableVideos.length = 15;
+  }
+  playlistData = availableVideos
+} catch (error) {
+  console.log(error);
+}
 ---
 
 {
-  playlistData?.items?.length > 0
+  playlistData && playlistData?.length > 0
   // @ts-ignore
-    ? playlistData?.items?.map(({snippet}) => {
+    ? playlistData.map(({snippet}) => {
       let {title, thumbnails, resourceId} = snippet;
-      const thumb =  thumbnails.standard;
-      if (title.length > MAX_CAPTION_LENGTH) { 
+
+      const thumb = getSnippetThumbnail(thumbnails);
+      if (title.length > MAX_CAPTION_LENGTH) {
         title = title.slice(0, MAX_CAPTION_LENGTH - 3) + '...';
       }
-      return <CommercialCard 
+      return <CommercialCard
                               {title} src={thumb.url}
                               width={thumb.width+'px'} height={thumb.height+'px'}
-                              videoId={resourceId.videoId} />
+                              videoId={resourceId?.videoId} />
       })
     : (
       <CommercialCardSkeleton />
